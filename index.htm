@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>空中新聞</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        header {
+            background: #50b3a2;
+            color: #fff;
+            padding: 20px 0;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .news-section {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-start;
+        }
+        .news-section img {
+            max-width: 150px;
+            margin-right: 20px;
+        }
+        .news-section h2 {
+            margin-top: 0;
+        }
+        .news-section p {
+            margin: 10px 0;
+        }
+        .news-section a {
+            color: #50b3a2;
+            text-decoration: none;
+        }
+        .news-section a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>空中新聞</h1>
+            <div id="audio-player">
+                <audio controls>
+                    <source src="https://your-username.github.io/my-website/audio.mp3" type="audio/mpeg">
+                    您的瀏覽器不支持音頻播放。
+                </audio>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="news-section">
+            <img src="https://your-username.github.io/my-website/image.jpg" alt="科技類">
+            <div>
+                <h2>科技類</h2>
+                <p><a href="https://www.youtube.com/watch?v=2G-L0u_L0qU" target="_blank">SpaceX星艦第四次測試飛行直播</a> - 2024/06/06 22:20</p>
+                <p><a href="https://www.wsj.com/tech/ai/ftc-opens-antitrust-probe-of-microsoft-ai-deal-29b5169a" target="_blank">FTC對微軟AI交易展開反壟斷調查</a> - 2024/06/06 21:44</p>
+            </div>
+        </div>
+        <!-- 添加更多新聞類別 -->
+    </div>
+</body>
+</html>

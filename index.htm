@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI365 Master Portal | DLOS & AI-TRIZ Ecosystem</title>
+    <title>AI365 Master Portal | Sovereign Knowledge Network</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -18,7 +18,7 @@
         }
         * { box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -53,6 +53,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
         }
 
         /* Main Container: Sidebar + Content */
@@ -153,7 +154,7 @@
             border-left: 3px solid var(--accent-purple);
         }
         .node-icon {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-right: 8px;
         }
         .node-left {
@@ -197,37 +198,86 @@
             padding: 40px;
             background: var(--bg-color);
         }
-        .content-header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
+
+        /* Jobs-Style Bento Hero Grid */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.4));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
             margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
         }
-        .node-id-tag {
-            color: var(--accent-gold);
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .content-title {
-            font-size: 2rem;
-            margin: 6px 0 10px 0;
-            background: linear-gradient(135deg, var(--text-main), var(--text-muted));
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff, var(--text-muted));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .content-subtitle {
-            color: var(--accent-cyan);
+        .hero-desc {
             font-size: 1.05rem;
-            margin: 0;
+            color: var(--accent-cyan);
+            max-width: 680px;
+            margin: 0 0 24px 0;
+            line-height: 1.5;
         }
-
-        .main-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             margin-bottom: 30px;
         }
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .bento-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(192, 132, 252, 0.15);
+        }
+        .bento-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .bento-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 10px 0 8px 0;
+            color: var(--text-main);
+        }
+        .bento-card-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin: 0;
+        }
+        .bento-count {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
         .diag-card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -308,7 +358,7 @@
 <body>
 
 <div class="top-bar">
-    <div class="brand">
+    <div class="brand" onclick="loadContent('home')">
         <span>⚙️</span> AI365 Master Portal
     </div>
     <div style="display:flex; gap:12px;">
@@ -326,6 +376,12 @@
         </div>
         
         <div class="tree-container" id="treeContainer">
+            <!-- HOME QUICK LINK -->
+            <div class="tree-node active" onclick="loadContent('home')" id="btn-node-home">
+                <div class="node-left"><span class="node-icon">🌌</span><span>AI365 System Architecture Home</span></div>
+                <span class="node-tag">BigPicture</span>
+            </div>
+
             <!-- FOLDER 1: DLOS Framework (Hub + 5 Spokes) -->
             <div class="folder-toggle" onclick="toggleFolder('folder-dlos')">
                 <span>📂 1. DLOS Framework (Hub + 5 Spokes)</span>
@@ -364,7 +420,7 @@
                 <span class="folder-arrow" id="arrow-folder-pkm">▼</span>
             </div>
             <div class="folder-content" id="folder-pkm">
-                <div class="tree-node active" onclick="loadContent('node-010')" id="btn-node-010">
+                <div class="tree-node" onclick="loadContent('node-010')" id="btn-node-010">
                     <div class="node-left"><span class="node-icon">🩺</span><span>#010 Four Diagnostics (望聞問切)</span></div>
                     <span class="node-tag">Audit</span>
                 </div>
@@ -406,7 +462,7 @@
                     <div class="node-left"><span class="node-icon">🕳️</span><span>#020 Live Post & Meta AI Prompt</span></div>
                     <span class="node-tag">X/MetaAI</span>
                 </div>
-                <!-- 100+ Stress-test placeholders for AI Apps -->
+                <!-- 100+ Diverse-Icon Stress-test placeholders for AI Apps -->
                 <div id="ai-placeholders"></div>
             </div>
         </div>
@@ -420,6 +476,49 @@
 
 <script>
     const NODE_DATA = {
+        'home': {
+            id: 'HOME',
+            tag: 'Sovereign Network Architecture',
+            title: 'AI365 Master Knowledge & Safety Portal',
+            subtitle: 'Steve Jobs-Inspired Bento Box Architecture for 100+ Satellite Knowledge Nodes',
+            content: `
+                <div class="hero-banner">
+                    <h1 class="hero-title">Dual-Loop OS & AI-TRIZ Ecosystem</h1>
+                    <p class="hero-desc">A unified neuro-symbolic safety shield, GNN topological vault audit, and systematic invention portal. Explore 100+ master nodes with microsecond edge safety guarantees.</p>
+                </div>
+
+                <h3 style="margin-bottom:16px;">🏛️ Master System Map (Bento Box Grid)</h3>
+                <div class="bento-grid">
+                    <div class="bento-card" onclick="loadContent('node-001')">
+                        <span class="bento-count">6 Core Nodes</span>
+                        <div class="bento-tag">Folder 1</div>
+                        <h4 class="bento-card-title">🛡️ DLOS Framework</h4>
+                        <p class="bento-card-desc">Dual-Loop OS Hub + 5 Spokes: CartPole CBF, SysML v2.0, Friston FEP, Cortex-M7 MCU & MAMS-161.</p>
+                    </div>
+
+                    <div class="bento-card" onclick="loadContent('node-010')">
+                        <span class="bento-count">3 Audit Nodes</span>
+                        <div class="bento-tag">Folder 2</div>
+                        <h4 class="bento-card-title">🩺 PKM Architecture</h4>
+                        <p class="bento-card-desc">Bian Que's Four Diagnostics (望聞問切), Indra's Net GNN Topology, and Obsidian AGY workflows.</p>
+                    </div>
+
+                    <div class="bento-card" onclick="loadContent('node-012')">
+                        <span class="bento-count">45+ Nodes</span>
+                        <div class="bento-tag">Folder 3</div>
+                        <h4 class="bento-card-title">💡 TRIZ Systematic Innovation</h4>
+                        <p class="bento-card-desc">40 Altshuller Inventive Principles translated into automated neuro-symbolic prompt engines.</p>
+                    </div>
+
+                    <div class="bento-card" onclick="loadContent('node-020')">
+                        <span class="bento-count">56+ Nodes</span>
+                        <div class="bento-tag">Folder 4</div>
+                        <h4 class="bento-card-title">🛰️ AI Telemetry & Apps</h4>
+                        <p class="bento-card-desc">Live X post status telemetry, Meta AI prompt linkages, and autonomous agent case studies.</p>
+                    </div>
+                </div>
+            `
+        },
         'node-010': {
             id: '#010',
             tag: 'PKM / Audit',
@@ -564,7 +663,9 @@
         }
     };
 
-    // Generate 100+ placeholders dynamically for UI/UX Stress Testing
+    // Jobs-style: Diverse, semantic micro-icons array replacing repetitive 🤖🤖🤖
+    const DIVERSE_ICONS = ['⚡', '🔬', '🛰️', '⚖️', '🌀', '📐', '🧬', '🛡️', '⚙️', '🌌', '📊', '🔮'];
+
     function generateStressTestPlaceholders() {
         const trizContainer = document.getElementById('triz-placeholders');
         const aiContainer = document.getElementById('ai-placeholders');
@@ -572,26 +673,28 @@
         // Generate 45 TRIZ nodes (#020 ~ #064)
         for (let i = 20; i <= 64; i++) {
             const numStr = String(i).padStart(3, '0');
+            const icon = DIVERSE_ICONS[i % DIVERSE_ICONS.length];
             const nodeEl = document.createElement('div');
             nodeEl.className = 'tree-node';
             nodeEl.id = `btn-node-${numStr}`;
             nodeEl.setAttribute('onclick', `loadContent('node-${numStr}')`);
             nodeEl.innerHTML = `
-                <div class="node-left"><span class="node-icon">💡</span><span>#${numStr} Inventive Principle #${(i%40)+1}</span></div>
-                <span class="node-tag">TRIZ/Stress</span>
+                <div class="node-left"><span class="node-icon">${icon}</span><span>#${numStr} Inventive Principle #${(i%40)+1}</span></div>
+                <span class="node-tag">TRIZ</span>
             `;
             trizContainer.appendChild(nodeEl);
         }
 
-        // Generate 55 AI Application nodes (#065 ~ #120)
+        // Generate 55 AI Application nodes (#065 ~ #120) with diverse icons
         for (let i = 65; i <= 120; i++) {
             const numStr = String(i).padStart(3, '0');
+            const icon = DIVERSE_ICONS[(i * 3) % DIVERSE_ICONS.length];
             const nodeEl = document.createElement('div');
             nodeEl.className = 'tree-node';
             nodeEl.id = `btn-node-${numStr}`;
             nodeEl.setAttribute('onclick', `loadContent('node-${numStr}')`);
             nodeEl.innerHTML = `
-                <div class="node-left"><span class="node-icon">🤖</span><span>#${numStr} Autonomous Agent Case #${i-64}</span></div>
+                <div class="node-left"><span class="node-icon">${icon}</span><span>#${numStr} Autonomous Agent Case #${i-64}</span></div>
                 <span class="node-tag">AI/App</span>
             `;
             aiContainer.appendChild(nodeEl);
@@ -608,7 +711,7 @@
 
     function loadContent(nodeId) {
         document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('active'));
-        const btn = document.getElementById(`btn-${nodeId}`);
+        const btn = document.getElementById(`btn-node-${nodeId}`);
         if(btn) btn.classList.add('active');
 
         const display = document.getElementById('contentDisplayArea');
@@ -635,16 +738,15 @@
             const text = node.textContent.toLowerCase();
             node.style.display = text.includes(query) ? 'flex' : 'none';
         });
-        // Auto expand all folders when searching
         if(query !== '') {
             document.querySelectorAll('.folder-content').forEach(f => f.classList.remove('collapsed'));
         }
     }
 
-    // Default Load #010
+    // Default Load Home (Jobs-style Bento Grid Landing)
     document.addEventListener('DOMContentLoaded', () => {
         generateStressTestPlaceholders();
-        loadContent('node-010');
+        loadContent('home');
     });
 </script>
 

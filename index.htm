@@ -414,9 +414,29 @@
                 </div>
             </div>
 
-            <!-- FOLDER 2: PKM Architecture & Diagnostics -->
+            <!-- FOLDER 2: PCOS Personal Cognitive Operating System -->
+            <div class="folder-toggle" onclick="toggleFolder('folder-pcos')">
+                <span>📂 2. PCOS Personal Cognitive OS</span>
+                <span class="folder-arrow" id="arrow-folder-pcos">▼</span>
+            </div>
+            <div class="folder-content" id="folder-pcos">
+                <div class="tree-node" onclick="loadContent('node-007')" id="btn-node-007">
+                    <div class="node-left"><span class="node-icon">⚖️</span><span>#007 DLOS 05: Seven Decision Layers</span></div>
+                    <span class="node-tag">PCOS/Theory</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-008')" id="btn-node-008">
+                    <div class="node-left"><span class="node-icon">☯️</span><span>#008 Taiji Decision Topology</span></div>
+                    <span class="node-tag">PCOS/Dual</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-009')" id="btn-node-009">
+                    <div class="node-left"><span class="node-icon">🪜</span><span>#009 11-Stage Representation Ladder</span></div>
+                    <span class="node-tag">PCOS/AI</span>
+                </div>
+            </div>
+
+            <!-- FOLDER 3: PKM Architecture & Diagnostics -->
             <div class="folder-toggle" onclick="toggleFolder('folder-pkm')">
-                <span>📂 2. PKM Architecture & Diagnostics</span>
+                <span>📂 3. PKM Architecture & Diagnostics</span>
                 <span class="folder-arrow" id="arrow-folder-pkm">▼</span>
             </div>
             <div class="folder-content" id="folder-pkm">
@@ -434,9 +454,9 @@
                 </div>
             </div>
 
-            <!-- FOLDER 3: TRIZ & Systematic Innovation -->
+            <!-- FOLDER 4: TRIZ & Systematic Innovation -->
             <div class="folder-toggle" onclick="toggleFolder('folder-triz')">
-                <span>📂 3. TRIZ & Systematic Innovation</span>
+                <span>📂 4. TRIZ & Systematic Innovation</span>
                 <span class="folder-arrow" id="arrow-folder-triz">▼</span>
             </div>
             <div class="folder-content" id="folder-triz">
@@ -448,13 +468,13 @@
                     <div class="node-left"><span class="node-icon">🔮</span><span>#013 TRIZ Principle #10 Preliminary Act</span></div>
                     <span class="node-tag">AI-TRIZ</span>
                 </div>
-                <!-- 100+ Stress-test placeholders for TRIZ -->
+                <!-- Placeholders for TRIZ -->
                 <div id="triz-placeholders"></div>
             </div>
 
-            <!-- FOLDER 4: AI Applications & Telemetry -->
+            <!-- FOLDER 5: AI Applications & Telemetry -->
             <div class="folder-toggle" onclick="toggleFolder('folder-ai')">
-                <span>📂 4. AI Applications & Telemetry</span>
+                <span>📂 5. AI Applications & Telemetry</span>
                 <span class="folder-arrow" id="arrow-folder-ai">▼</span>
             </div>
             <div class="folder-content" id="folder-ai">
@@ -462,8 +482,20 @@
                     <div class="node-left"><span class="node-icon">🕳️</span><span>#020 Live Post & Meta AI Prompt</span></div>
                     <span class="node-tag">X/MetaAI</span>
                 </div>
-                <!-- 100+ Diverse-Icon Stress-test placeholders for AI Apps -->
+                <!-- Placeholders for AI Apps -->
                 <div id="ai-placeholders"></div>
+            </div>
+
+            <!-- FOLDER 6: Other Research & Satellite Vault (Placeholder) -->
+            <div class="folder-toggle" onclick="toggleFolder('folder-other')">
+                <span>📂 6. Other Research & Extensions (Placeholder)</span>
+                <span class="folder-arrow" id="arrow-folder-other">▼</span>
+            </div>
+            <div class="folder-content" id="folder-other">
+                <div class="tree-node" onclick="loadContent('node-099')" id="btn-node-099">
+                    <div class="node-left"><span class="node-icon">🧩</span><span>#099 General Research Placeholder</span></div>
+                    <span class="node-tag">Archive</span>
+                </div>
             </div>
         </div>
     </div>
@@ -480,14 +512,14 @@
             id: 'HOME',
             tag: 'Sovereign Network Architecture',
             title: 'AI365 Master Knowledge & Safety Portal',
-            subtitle: 'Steve Jobs-Inspired Bento Box Architecture for 100+ Satellite Knowledge Nodes',
+            subtitle: 'Steve Jobs-Inspired Bento Box Architecture across 6 Core Systemic Modules',
             content: `
                 <div class="hero-banner">
                     <h1 class="hero-title">Dual-Loop OS & AI-TRIZ Ecosystem</h1>
-                    <p class="hero-desc">A unified neuro-symbolic safety shield, GNN topological vault audit, and systematic invention portal. Explore 100+ master nodes with microsecond edge safety guarantees.</p>
+                    <p class="hero-desc">A unified neuro-symbolic safety shield, personal cognitive operating system (PCOS), GNN topological vault audit, and systematic invention portal.</p>
                 </div>
 
-                <h3 style="margin-bottom:16px;">🏛️ Master System Map (Bento Box Grid)</h3>
+                <h3 style="margin-bottom:16px;">🏛️ Master System Map (6 Core Modules Bento Grid)</h3>
                 <div class="bento-grid">
                     <div class="bento-card" onclick="loadContent('node-001')">
                         <span class="bento-count">6 Core Nodes</span>
@@ -496,26 +528,69 @@
                         <p class="bento-card-desc">Dual-Loop OS Hub + 5 Spokes: CartPole CBF, SysML v2.0, Friston FEP, Cortex-M7 MCU & MAMS-161.</p>
                     </div>
 
+                    <div class="bento-card" onclick="loadContent('node-007')">
+                        <span class="bento-count">3 Core Nodes</span>
+                        <div class="bento-tag">Folder 2</div>
+                        <h4 class="bento-card-title">⚖️ PCOS Cognitive OS</h4>
+                        <p class="bento-card-desc">Seven Decision Layers (L1~L7), Taiji Dual-Topology, and 11-Stage Representation Ladder.</p>
+                    </div>
+
                     <div class="bento-card" onclick="loadContent('node-010')">
                         <span class="bento-count">3 Audit Nodes</span>
-                        <div class="bento-tag">Folder 2</div>
+                        <div class="bento-tag">Folder 3</div>
                         <h4 class="bento-card-title">🩺 PKM Architecture</h4>
                         <p class="bento-card-desc">Bian Que's Four Diagnostics (望聞問切), Indra's Net GNN Topology, and Obsidian AGY workflows.</p>
                     </div>
 
                     <div class="bento-card" onclick="loadContent('node-012')">
                         <span class="bento-count">45+ Nodes</span>
-                        <div class="bento-tag">Folder 3</div>
+                        <div class="bento-tag">Folder 4</div>
                         <h4 class="bento-card-title">💡 TRIZ Systematic Innovation</h4>
                         <p class="bento-card-desc">40 Altshuller Inventive Principles translated into automated neuro-symbolic prompt engines.</p>
                     </div>
 
                     <div class="bento-card" onclick="loadContent('node-020')">
                         <span class="bento-count">56+ Nodes</span>
-                        <div class="bento-tag">Folder 4</div>
+                        <div class="bento-tag">Folder 5</div>
                         <h4 class="bento-card-title">🛰️ AI Telemetry & Apps</h4>
                         <p class="bento-card-desc">Live X post status telemetry, Meta AI prompt linkages, and autonomous agent case studies.</p>
                     </div>
+
+                    <div class="bento-card" onclick="loadContent('node-099')">
+                        <span class="bento-count">Placeholder</span>
+                        <div class="bento-tag">Folder 6</div>
+                        <h4 class="bento-card-title">🧩 Other Extensions</h4>
+                        <p class="bento-card-desc">Reserved workspace for future multi-domain expansion and satellite library archiving.</p>
+                    </div>
+                </div>
+            `
+        },
+        'node-007': {
+            id: '#007',
+            tag: 'PCOS / Theory',
+            title: 'DLOS 05: Seven Decision Layers & Subjective-Objective Spectrum',
+            subtitle: 'Personal Cognitive Operating System (PCOS) Decision Framework (L1~L7)',
+            content: `
+                <div class="content-header">
+                    <span class="node-id-tag">[ID: #007] [Folder: 2. PCOS Cognitive OS] [Field: Theory & Philosophy]</span>
+                    <h2 class="content-title">Seven Decision Layers Master Model</h2>
+                    <p class="content-subtitle">Transitioning Human & AI Decisions from Objective Laws to Subjective Wisdom</p>
+                </div>
+
+                <div class="main-card">
+                    <h3>📊 Seven Decision Spectrum & Answer Alignment</h3>
+                    <p>The <strong>PCOS Decision System</strong> categorizes human and synthetic reasoning into 7 deterministic layers, aligning each question with its exact mathematical answer form.</p>
+
+                    <table class="tech-table">
+                        <tr><th>Layer</th><th>Decision Spectrum</th><th>Target Answer Form</th><th>Adaptive Persona Style</th></tr>
+                        <tr><td><strong>L1</strong></td><td>Physical Law (物理規律)</td><td>Unique Closed-Form Solution</td><td>Authoritative Scholar / Zero Fluff</td></tr>
+                        <tr><td><strong>L2</strong></td><td>Institutional Rule (制度規則)</td><td>Stable Rule Boundary</td><td>Compliance Counsel</td></tr>
+                        <tr><td><strong>L3</strong></td><td>System Constraint (系統限制)</td><td>Feasible / Approximate Solution</td><td>Feynman First-Principles</td></tr>
+                        <tr><td><strong>L4</strong></td><td>Preference (個人偏好)</td><td>Local Optimal / Satisficing Solution</td><td>Steve Jobs Simplicity</td></tr>
+                        <tr><td><strong>L5</strong></td><td>Value Choice (價值選擇)</td><td>Global Optimal / TRIZ Decoupled</td><td>Socratic Mentor</td></tr>
+                        <tr><td><strong>L6</strong></td><td>Perspective (立場觀點)</td><td>Dialectical Dual-Solution</td><td>Bi-directional Empathy</td></tr>
+                        <tr><td><strong>L7</strong></td><td>Wisdom Integration (智慧整合)</td><td>Space 6 Dynamic Action Plan</td><td>Warm Supportive Coach</td></tr>
+                    </table>
                 </div>
             `
         },
@@ -526,7 +601,7 @@
             subtitle: 'Translating Ancient Eastern Medicine to Modern Non-Euclidean GNN Topology & Entropy Control',
             content: `
                 <div class="content-header">
-                    <span class="node-id-tag">[ID: #010] [Folder: 2. PKM Architecture] [Field: Vault Diagnostics]</span>
+                    <span class="node-id-tag">[ID: #010] [Folder: 3. PKM Architecture] [Field: Vault Diagnostics]</span>
                     <h2 class="content-title">Four Diagnostics Protocol for Knowledge Base Quality</h2>
                     <p class="content-subtitle">Master Physician Bian Que's Four Methods Applied to Knowledge Graph Health</p>
                 </div>
@@ -602,7 +677,7 @@
             subtitle: 'Real-time Social Telemetry and Generative Prompt Engineering Linkage',
             content: `
                 <div class="content-header">
-                    <span class="node-id-tag">[ID: #020] [Folder: 4. AI Applications] [Field: Telemetry & Prompt]</span>
+                    <span class="node-id-tag">[ID: #020] [Folder: 5. AI Applications] [Field: Telemetry & Prompt]</span>
                     <h2 class="content-title">Live Post Telemetry & Meta AI Prompt Linkage</h2>
                     <p class="content-subtitle">Direct Anchor to Live X Status and Meta AI Generative Prompt Workflow</p>
                 </div>
@@ -663,14 +738,12 @@
         }
     };
 
-    // Jobs-style: Diverse, semantic micro-icons array replacing repetitive 🤖🤖🤖
     const DIVERSE_ICONS = ['⚡', '🔬', '🛰️', '⚖️', '🌀', '📐', '🧬', '🛡️', '⚙️', '🌌', '📊', '🔮'];
 
     function generateStressTestPlaceholders() {
         const trizContainer = document.getElementById('triz-placeholders');
         const aiContainer = document.getElementById('ai-placeholders');
 
-        // Generate 45 TRIZ nodes (#020 ~ #064)
         for (let i = 20; i <= 64; i++) {
             const numStr = String(i).padStart(3, '0');
             const icon = DIVERSE_ICONS[i % DIVERSE_ICONS.length];
@@ -685,7 +758,6 @@
             trizContainer.appendChild(nodeEl);
         }
 
-        // Generate 55 AI Application nodes (#065 ~ #120) with diverse icons
         for (let i = 65; i <= 120; i++) {
             const numStr = String(i).padStart(3, '0');
             const icon = DIVERSE_ICONS[(i * 3) % DIVERSE_ICONS.length];
@@ -743,7 +815,6 @@
         }
     }
 
-    // Default Load Home (Jobs-style Bento Grid Landing)
     document.addEventListener('DOMContentLoaded', () => {
         generateStressTestPlaceholders();
         loadContent('home');

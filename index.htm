@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI365 Master Diagnostics (#001~#999) | DLOS Hub+5 Spokes & AI-TRIZ Portal</title>
+    <title>AI365 Master Portal (#001~#999) | DLOS Hub+5 Spokes & PKM TRIZ AI</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -76,7 +76,7 @@
 
         /* Left Sidebar: Tree Navigation */
         .sidebar {
-            width: 340px;
+            width: 350px;
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
             display: flex;
@@ -110,7 +110,7 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--accent-gold);
-            margin-top: 16px;
+            margin-top: 18px;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -139,14 +139,22 @@
             color: var(--accent-purple);
             border-left: 3px solid var(--accent-purple);
         }
-        .node-badge {
-            font-size: 0.72rem;
-            font-weight: bold;
+        .node-icon {
+            font-size: 1.1rem;
+            margin-right: 8px;
+        }
+        .node-left {
+            display: flex;
+            align-items: center;
+        }
+        .node-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
             padding: 2px 6px;
             border-radius: 4px;
-            background: rgba(34, 211, 238, 0.12);
+            background: rgba(34, 211, 238, 0.1);
             color: var(--accent-cyan);
-            border: 1px solid rgba(34, 211, 238, 0.25);
+            border: 1px solid rgba(34, 211, 238, 0.2);
         }
 
         /* Right Content Area */
@@ -187,19 +195,6 @@
             padding: 30px;
             margin-bottom: 30px;
         }
-        .image-box {
-            text-align: center;
-            background: #000;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid var(--border-color);
-        }
-        .image-box img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
         .tech-table {
             width: 100%;
             border-collapse: collapse;
@@ -231,11 +226,11 @@
 
 <div class="top-bar">
     <div class="brand">
-        <span>☯️</span> AI365 Master Diagnostics Portal (#001 ~ #999)
+        <span>⚙️</span> AI365 Master Portal (#001 ~ #999)
     </div>
     <div class="top-nav-links">
-        <a href="https://github.com/SDRmsung/DLOS" target="_blank">Hub Repo (DLOS)</a>
-        <a href="https://github.com/SDRmsung/ai365" target="_blank">ai365 Gateway Repo</a>
+        <a href="https://github.com/SDRmsung/DLOS" target="_blank">DLOS Core Repo</a>
+        <a href="https://github.com/SDRmsung/ai365" target="_blank">ai365 Portal Repo</a>
         <a href="https://x.com/SDRmsung" target="_blank">@SDRmsung X</a>
     </div>
 </div>
@@ -247,50 +242,57 @@
             <input type="text" id="nodeSearch" class="search-input" placeholder="Search #001~#999 nodes or keywords..." oninput="filterTreeNodes()">
         </div>
         <div class="tree-container" id="treeContainer">
-            <!-- 1. DLOS Framework (Hub + 5 Spokes) -->
-            <div class="tree-section-title">🏛️ 1. DLOS Framework (Hub + 5 Spokes)</div>
-            <div class="tree-node" onclick="loadContent('node-001')" id="btn-node-001">
-                <span>#001 DLOS Core Hub Safety Engine</span>
-                <span class="node-badge">切 Touch</span>
+
+            <!-- FOLDER 1: DLOS Framework (Hub + 5 Spokes) -->
+            <div class="tree-section-title">📂 1. DLOS Framework (Hub + 5 Spokes)</div>
+
+            <div class="tree-node active" onclick="loadContent('node-001')" id="btn-node-001">
+                <div class="node-left"><span class="node-icon">🛡️</span><span>#001 Dual-Loop OS Core Hub</span></div>
+                <span class="node-tag">cs.AI</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-002')" id="btn-node-002">
-                <span>#002 Spoke 1 (cs.SY) CartPole CBF</span>
-                <span class="node-badge">切 Touch</span>
+                <div class="node-left"><span class="node-icon">🎯</span><span>#002 Spoke 1: CartPole CBF</span></div>
+                <span class="node-tag">cs.SY</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-003')" id="btn-node-003">
-                <span>#003 Spoke 2 (cs.SE) SysML v2.0 IDEF0</span>
-                <span class="node-badge">聞 Listen</span>
+                <div class="node-left"><span class="node-icon">📐</span><span>#003 Spoke 2: SysML v2.0 & IDEF0</span></div>
+                <span class="node-tag">cs.SE</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-004')" id="btn-node-004">
-                <span>#004 Spoke 3 (q-bio.NC) Friston FEP</span>
-                <span class="node-badge">望 Look</span>
+                <div class="node-left"><span class="node-icon">🧠</span><span>#004 Spoke 3: Friston FEP Active Inf</span></div>
+                <span class="node-tag">q-bio.NC</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-005')" id="btn-node-005">
-                <span>#005 Spoke 4 (cs.AR) MCU Cortex-M7</span>
-                <span class="node-badge">切 Touch</span>
+                <div class="node-left"><span class="node-icon">⚡</span><span>#005 Spoke 4: Edge MCU Cortex-M7</span></div>
+                <span class="node-tag">cs.AR</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-006')" id="btn-node-006">
-                <span>#006 Spoke 5 (q-bio.NC) MAMS-161</span>
-                <span class="node-badge">問 Ask</span>
+                <div class="node-left"><span class="node-icon">🧬</span><span>#006 Spoke 5: MAMS-161 Motive Tax</span></div>
+                <span class="node-tag">q-bio.NC</span>
             </div>
 
-            <!-- 2. AI-TRIZ Core -->
-            <div class="tree-section-title">⚡ 2. AI-TRIZ Core & Contradictions</div>
-            <div class="tree-node active" onclick="loadContent('node-010')" id="btn-node-010">
-                <span>#010 Indra's Net GNN Topology</span>
-                <span class="node-badge">望 Look</span>
+            <!-- FOLDER 2: PKM TRIZ AI -->
+            <div class="tree-section-title">📂 2. PKM · TRIZ · AI Ecosystem</div>
+
+            <div class="tree-node" onclick="loadContent('node-010')" id="btn-node-010">
+                <div class="node-left"><span class="node-icon">🩺</span><span>#010 望聞問切 Knowledge Diagnostics</span></div>
+                <span class="node-tag">PKM/Audit</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-011')" id="btn-node-011">
-                <span>#011 Principle #15 Dynamization</span>
-                <span class="node-badge">聞 Listen</span>
+                <div class="node-left"><span class="node-icon">🌐</span><span>#011 Indra's Net GNN Topology</span></div>
+                <span class="node-tag">GNN/Obsidian</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-012')" id="btn-node-012">
-                <span>#012 Principle #10 Preliminary Action</span>
-                <span class="node-badge">切 Touch</span>
+                <div class="node-left"><span class="node-icon">💡</span><span>#012 TRIZ Principle #15 Dynamization</span></div>
+                <span class="node-tag">AI-TRIZ</span>
             </div>
             <div class="tree-node" onclick="loadContent('node-013')" id="btn-node-013">
-                <span>#013 TRIZ 40 x LLM Causal Matrix</span>
-                <span class="node-badge">問 Ask</span>
+                <div class="node-left"><span class="node-icon">🔮</span><span>#013 TRIZ Principle #10 Preliminary Act</span></div>
+                <span class="node-tag">AI-TRIZ</span>
+            </div>
+            <div class="tree-node" onclick="loadContent('node-014')" id="btn-node-014">
+                <div class="node-left"><span class="node-icon">🗂️</span><span>#014 Obsidian + Google AGY Workflow</span></div>
+                <span class="node-tag">PKM/AGY</span>
             </div>
         </div>
     </div>
@@ -303,52 +305,50 @@
 
 <script>
     const NODE_DATA = {
-        'node-010': {
-            id: '#010',
-            category_zh: '望',
-            title: 'Indra\'s Net (帝釋天網) GNN Topology',
-            subtitle: 'Non-Euclidean Vault Manifold & Holographic Attention Matrix',
+        'node-001': {
+            id: '#001',
+            tag: 'cs.AI / eess.SY',
+            title: 'Dual-Loop OS Core Hub (Safety Engine)',
+            subtitle: 'A Neuro-Symbolic Safety Shield for JEPA Latent World Models with Deterministic Control Barrier Functions (CBF)',
             content: `
                 <div class="content-header">
-                    <span class="node-id-tag">[ID: #010] [Category: AI-TRIZ Core] [Diagnostic: 望 Look]</span>
-                    <h2 class="content-title">Indra's Net (帝釋天網) GNN Topology & Manifold Geometry</h2>
-                    <p class="content-subtitle">Mapping Ancient Holographic Philosophy to Modern Non-Euclidean Graph Neural Networks</p>
+                    <span class="node-id-tag">[ID: #001] [Folder: 1. DLOS Framework] [Field: cs.AI / eess.SY]</span>
+                    <h2 class="content-title">Dual-Loop OS Core Hub Safety Engine</h2>
+                    <p class="content-subtitle">Deterministic O(1) Microsecond Pre-Transition Edge Safety Veto for JEPA Models</p>
                 </div>
 
                 <div class="main-card">
-                    <h3>🌟 Architectural Concept</h3>
-                    <p>In ancient Hua-Yan cosmology, Indra's Net consists of infinitely reflecting jewels where each jewel reflects every other jewel. In <strong>Dual-Loop OS</strong>, this directly translates to Graph Neural Network (GNN) message passing across explicit Markdown wiki-link edges.</p>
+                    <h3>🌟 Executive Architecture Summary</h3>
+                    <p>Large latent world models (JEPA) lack deterministic safety guarantees during out-of-distribution (OOD) dynamic prediction drift. <strong>Dual-Loop OS Hub</strong> solves this fundamental issue by constructing an O(1) pre-transition predictive safety shield built on an orthogonal energy manifold (MCR²).</p>
 
-                    <div class="image-box">
-                        <span style="font-size: 5rem;">☯️</span>
-                        <p style="color:var(--accent-purple); font-weight:bold; margin-bottom:5px;">Purple Core (System 2): Yin Zero-Entropy Structural Core</p>
-                        <p style="color:var(--accent-cyan); margin-top:0;">Multi-Color Fringe (System 1): Yang Generative High-Entropy Expansion</p>
-                    </div>
-
-                    <h3>📊 Technical Receipts & Metrics</h3>
+                    <h3>🏛️ Hub + 5 Spokes Modular Topology</h3>
                     <table class="tech-table">
-                        <tr><th>Metric / Concept</th><th>Engineering Specification</th><th>Diagnostic Result (望 Look)</th></tr>
-                        <tr><td>Latent Topology</td><td>Non-Euclidean GNN Manifold</td><td>Yin/Yang Structural Balance Verified</td></tr>
-                        <tr><td>Effective Rank (MCR²)</td><td>Rank_eff = 8.84 ± 0.12</td><td>Tr < 10^-7 (Zero Drift)</td></tr>
-                        <tr><td>Message Passing</td><td>3-Hop Feature Propagation</td><td>Full Holographic Coverage</td></tr>
+                        <tr><th>Module Component</th><th>Target Field</th><th>Core Responsibility & Technical Highlight</th></tr>
+                        <tr><td><strong>Dual-Loop OS Hub</strong></td><td>cs.AI / eess.SY</td><td>Core mathematical safety engine (O(1) pre-transition veto table & Theorem 1B closure).</td></tr>
+                        <tr><td><strong>Spoke 1</strong></td><td>cs.SY</td><td>Continuous control dynamics, CartPole-v1 CBF validation (0 violations vs CBF-QP 0.4%).</td></tr>
+                        <tr><td><strong>Spoke 2</strong></td><td>cs.SE</td><td>SysML v2.0 textual mapping & IDEF0 A0-A4 systems engineering traceability.</td></tr>
+                        <tr><td><strong>Spoke 3</strong></td><td>q-bio.NC</td><td>Friston Free Energy Principle (FEP) active inference & surprise minimization.</td></tr>
+                        <tr><td><strong>Spoke 4</strong></td><td>cs.AR</td><td>Edge MCU Cortex-M7 1.08μs microsecond hardware execution & C-code generation.</td></tr>
+                        <tr><td><strong>Spoke 5</strong></td><td>q-bio.NC</td><td>MAMS-161 motive taxonomy & intrinsic motivation state machine.</td></tr>
                     </table>
                 </div>
             `
         },
-        'node-001': {
-            id: '#001',
-            category_zh: '切',
-            title: 'DLOS Core Hub — 1.08μs O(1) CBF-QP Safety Shield',
-            subtitle: 'Pre-Transition Deterministic Safety Veto Engine',
+        'node-010': {
+            id: '#010',
+            tag: 'PKM / Audit',
+            title: 'AI-TRIZ 知識品質「望聞問切」診斷手冊 (Vault Diagnostics)',
+            subtitle: 'Systemic Vault Inspection via Eastern Philosophy & GNN Topology',
             content: `
                 <div class="content-header">
-                    <span class="node-id-tag">[ID: #001] [Category: DLOS Framework] [Diagnostic: 切 Touch]</span>
-                    <h2 class="content-title">DLOS Core Hub — Deterministic Safety Shield</h2>
-                    <p class="content-subtitle">Microsecond Edge Safety Veto for JEPA Latent World Models</p>
+                    <span class="node-id-tag">[ID: #010] [Folder: 2. PKM · TRIZ · AI] [Field: Vault Diagnostics]</span>
+                    <h2 class="content-title">AI-TRIZ 知識品質「望聞問切」四維診斷手冊</h2>
+                    <p class="content-subtitle">Bian Que's Four Diagnostics Translated to GNN Topology & Entropy Control</p>
                 </div>
+
                 <div class="main-card">
-                    <h3>🛡️ Core Engineering Veto</h3>
-                    <p>Dual-Loop OS Hub enforces pre-transition deterministic Control Barrier Functions (CBF-QP) within <strong>1.08μs</strong>. Validated with 0.0% safety violations across 1,000 continuous stress tests.</p>
+                    <h3>🩺 望聞問切四診對譯</h3>
+                    <p>將古老中醫「望聞問切」轉譯為現代知識庫品質診斷：<strong>望 (Visual Topology)</strong>、<strong>聞 (Link Density & Entropy)</strong>、<strong>問 (GNN Message Passing)</strong>、<strong>切 (O(1) CBF Veto)</strong>。</p>
                 </div>
             `
         }
@@ -365,12 +365,12 @@
         } else {
             display.innerHTML = `
                 <div class="content-header">
-                    <span class="node-id-tag">[ID: ${nodeId}] [Category: AI365 Satellite]</span>
-                    <h2 class="content-title">Satellite Node Details</h2>
-                    <p class="content-subtitle">Fetching data for node ${nodeId}...</p>
+                    <span class="node-id-tag">[ID: ${nodeId}] [Category: AI365 Node]</span>
+                    <h2 class="content-title">Satellite Node Specification</h2>
+                    <p class="content-subtitle">Loading technical details for node ${nodeId}...</p>
                 </div>
                 <div class="main-card">
-                    <p>This satellite node is active in the AI365 network registry. Full interactive dashboard loading from repo...</p>
+                    <p>This node is active in the AI365 Master Portal registry. Full interactive dashboard loading from DLOS repository...</p>
                 </div>
             `;
         }
@@ -384,9 +384,9 @@
         });
     }
 
-    // Default Load #010 (Indra's Net)
+    // Default Load #001 (DLOS Core Hub)
     document.addEventListener('DOMContentLoaded', () => {
-        loadContent('node-010');
+        loadContent('node-001');
     });
 </script>
 

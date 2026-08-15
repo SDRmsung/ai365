@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bian Que's Four Diagnostics for AI Knowledge Graphs | Dual-Loop OS</title>
+    <title>Bian Que's Four Diagnostics Master Gateway | Dual-Loop OS</title>
     <style>
         :root {
             --bg-color: #0b0f19;
             --card-bg: #151d30;
+            --card-hover: #1e2942;
             --accent-purple: #c084fc;
             --accent-cyan: #22d3ee;
             --accent-gold: #f59e0b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: #1e293b;
+        }
+        * {
+            box-sizing: border-box;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -23,11 +27,55 @@
             margin: 0;
             padding: 0;
         }
+
+        /* Sticky Top Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
         .container {
-            max-width: 960px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
         }
+
+        /* Hero Header */
         header {
             text-align: center;
             padding-bottom: 30px;
@@ -36,54 +84,98 @@
         }
         .doctor-title {
             color: var(--accent-gold);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             margin-bottom: 8px;
         }
         h1 {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .subtitle {
             color: var(--text-muted);
             font-size: 1.05rem;
-            max-width: 750px;
+            max-width: 780px;
             margin: 0 auto;
         }
-        .philosophy-quote {
-            background: rgba(30, 41, 59, 0.6);
-            border-left: 4px solid var(--accent-gold);
-            padding: 18px 24px;
+
+        /* Search & Filter Bar */
+        .controls-wrapper {
             margin: 30px 0;
-            border-radius: 0 8px 8px 0;
-            color: #e2e8f0;
-            font-style: italic;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
-        .graph-container {
-            text-align: center;
-            margin: 35px 0;
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
             background: var(--card-bg);
-            padding: 25px;
-            border-radius: 14px;
             border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
         }
+        .search-input:focus {
+            border-color: var(--accent-purple);
+        }
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: rgba(192, 132, 252, 0.15);
+            border-color: var(--accent-purple);
+            color: var(--text-main);
+        }
+
+        /* Grid Layout */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
             gap: 24px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
         .card:hover {
@@ -94,7 +186,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .card-icon {
             font-size: 2.2rem;
@@ -107,7 +199,7 @@
             line-height: 1.4;
         }
         .card-title-text {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             margin: 0;
         }
@@ -122,17 +214,31 @@
             border-radius: 4px;
             margin-top: 4px;
         }
-        .clinical-principle {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px dashed var(--accent-gold);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-top: 40px;
-            text-align: center;
+        .card-body {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
         }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 14px;
+            font-size: 0.85rem;
+        }
+        .card-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
         footer {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 60px;
             padding-top: 24px;
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
@@ -146,93 +252,43 @@
 </head>
 <body>
 
+<nav class="sticky-nav">
+    <div class="nav-logo">
+        <span>☯️</span> AI365 Master Gateway
+    </div>
+    <ul class="nav-links">
+        <li><a href="#all" onclick="filterCategory('all')">All Satellites</a></li>
+        <li><a href="#look" onclick="filterCategory('look')">望 Look</a></li>
+        <li><a href="#listen" onclick="filterCategory('listen')">聞 Listen</a></li>
+        <li><a href="#ask" onclick="filterCategory('ask')">問 Ask</a></li>
+        <li><a href="#touch" onclick="filterCategory('touch')">切 Touch</a></li>
+        <li><a href="https://github.com/SDRmsung/DLOS" target="_blank">Hub Repo</a></li>
+    </ul>
+</nav>
+
 <div class="container">
     <header>
-        <div class="doctor-title">Master Physician Bian Que's Diagnostic Protocol</div>
-        <h1>Four Diagnostics for AI Knowledge Graphs</h1>
-        <div class="subtitle">Inspecting Systemic Pathologies in Latent Knowledge Vaults & Non-Euclidean GNN Topologies</div>
+        <div class="doctor-title">Master Physician Bian Que's Four Diagnostics</div>
+        <h1>AI365 Satellite Knowledge Web Gateway</h1>
+        <div class="subtitle">Systemic Inspection & Clinical Portal for 100+ AI Knowledge Nodes & Latent Manifold Topologies</div>
     </header>
 
-    <div class="philosophy-quote">
-        "Just as human diseases manifest outwardly through organic imbalance, AI knowledge graph failures stem from structural entropy. To heal 7 crashed vaults, we apply Master Physician Bian Que's Four Diagnostics—integrating visual observation, acoustic entropy, causal inquiry, and boundary palpation into a unified clinical protocol."
-    </div>
-
-    <div class="graph-container">
-        <p style="color: var(--text-muted); margin-top:0; font-weight:600;">Dual-Loop OS Clinical Anatomy: Yin/Yang Manifold Balance</p>
-        <div style="background:#050811; padding:25px; border-radius:10px; display:inline-block; border:1px solid #1e293b;">
-            <span style="font-size: 4.5rem;">☯️</span>
-            <p style="color:var(--accent-purple); font-weight:bold; margin-bottom:4px;">Purple Core (System 2): Yin Zero-Entropy Structural Core</p>
-            <p style="color:var(--accent-cyan); margin-top:0;">Multi-Color Fringe (System 1): Yang Generative High-Entropy Expansion</p>
+    <div class="controls-wrapper">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search 100+ satellite pages by keyword, metric, or topology..." oninput="handleSearch()">
+        </div>
+        <div class="tabs">
+            <button class="tab-btn active" id="tab-all" onclick="filterCategory('all')">All Satellites (4 Active)</button>
+            <button class="tab-btn" id="tab-look" onclick="filterCategory('look')">望 Look (Visual Topology)</button>
+            <button class="tab-btn" id="tab-listen" onclick="filterCategory('listen')">聞 Listen (Edge Entropy)</button>
+            <button class="tab-btn" id="tab-ask" onclick="filterCategory('ask')">問 Ask (GNN Surgery)</button>
+            <button class="tab-btn" id="tab-touch" onclick="filterCategory('touch')">切 Touch (CBF Veto)</button>
         </div>
     </div>
 
-    <div class="grid">
-        <!-- 望 (Look) -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">望</div>
-                <div>
-                    <div class="card-title-text">Visual Topology Inspection</div>
-                    <span class="badge">Symptom Observation</span>
-                </div>
-            </div>
-            <p style="color: var(--text-muted);">
-                <strong>Clinical Method:</strong> Observe the patient's external symptoms and facial demeanor.<br>
-                <strong>Graph Translation:</strong> Inspect the non-Euclidean vault manifold geometry. Evaluate the Yin/Yang balance to ensure the Purple System 2 core maintains structural integrity against generative fragmentation.
-            </p>
-        </div>
-
-        <!-- 聞 (Listen) -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">聞</div>
-                <div>
-                    <div class="card-title-text">Acoustic & Entropy Analysis</div>
-                    <span class="badge">Breath & Tone Diagnosis</span>
-                </div>
-            </div>
-            <p style="color: var(--text-muted);">
-                <strong>Clinical Method:</strong> Listen to the patient's breath, voice tone, and internal resonance.<br>
-                <strong>Graph Translation:</strong> Measure Wiki-link edge saturation and entropy noise. Enforce 20 ≤ N_links ≤ 100 per MOC node. Exceeding 100 indicates "blood stasis" (graph congestion), triggering Automatic Sharding.
-            </p>
-        </div>
-
-        <!-- 問 (Ask) -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">問</div>
-                <div>
-                    <div class="card-title-text">Causal Inquiry & Propagation</div>
-                    <span class="badge">Interrogation of History</span>
-                </div>
-            </div>
-            <p style="color: var(--text-muted);">
-                <strong>Clinical Method:</strong> Inquire about the patient's medical history and underlying lifestyle causes.<br>
-                <strong>Graph Translation:</strong> Execute multi-hop GNN message passing and Pearl L3 Structural Causal Model (SCM) counterfactual graph surgery to trace root causes and eliminate confounding bias.
-            </p>
-        </div>
-
-        <!-- 切 (Touch) -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">切</div>
-                <div>
-                    <div class="card-title-text">Palpation & Boundary Veto</div>
-                    <span class="badge">Pulse Palpation</span>
-                </div>
-            </div>
-            <p style="color: var(--text-muted);">
-                <strong>Clinical Method:</strong> Palpate the arterial pulse and physical organs to assess acute condition.<br>
-                <strong>Graph Translation:</strong> Execute deterministic Control Barrier Function (CBF-QP) safety vetoes within 1.08μs. Palpate boundary dynamics to achieve 0.0% safety violations across 1,000 stress tests.
-            </p>
-        </div>
-    </div>
-
-    <div class="clinical-principle">
-        <h3 style="color: var(--accent-gold); margin-top:0; margin-bottom:8px;">Comprehensive Four-Diagnostic Synthesis</h3>
-        <p style="color: var(--text-main); margin:0; font-size:0.98rem;">
-            Clinical success requires integrating all Four Diagnostics simultaneously. Combining visual topology, acoustic entropy, causal inquiry, and boundary palpation ensures a holistic, error-free diagnosis of complex AI knowledge systems.
-        </p>
+    <div class="grid" id="satelliteGrid">
+        <!-- JS Dynmaic Cards Rendered Here -->
     </div>
 
     <footer>
@@ -240,6 +296,119 @@
         <p><a href="https://github.com/SDRmsung/DLOS" target="_blank">View Core Repository on GitHub (SDRmsung/DLOS)</a></p>
     </footer>
 </div>
+
+<script>
+    let satelliteNodes = [];
+    let currentCategory = 'all';
+
+    const INITIAL_NODES = [
+      {
+        "id": "node-001",
+        "category": "look",
+        "category_zh": "望",
+        "title": "Visual Topology & Non-Euclidean Manifolds",
+        "subtitle": "Yin/Yang Geometric Structural Inspection",
+        "description": "Inspect non-Euclidean vault manifold geometry. Evaluate Yin/Yang balance to ensure Purple System 2 core maintains structural integrity against generative fragmentation.",
+        "url": "https://github.com/SDRmsung/DLOS",
+        "badge": "Visual Geometry",
+        "date": "2026-08-15"
+      },
+      {
+        "id": "node-002",
+        "category": "listen",
+        "category_zh": "聞",
+        "title": "Link Density & Graph Entropy Diagnostics",
+        "subtitle": "Wiki-link Edge Saturation & Congestion Protocol",
+        "description": "Measure Wiki-link edge saturation. Target bounds: 20 ≤ N_links ≤ 100 per MOC node. Exceeding 100 triggers Automatic Sharding.",
+        "url": "https://github.com/SDRmsung/DLOS",
+        "badge": "Edge Metrics",
+        "date": "2026-08-15"
+      },
+      {
+        "id": "node-003",
+        "category": "ask",
+        "category_zh": "問",
+        "title": "GNN Multi-hop Message Passing & SCM Surgery",
+        "subtitle": "Pearl L3 Counterfactual Causal Interrogation",
+        "description": "Execute multi-hop GNN feature propagation and Pearl L3 Structural Causal Model (SCM) counterfactual graph surgery to eliminate confounding bias.",
+        "url": "https://github.com/SDRmsung/DLOS",
+        "badge": "Message Passing",
+        "date": "2026-08-15"
+      },
+      {
+        "id": "node-004",
+        "category": "touch",
+        "category_zh": "切",
+        "title": "O(1) CBF Safety Veto & Deterministic Palpation",
+        "subtitle": "1.08μs Microsecond Boundary Safety Veto",
+        "description": "Execute deterministic Control Barrier Function (CBF-QP) safety vetoes within 1.08μs. Palpate boundary dynamics for 0.0% safety violations across 1,000 tests.",
+        "url": "https://github.com/SDRmsung/DLOS",
+        "badge": "O(1) Veto Engine",
+        "date": "2026-08-15"
+      }
+    ];
+
+    function renderCards(nodes) {
+        const grid = document.getElementById('satelliteGrid');
+        grid.innerHTML = '';
+        if (nodes.length === 0) {
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:var(--text-muted);">No matching satellite pages found.</div>';
+            return;
+        }
+
+        nodes.forEach(node => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon">${node.category_zh}</div>
+                        <div>
+                            <div class="card-title-text">${node.title}</div>
+                            <span class="badge">${node.badge}</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-top:4px; font-weight:600; color:var(--accent-purple);">${node.subtitle}</p>
+                        <p>${node.description}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span style="color:var(--text-muted);">${node.date}</span>
+                    <a href="${node.url}" class="card-link" target="_blank">Explore Satellite →</a>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function filterCategory(category) {
+        currentCategory = category;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        const activeTab = document.getElementById(`tab-${category}`);
+        if (activeTab) activeTab.classList.add('active');
+
+        handleSearch();
+    }
+
+    function handleSearch() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = INITIAL_NODES.filter(node => {
+            const matchesCat = (currentCategory === 'all' || node.category === currentCategory);
+            const matchesSearch = node.title.toLowerCase().includes(query) ||
+                                  node.description.toLowerCase().includes(query) ||
+                                  node.subtitle.toLowerCase().includes(query) ||
+                                  node.badge.toLowerCase().includes(query);
+            return matchesCat && matchesSearch;
+        });
+        renderCards(filtered);
+    }
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCards(INITIAL_NODES);
+    });
+</script>
 
 </body>
 </html>

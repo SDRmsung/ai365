@@ -6,7 +6,6 @@
     <title>AI365 Master Portal | Sovereign Knowledge Network</title>
     <style>
         :root {
-            /* Steve Jobs Inspired Monochrome + Single Electric Cyan Accent Palette */
             --bg-dark: #05070a;
             --sidebar-bg: #090d16;
             --card-bg: rgba(255, 255, 255, 0.03);
@@ -32,7 +31,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Top Bar: Minimal & Glassmorphic */
         .top-bar {
             position: absolute;
             top: 0;
@@ -66,7 +64,6 @@
             box-shadow: 0 0 10px var(--accent-cyan);
         }
 
-        /* Main Container */
         .app-body {
             display: flex;
             width: 100%;
@@ -74,7 +71,6 @@
             margin-top: 56px;
         }
 
-        /* Left Sidebar: Pure Minimalist Tree Navigation */
         .sidebar {
             width: 340px;
             background-color: var(--sidebar-bg);
@@ -109,7 +105,6 @@
             padding: 16px 12px;
         }
         
-        /* Unified Monochrome Folder Styles (Eliminated Gaudy Yellow) */
         .folder-toggle {
             font-size: 0.78rem;
             font-weight: 600;
@@ -204,7 +199,6 @@
             color: var(--text-primary);
         }
 
-        /* Content Area */
         .content-area {
             flex: 1;
             overflow-y: auto;
@@ -212,7 +206,6 @@
             background: var(--bg-dark);
         }
 
-        /* Apple-Style Bento Grid System */
         .hero-banner {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
             border: 1px solid var(--border-subtle);
@@ -297,7 +290,7 @@
             margin-top: 24px;
         }
         .diag-card {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 252, 0.02);
             border: 1px solid var(--border-subtle);
             border-radius: 14px;
             padding: 24px;
@@ -372,14 +365,12 @@
 </div>
 
 <div class="app-body">
-    <!-- Left Sidebar: Pure Minimalist Tree Navigation -->
     <div class="sidebar">
         <div class="search-area">
             <input type="text" id="nodeSearch" class="search-input" placeholder="Search architecture nodes..." oninput="filterTreeNodes()">
         </div>
         
         <div class="tree-container" id="treeContainer">
-            <!-- HOME QUICK LINK -->
             <div class="tree-node active" onclick="loadContent('home')" id="btn-node-home">
                 <div class="node-left"><span class="node-icon">🌌</span><span>System Architecture Overview</span></div>
                 <span class="node-tag">Home</span>
@@ -501,9 +492,7 @@
         </div>
     </div>
 
-    <!-- Right Main Content -->
     <div class="content-area" id="contentDisplayArea">
-        <!-- Rendered Dynamically by JS -->
     </div>
 </div>
 
@@ -566,35 +555,6 @@
                 </div>
             `
         },
-        'node-007': {
-            id: '#007',
-            tag: 'PCOS / Theory',
-            title: 'DLOS 05: Seven Decision Layers & Subjective-Objective Spectrum',
-            subtitle: 'Personal Cognitive Operating System (PCOS) Decision Framework (L1~L7)',
-            content: `
-                <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:20px; margin-bottom:30px;">
-                    <span style="color:var(--accent-cyan); font-size:0.8rem; font-weight:600; letter-spacing:1px;">[ID: #007] [PCOS COGNITIVE OS]</span>
-                    <h2 style="font-size:2rem; margin:8px 0 10px 0; color:#fff;">Seven Decision Layers Master Model</h2>
-                    <p style="color:var(--text-secondary); margin:0;">Transitioning Human & AI Decisions from Objective Laws to Subjective Wisdom</p>
-                </div>
-
-                <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-radius:16px; padding:32px;">
-                    <h3 style="color:#fff; margin-top:0;">📊 Seven Decision Spectrum & Answer Alignment</h3>
-                    <p style="color:var(--text-secondary);">The <strong>PCOS Decision System</strong> categorizes human and synthetic reasoning into 7 deterministic layers, aligning each question with its exact mathematical answer form.</p>
-
-                    <table class="tech-table">
-                        <tr><th>Layer</th><th>Decision Spectrum</th><th>Target Answer Form</th><th>Adaptive Persona Style</th></tr>
-                        <tr><td><strong>L1</strong></td><td>Physical Law (物理規律)</td><td>Unique Closed-Form Solution</td><td>Authoritative Scholar / Zero Fluff</td></tr>
-                        <tr><td><strong>L2</strong></td><td>Institutional Rule (制度規則)</td><td>Stable Rule Boundary</td><td>Compliance Counsel</td></tr>
-                        <tr><td><strong>L3</strong></td><td>System Constraint (系統限制)</td><td>Feasible / Approximate Solution</td><td>Feynman First-Principles</td></tr>
-                        <tr><td><strong>L4</strong></td><td>Preference (個人偏好)</td><td>Local Optimal / Satisficing Solution</td><td>Steve Jobs Simplicity</td></tr>
-                        <tr><td><strong>L5</strong></td><td>Value Choice (價值選擇)</td><td>Global Optimal / TRIZ Decoupled</td><td>Socratic Mentor</td></tr>
-                        <tr><td><strong>L6</strong></td><td>Perspective (立場觀點)</td><td>Dialectical Dual-Solution</td><td>Bi-directional Empathy</td></tr>
-                        <tr><td><strong>L7</strong></td><td>Wisdom Integration (智慧整合)</td><td>Space 6 Dynamic Action Plan</td><td>Warm Supportive Coach</td></tr>
-                    </table>
-                </div>
-            `
-        },
         'node-010': {
             id: '#010',
             tag: 'PKM / Audit',
@@ -604,12 +564,12 @@
                 <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:20px; margin-bottom:30px;">
                     <span style="color:var(--accent-cyan); font-size:0.8rem; font-weight:600; letter-spacing:1px;">[ID: #010] [PKM ARCHITECTURE]</span>
                     <h2 style="font-size:2rem; margin:8px 0 10px 0; color:#fff;">Four Diagnostics Protocol for Knowledge Base Quality</h2>
-                    <p style="color:var(--text-secondary); margin:0;">Master Physician Bian Que's Four Methods Applied to Knowledge Graph Health</p>
+                    <p style="color:var(--text-secondary); margin:0;">Master Physician Hua Tuo & Bian Que's Four Methods Applied to Knowledge Graph Health</p>
                 </div>
 
                 <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-radius:16px; padding:32px;">
                     <h3 style="color:#fff; margin-top:0;">🩺 Clinical Philosophy & Graph Translation</h3>
-                    <p style="color:var(--text-secondary);">In traditional Eastern medicine, the Four Diagnostics (望, 聞, 問, 切) form the holistic foundation for inspecting organic pathology. Applying this to <strong>AI-TRIZ Vaults</strong>, we evaluate structural health and microsecond safety vetoes.</p>
+                    <p style="color:var(--text-secondary);">In traditional Eastern medicine, the Four Diagnostics (望, 聞, 問, 切) form the holistic foundation for inspecting organic pathology. Applying this to <strong>AI-TRIZ Vaults</strong>, we evaluate structural health, entropy emissions, and microsecond safety vetoes.</p>
 
                     <div class="diag-card-grid">
                         <div class="diag-card">
@@ -617,43 +577,43 @@
                                 <div class="diag-icon">望</div>
                                 <div>
                                     <div style="font-weight:600; color:#fff;">Look — Visual Topology</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">Visual Observation</span>
+                                    <span style="color:var(--text-muted); font-size:0.8rem;">Visual Manifold Observation</span>
                                 </div>
                             </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;">Inspect non-Euclidean vault manifold geometry. Evaluate Yin/Yang balance to ensure System 2 zero-entropy core convergence.</p>
+                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Observe outward physical demeanor & facial complexions.<br><strong>Graph:</strong> Inspect non-Euclidean vault manifold geometry & Yin/Yang structural balance.</p>
                         </div>
 
                         <div class="diag-card">
                             <div class="diag-card-header">
                                 <div class="diag-icon">聞</div>
                                 <div>
-                                    <div style="font-weight:600; color:#fff;">Listen — Acoustic Entropy</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">Acoustic & Tone</span>
+                                    <div style="font-weight:600; color:#fff;">Listen & Smell — Acoustic & Olfactory</div>
+                                    <span style="color:var(--text-muted); font-size:0.8rem;">Auditory Sound & Olfactory Odor</span>
                                 </div>
                             </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;">Measure Wiki-link edge saturation. Target bounds: 20 ≤ N_links ≤ 100 per MOC to prevent graph stasis.</p>
+                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Listen to internal breath/voice resonance & smell body odor emissions.<br><strong>Graph:</strong> Measure Wiki-link saturation (20 ≤ N_links ≤ 100) & detect stale entropy decay (vault odor).</p>
                         </div>
 
                         <div class="diag-card">
                             <div class="diag-card-header">
                                 <div class="diag-icon">問</div>
                                 <div>
-                                    <div style="font-weight:600; color:#fff;">Ask — Causal Inquiry</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">Causal Interrogation</span>
+                                    <div style="font-weight:600; color:#fff;">Ask — Causal Interrogation</div>
+                                    <span style="color:var(--text-muted); font-size:0.8rem;">Multi-Hop GNN Propagation</span>
                                 </div>
                             </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;">Execute multi-hop GNN feature propagation and Pearl L3 counterfactual graph surgery.</p>
+                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Inquire about medical history and root lifestyle causes.<br><strong>Graph:</strong> Execute multi-hop GNN feature propagation and Pearl L3 counterfactual graph surgery.</p>
                         </div>
 
                         <div class="diag-card">
                             <div class="diag-card-header">
                                 <div class="diag-icon">切</div>
                                 <div>
-                                    <div style="font-weight:600; color:#fff;">Touch — Safety Veto</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">Pulse Palpation</span>
+                                    <div style="font-weight:600; color:#fff;">Touch — Pulse Palpation</div>
+                                    <span style="color:var(--text-muted); font-size:0.8rem;">1.08μs Edge Safety Veto</span>
                                 </div>
                             </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;">Execute deterministic Control Barrier Function (CBF-QP) safety vetoes within 1.08μs.</p>
+                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Palpate arterial pulses to assess acute physical conditions.<br><strong>Graph:</strong> Execute deterministic Control Barrier Function (CBF-QP) safety vetoes within 1.08μs.</p>
                         </div>
                     </div>
                 </div>

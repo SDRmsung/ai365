@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI365 Master Portal (#001~#999) | DLOS Hub+5 Spokes & PKM TRIZ AI</title>
+    <title>AI365 Master Portal | DLOS Hub+5 Spokes & PKM TRIZ AI</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -247,6 +247,39 @@
             padding: 30px;
             margin-bottom: 30px;
         }
+        .diag-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .diag-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .diag-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .diag-icon {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-purple);
+            background: rgba(192, 132, 252, 0.15);
+            padding: 4px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+        .diag-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
         .tech-table {
             width: 100%;
             border-collapse: collapse;
@@ -278,7 +311,7 @@
 
 <div class="top-bar">
     <div class="brand">
-        <span>⚙️</span> AI365 Master Portal (#001 ~ #999)
+        <span>⚙️</span> AI365 Master Portal
     </div>
     <div style="display:flex; gap:12px;">
         <a href="https://x.com/SDRmsung" target="_blank" class="social-btn">𝕏 @SDRmsung</a>
@@ -291,7 +324,7 @@
     <!-- Left Sidebar: Tree Navigation -->
     <div class="sidebar">
         <div class="search-area">
-            <input type="text" id="nodeSearch" class="search-input" placeholder="Search #001~#999 nodes or keywords..." oninput="filterTreeNodes()">
+            <input type="text" id="nodeSearch" class="search-input" placeholder="Search satellite nodes or keywords..." oninput="filterTreeNodes()">
         </div>
         
         <div class="tree-container" id="treeContainer">
@@ -301,7 +334,7 @@
                 <span class="folder-arrow" id="arrow-folder-dlos">▼</span>
             </div>
             <div class="folder-content" id="folder-dlos">
-                <div class="tree-node active" onclick="loadContent('node-001')" id="btn-node-001">
+                <div class="tree-node" onclick="loadContent('node-001')" id="btn-node-001">
                     <div class="node-left"><span class="node-icon">🛡️</span><span>#001 Dual-Loop OS Core Hub</span></div>
                     <span class="node-tag">cs.AI</span>
                 </div>
@@ -333,7 +366,7 @@
                 <span class="folder-arrow" id="arrow-folder-pkm">▼</span>
             </div>
             <div class="folder-content" id="folder-pkm">
-                <div class="tree-node" onclick="loadContent('node-010')" id="btn-node-010">
+                <div class="tree-node active" onclick="loadContent('node-010')" id="btn-node-010">
                     <div class="node-left"><span class="node-icon">🩺</span><span>#010 望聞問切 Knowledge Diagnostics</span></div>
                     <span class="node-tag">PKM/Audit</span>
                 </div>
@@ -376,6 +409,82 @@
 
 <script>
     const NODE_DATA = {
+        'node-010': {
+            id: '#010',
+            tag: 'PKM / Audit',
+            title: 'Four Diagnostics Protocol for Knowledge Base Quality (望聞問切)',
+            subtitle: 'Translating Ancient Eastern Medicine to Modern Non-Euclidean GNN Topology & Entropy Control',
+            content: `
+                <div class="content-header">
+                    <span class="node-id-tag">[ID: #010] [Folder: 2. PKM · TRIZ · AI] [Field: Vault Diagnostics]</span>
+                    <h2 class="content-title">Four Diagnostics Protocol for Knowledge Base Quality</h2>
+                    <p class="content-subtitle">Master Physician Bian Que's Four Methods Applied to Knowledge Graph Health</p>
+                </div>
+
+                <div class="main-card">
+                    <h3>🩺 Clinical Philosophy & Graph Translation</h3>
+                    <p>In traditional Eastern medicine, the Four Diagnostics (望, 聞, 問, 切) form the holistic foundation for inspecting organic pathology. Applying this to <strong>AI-TRIZ & Markdown Knowledge Vaults</strong>, we evaluate structural health, entropy saturation, causal message passing, and microsecond safety vetoes.</p>
+
+                    <div class="diag-card-grid">
+                        <div class="diag-card">
+                            <div class="diag-card-header">
+                                <div class="diag-icon">望</div>
+                                <div>
+                                    <div class="diag-title">Look — Visual Topology Inspection</div>
+                                    <span style="color:var(--accent-cyan); font-size:0.8rem;">Visual Observation</span>
+                                </div>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">
+                                <strong>Clinical Method:</strong> Observe outward physical demeanor and facial complexions.<br>
+                                <strong>Graph Translation:</strong> Inspect non-Euclidean vault manifold geometry. Evaluate Yin/Yang structural balance to ensure System 2 zero-entropy core convergence against generative fragmentation.
+                            </p>
+                        </div>
+
+                        <div class="diag-card">
+                            <div class="diag-card-header">
+                                <div class="diag-icon">聞</div>
+                                <div>
+                                    <div class="diag-title">Listen — Acoustic & Entropy Analysis</div>
+                                    <span style="color:var(--accent-cyan); font-size:0.8rem;">Acoustic & Tone</span>
+                                </div>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">
+                                <strong>Clinical Method:</strong> Listen to internal breath, voice resonance, and tone.<br>
+                                <strong>Graph Translation:</strong> Measure Wiki-link edge saturation. Target bounds: 20 ≤ N_links ≤ 100 per MOC. Exceeding 100 indicates "blood stasis" (graph congestion), triggering Automatic Sharding.
+                            </p>
+                        </div>
+
+                        <div class="diag-card">
+                            <div class="diag-card-header">
+                                <div class="diag-icon">問</div>
+                                <div>
+                                    <div class="diag-title">Ask — Causal Inquiry & Message Passing</div>
+                                    <span style="color:var(--accent-cyan); font-size:0.8rem;">Causal Interrogation</span>
+                                </div>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">
+                                <strong>Clinical Method:</strong> Inquire about medical history and root lifestyle causes.<br>
+                                <strong>Graph Translation:</strong> Execute multi-hop GNN feature propagation and Pearl L3 Structural Causal Model (SCM) counterfactual graph surgery to eliminate confounding bias.
+                            </p>
+                        </div>
+
+                        <div class="diag-card">
+                            <div class="diag-card-header">
+                                <div class="diag-icon">切</div>
+                                <div>
+                                    <div class="diag-title">Touch — Palpation & Boundary Safety Veto</div>
+                                    <span style="color:var(--accent-cyan); font-size:0.8rem;">Pulse Palpation</span>
+                                </div>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">
+                                <strong>Clinical Method:</strong> Palpate arterial pulses to assess acute physical conditions.<br>
+                                <strong>Graph Translation:</strong> Execute deterministic Control Barrier Function (CBF-QP) safety vetoes within 1.08μs. Palpate boundary dynamics for 0.0% safety violations across 1,000 stress tests.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
         'node-001': {
             id: '#001',
             tag: 'cs.AI / eess.SY',
@@ -402,24 +511,6 @@
                         <tr><td><strong>Spoke 4</strong></td><td>cs.AR</td><td>Edge MCU Cortex-M7 1.08μs microsecond hardware execution & C-code generation.</td></tr>
                         <tr><td><strong>Spoke 5</strong></td><td>q-bio.NC</td><td>MAMS-161 motive taxonomy & intrinsic motivation state machine.</td></tr>
                     </table>
-                </div>
-            `
-        },
-        'node-010': {
-            id: '#010',
-            tag: 'PKM / Audit',
-            title: 'AI-TRIZ 知識品質「望聞問切」診斷手冊 (Vault Diagnostics)',
-            subtitle: 'Systemic Vault Inspection via Eastern Philosophy & GNN Topology',
-            content: `
-                <div class="content-header">
-                    <span class="node-id-tag">[ID: #010] [Folder: 2. PKM · TRIZ · AI] [Field: Vault Diagnostics]</span>
-                    <h2 class="content-title">AI-TRIZ 知識品質「望聞問切」四維診斷手冊</h2>
-                    <p class="content-subtitle">Bian Que's Four Diagnostics Translated to GNN Topology & Entropy Control</p>
-                </div>
-
-                <div class="main-card">
-                    <h3>🩺 望聞問切四診對譯</h3>
-                    <p>將古老中醫「望聞問切」轉譯為現代知識庫品質診斷：<strong>望 (Visual Topology)</strong>、<strong>聞 (Link Density & Entropy)</strong>、<strong>問 (GNN Message Passing)</strong>、<strong>切 (O(1) CBF Veto)</strong>。</p>
                 </div>
             `
         }
@@ -467,9 +558,9 @@
         }
     }
 
-    // Default Load #001 (DLOS Core Hub)
+    // Default Load #010
     document.addEventListener('DOMContentLoaded', () => {
-        loadContent('node-001');
+        loadContent('node-010');
     });
 </script>
 

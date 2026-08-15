@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-TRIZ 知識品質「望聞問切」四維診斷手冊 | Dual-Loop OS</title>
+    <title>Bian Que's Four Diagnostics for AI Knowledge Graphs | Dual-Loop OS</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-purple: #a855f7;
-            --accent-cyan: #06b6d4;
+            --bg-color: #0b0f19;
+            --card-bg: #151d30;
+            --accent-purple: #c084fc;
+            --accent-cyan: #22d3ee;
+            --accent-gold: #f59e0b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: #334155;
+            --border-color: #1e293b;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -23,7 +24,7 @@
             padding: 0;
         }
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -31,79 +32,108 @@
             text-align: center;
             padding-bottom: 30px;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+        }
+        .doctor-title {
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
         h1 {
             font-size: 2.2rem;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-top: 0;
             margin-bottom: 10px;
         }
         .subtitle {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        .philosophy-quote {
+            background: rgba(30, 41, 59, 0.6);
+            border-left: 4px solid var(--accent-gold);
+            padding: 18px 24px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+            color: #e2e8f0;
+            font-style: italic;
         }
         .graph-container {
             text-align: center;
-            margin: 30px 0;
+            margin: 35px 0;
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 25px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
-        }
-        .graph-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 24px;
             margin-top: 30px;
         }
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            transition: transform 0.2s ease;
+            border-radius: 14px;
+            padding: 26px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
         .card:hover {
             transform: translateY(-4px);
+            border-color: var(--accent-purple);
         }
         .card-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 14px;
+            margin-bottom: 14px;
         }
         .card-icon {
-            font-size: 1.8rem;
-            background: rgba(168, 85, 247, 0.1);
-            padding: 8px 12px;
-            border-radius: 8px;
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: rgba(192, 132, 252, 0.12);
+            padding: 4px 18px;
+            border-radius: 10px;
             color: var(--accent-purple);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            line-height: 1.4;
         }
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 600;
+        .card-title-text {
+            font-size: 1.25rem;
+            font-weight: 700;
             margin: 0;
         }
         .badge {
             display: inline-block;
-            background: #3b82f6;
-            color: white;
-            font-size: 0.8rem;
+            background: rgba(34, 211, 238, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            font-size: 0.78rem;
+            font-weight: 600;
             padding: 2px 8px;
             border-radius: 4px;
-            margin-top: 8px;
+            margin-top: 4px;
+        }
+        .clinical-principle {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px dashed var(--accent-gold);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 40px;
+            text-align: center;
         }
         footer {
             text-align: center;
             margin-top: 50px;
-            padding-top: 20px;
+            padding-top: 24px;
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.9rem;
@@ -118,67 +148,95 @@
 
 <div class="container">
     <header>
-        <h1>🩺 AI-TRIZ 知識品質「望聞問切」四維診斷手冊</h1>
-        <div class="subtitle">Vault Quality Diagnostics via Eastern Systemic Philosophy & Non-Euclidean GNN Topology</div>
+        <div class="doctor-title">Master Physician Bian Que's Diagnostic Protocol</div>
+        <h1>Four Diagnostics for AI Knowledge Graphs</h1>
+        <div class="subtitle">Inspecting Systemic Pathologies in Latent Knowledge Vaults & Non-Euclidean GNN Topologies</div>
     </header>
 
+    <div class="philosophy-quote">
+        "Just as human diseases manifest outwardly through organic imbalance, AI knowledge graph failures stem from structural entropy. To heal 7 crashed vaults, we apply Master Physician Bian Que's Four Diagnostics—integrating visual observation, acoustic entropy, causal inquiry, and boundary palpation into a unified clinical protocol."
+    </div>
+
     <div class="graph-container">
-        <p style="color: var(--text-muted); margin-top:0;">Dual-Loop OS 太極幾何流形拓撲圖 (Yin System 2 / Yang System 1)</p>
-        <div style="background:#000; padding:20px; border-radius:8px; display:inline-block;">
-            <span style="font-size: 5rem;">☯️</span>
-            <p style="color:var(--accent-purple); font-weight:bold;">Purple Zone: System 2 (Yin Zero-Entropy Core)</p>
-            <p style="color:var(--accent-cyan);">Multi-Color Zone: System 1 (Yang High-Entropy Expansion)</p>
+        <p style="color: var(--text-muted); margin-top:0; font-weight:600;">Dual-Loop OS Clinical Anatomy: Yin/Yang Manifold Balance</p>
+        <div style="background:#050811; padding:25px; border-radius:10px; display:inline-block; border:1px solid #1e293b;">
+            <span style="font-size: 4.5rem;">☯️</span>
+            <p style="color:var(--accent-purple); font-weight:bold; margin-bottom:4px;">Purple Core (System 2): Yin Zero-Entropy Structural Core</p>
+            <p style="color:var(--accent-cyan); margin-top:0;">Multi-Color Fringe (System 1): Yang Generative High-Entropy Expansion</p>
         </div>
     </div>
 
     <div class="grid">
+        <!-- 望 (Look) -->
         <div class="card">
             <div class="card-header">
                 <div class="card-icon">望</div>
                 <div>
-                    <div class="card-title">望 (Look) — 幾何視覺拓撲診斷</div>
-                    <span class="badge">Visual Topology</span>
+                    <div class="card-title-text">Visual Topology Inspection</div>
+                    <span class="badge">Symptom Observation</span>
                 </div>
             </div>
-            <p style="color: var(--text-muted);">檢視 Markdown 知識庫的非歐幾何流形。判定陰圈 (Purple System 2) 與陽圈 (System 1) 的幾何平衡，防止系統充斥未收斂碎片。</p>
+            <p style="color: var(--text-muted);">
+                <strong>Clinical Method:</strong> Observe the patient's external symptoms and facial demeanor.<br>
+                <strong>Graph Translation:</strong> Inspect the non-Euclidean vault manifold geometry. Evaluate the Yin/Yang balance to ensure the Purple System 2 core maintains structural integrity against generative fragmentation.
+            </p>
         </div>
 
+        <!-- 聞 (Listen) -->
         <div class="card">
             <div class="card-header">
                 <div class="card-icon">聞</div>
                 <div>
-                    <div class="card-title">聞 (Listen) — 連結密度與熵值聲響</div>
-                    <span class="badge">Link Density & Entropy</span>
+                    <div class="card-title-text">Acoustic & Entropy Analysis</div>
+                    <span class="badge">Breath & Tone Diagnosis</span>
                 </div>
             </div>
-            <p style="color: var(--text-muted);">衡量 Wiki-links 邊的傳播效率。單一 MOC 控在 20 ≤ N_links ≤ 100；破百觸發「血瘀」自動分池規程，過低觸發「氣虛」孤立點過濾。</p>
+            <p style="color: var(--text-muted);">
+                <strong>Clinical Method:</strong> Listen to the patient's breath, voice tone, and internal resonance.<br>
+                <strong>Graph Translation:</strong> Measure Wiki-link edge saturation and entropy noise. Enforce 20 ≤ N_links ≤ 100 per MOC node. Exceeding 100 indicates "blood stasis" (graph congestion), triggering Automatic Sharding.
+            </p>
         </div>
 
+        <!-- 問 (Ask) -->
         <div class="card">
             <div class="card-header">
                 <div class="card-icon">問</div>
                 <div>
-                    <div class="card-title">問 (Ask) — GNN 多跳訊息傳遞問診</div>
-                    <span class="badge">GNN Message Passing</span>
+                    <div class="card-title-text">Causal Inquiry & Propagation</div>
+                    <span class="badge">Interrogation of History</span>
                 </div>
             </div>
-            <p style="color: var(--text-muted);">執行圖神經網路 3-hop 幾何傳遞與因果推導 (Pearl L3 SCM Counterfactuals)，透過圖手術剔除偽相關 (Confounding Bias)。</p>
+            <p style="color: var(--text-muted);">
+                <strong>Clinical Method:</strong> Inquire about the patient's medical history and underlying lifestyle causes.<br>
+                <strong>Graph Translation:</strong> Execute multi-hop GNN message passing and Pearl L3 Structural Causal Model (SCM) counterfactual graph surgery to trace root causes and eliminate confounding bias.
+            </p>
         </div>
 
+        <!-- 切 (Touch) -->
         <div class="card">
             <div class="card-header">
                 <div class="card-icon">切</div>
                 <div>
-                    <div class="card-title">切 (Touch) — O(1) 確定性 CBF 安全切脈</div>
-                    <span class="badge">O(1) CBF Safety Veto</span>
+                    <div class="card-title-text">Palpation & Boundary Veto</div>
+                    <span class="badge">Pulse Palpation</span>
                 </div>
             </div>
-            <p style="color: var(--text-muted);">在 1.08μs 內執行 O(1) 控制障礙函數 (CBF-QP) 硬性熔斷。達成 1,000 次連續壓力測試 0 次安全違規 (0.0% Safety Violation)。</p>
+            <p style="color: var(--text-muted);">
+                <strong>Clinical Method:</strong> Palpate the arterial pulse and physical organs to assess acute condition.<br>
+                <strong>Graph Translation:</strong> Execute deterministic Control Barrier Function (CBF-QP) safety vetoes within 1.08μs. Palpate boundary dynamics to achieve 0.0% safety violations across 1,000 stress tests.
+            </p>
         </div>
     </div>
 
+    <div class="clinical-principle">
+        <h3 style="color: var(--accent-gold); margin-top:0; margin-bottom:8px;">Comprehensive Four-Diagnostic Synthesis</h3>
+        <p style="color: var(--text-main); margin:0; font-size:0.98rem;">
+            Clinical success requires integrating all Four Diagnostics simultaneously. Combining visual topology, acoustic entropy, causal inquiry, and boundary palpation ensures a holistic, error-free diagnosis of complex AI knowledge systems.
+        </p>
+    </div>
+
     <footer>
-        <p>Dual-Loop OS © 2026 | Powered by Ret. Prof. MechE+IE & TRIZ L3 Architecture</p>
+        <p>Dual-Loop OS © 2026 | Inspired by Bian Que's Four Diagnostics & AI Neuro-Symbolic Control</p>
         <p><a href="https://github.com/SDRmsung/DLOS" target="_blank">View Core Repository on GitHub (SDRmsung/DLOS)</a></p>
     </footer>
 </div>

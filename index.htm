@@ -54,17 +54,6 @@
             align-items: center;
             gap: 8px;
         }
-        .top-nav-links {
-            display: flex;
-            gap: 16px;
-        }
-        .top-nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-        .top-nav-links a:hover { color: var(--accent-cyan); }
 
         /* Main Container: Sidebar + Content */
         .app-body {
@@ -76,7 +65,7 @@
 
         /* Left Sidebar: Tree Navigation */
         .sidebar {
-            width: 350px;
+            width: 360px;
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
             display: flex;
@@ -104,19 +93,43 @@
             overflow-y: auto;
             padding: 16px;
         }
-        .tree-section-title {
-            font-size: 0.8rem;
+        
+        /* Collapsible Folder Styles */
+        .folder-toggle {
+            font-size: 0.82rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             color: var(--accent-gold);
-            margin-top: 18px;
-            margin-bottom: 10px;
+            margin-top: 14px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: space-between;
+            padding: 8px 10px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
         }
-        .tree-section-title:first-child { margin-top: 0; }
+        .folder-toggle:hover { background: rgba(30, 41, 59, 0.9); }
+        .folder-toggle:first-child { margin-top: 0; }
+        .folder-arrow {
+            transition: transform 0.2s ease;
+            font-size: 0.75rem;
+        }
+        .folder-toggle.collapsed .folder-arrow {
+            transform: rotate(-90deg);
+        }
+        .folder-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .folder-content.collapsed {
+            display: none;
+        }
+
         .tree-node {
             display: flex;
             align-items: center;
@@ -155,6 +168,45 @@
             background: rgba(34, 211, 238, 0.1);
             color: var(--accent-cyan);
             border: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+        /* Sidebar Footer Multi-Platform Links */
+        .sidebar-social-footer {
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(15, 23, 42, 0.95);
+        }
+        .social-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .social-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .social-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-1px);
         }
 
         /* Right Content Area */
@@ -228,10 +280,10 @@
     <div class="brand">
         <span>⚙️</span> AI365 Master Portal (#001 ~ #999)
     </div>
-    <div class="top-nav-links">
-        <a href="https://github.com/SDRmsung/DLOS" target="_blank">DLOS Core Repo</a>
-        <a href="https://github.com/SDRmsung/ai365" target="_blank">ai365 Portal Repo</a>
-        <a href="https://x.com/SDRmsung" target="_blank">@SDRmsung X</a>
+    <div style="display:flex; gap:12px;">
+        <a href="https://x.com/SDRmsung" target="_blank" class="social-btn">𝕏 @SDRmsung</a>
+        <a href="https://huggingface.co/msung" target="_blank" class="social-btn">🤗 HuggingFace</a>
+        <a href="https://www.threads.com/@sdrmsung" target="_blank" class="social-btn">🌀 Threads</a>
     </div>
 </div>
 
@@ -241,58 +293,77 @@
         <div class="search-area">
             <input type="text" id="nodeSearch" class="search-input" placeholder="Search #001~#999 nodes or keywords..." oninput="filterTreeNodes()">
         </div>
+        
         <div class="tree-container" id="treeContainer">
-
             <!-- FOLDER 1: DLOS Framework (Hub + 5 Spokes) -->
-            <div class="tree-section-title">📂 1. DLOS Framework (Hub + 5 Spokes)</div>
-
-            <div class="tree-node active" onclick="loadContent('node-001')" id="btn-node-001">
-                <div class="node-left"><span class="node-icon">🛡️</span><span>#001 Dual-Loop OS Core Hub</span></div>
-                <span class="node-tag">cs.AI</span>
+            <div class="folder-toggle" onclick="toggleFolder('folder-dlos')">
+                <span>📂 1. DLOS Framework (Hub + 5 Spokes)</span>
+                <span class="folder-arrow" id="arrow-folder-dlos">▼</span>
             </div>
-            <div class="tree-node" onclick="loadContent('node-002')" id="btn-node-002">
-                <div class="node-left"><span class="node-icon">🎯</span><span>#002 Spoke 1: CartPole CBF</span></div>
-                <span class="node-tag">cs.SY</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-003')" id="btn-node-003">
-                <div class="node-left"><span class="node-icon">📐</span><span>#003 Spoke 2: SysML v2.0 & IDEF0</span></div>
-                <span class="node-tag">cs.SE</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-004')" id="btn-node-004">
-                <div class="node-left"><span class="node-icon">🧠</span><span>#004 Spoke 3: Friston FEP Active Inf</span></div>
-                <span class="node-tag">q-bio.NC</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-005')" id="btn-node-005">
-                <div class="node-left"><span class="node-icon">⚡</span><span>#005 Spoke 4: Edge MCU Cortex-M7</span></div>
-                <span class="node-tag">cs.AR</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-006')" id="btn-node-006">
-                <div class="node-left"><span class="node-icon">🧬</span><span>#006 Spoke 5: MAMS-161 Motive Tax</span></div>
-                <span class="node-tag">q-bio.NC</span>
+            <div class="folder-content" id="folder-dlos">
+                <div class="tree-node active" onclick="loadContent('node-001')" id="btn-node-001">
+                    <div class="node-left"><span class="node-icon">🛡️</span><span>#001 Dual-Loop OS Core Hub</span></div>
+                    <span class="node-tag">cs.AI</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-002')" id="btn-node-002">
+                    <div class="node-left"><span class="node-icon">🎯</span><span>#002 Spoke 1: CartPole CBF</span></div>
+                    <span class="node-tag">cs.SY</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-003')" id="btn-node-003">
+                    <div class="node-left"><span class="node-icon">📐</span><span>#003 Spoke 2: SysML v2.0 & IDEF0</span></div>
+                    <span class="node-tag">cs.SE</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-004')" id="btn-node-004">
+                    <div class="node-left"><span class="node-icon">🧠</span><span>#004 Spoke 3: Friston FEP Active Inf</span></div>
+                    <span class="node-tag">q-bio.NC</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-005')" id="btn-node-005">
+                    <div class="node-left"><span class="node-icon">⚡</span><span>#005 Spoke 4: Edge MCU Cortex-M7</span></div>
+                    <span class="node-tag">cs.AR</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-006')" id="btn-node-006">
+                    <div class="node-left"><span class="node-icon">🧬</span><span>#006 Spoke 5: MAMS-161 Motive Tax</span></div>
+                    <span class="node-tag">q-bio.NC</span>
+                </div>
             </div>
 
             <!-- FOLDER 2: PKM TRIZ AI -->
-            <div class="tree-section-title">📂 2. PKM · TRIZ · AI Ecosystem</div>
+            <div class="folder-toggle" onclick="toggleFolder('folder-pkm')">
+                <span>📂 2. PKM · TRIZ · AI Ecosystem</span>
+                <span class="folder-arrow" id="arrow-folder-pkm">▼</span>
+            </div>
+            <div class="folder-content" id="folder-pkm">
+                <div class="tree-node" onclick="loadContent('node-010')" id="btn-node-010">
+                    <div class="node-left"><span class="node-icon">🩺</span><span>#010 望聞問切 Knowledge Diagnostics</span></div>
+                    <span class="node-tag">PKM/Audit</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-011')" id="btn-node-011">
+                    <div class="node-left"><span class="node-icon">🌐</span><span>#011 Indra's Net GNN Topology</span></div>
+                    <span class="node-tag">GNN/Obsidian</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-012')" id="btn-node-012">
+                    <div class="node-left"><span class="node-icon">💡</span><span>#012 TRIZ Principle #15 Dynamization</span></div>
+                    <span class="node-tag">AI-TRIZ</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-013')" id="btn-node-013">
+                    <div class="node-left"><span class="node-icon">🔮</span><span>#013 TRIZ Principle #10 Preliminary Act</span></div>
+                    <span class="node-tag">AI-TRIZ</span>
+                </div>
+                <div class="tree-node" onclick="loadContent('node-014')" id="btn-node-014">
+                    <div class="node-left"><span class="node-icon">🗂️</span><span>#014 Obsidian + Google AGY Workflow</span></div>
+                    <span class="node-tag">PKM/AGY</span>
+                </div>
+            </div>
+        </div>
 
-            <div class="tree-node" onclick="loadContent('node-010')" id="btn-node-010">
-                <div class="node-left"><span class="node-icon">🩺</span><span>#010 望聞問切 Knowledge Diagnostics</span></div>
-                <span class="node-tag">PKM/Audit</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-011')" id="btn-node-011">
-                <div class="node-left"><span class="node-icon">🌐</span><span>#011 Indra's Net GNN Topology</span></div>
-                <span class="node-tag">GNN/Obsidian</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-012')" id="btn-node-012">
-                <div class="node-left"><span class="node-icon">💡</span><span>#012 TRIZ Principle #15 Dynamization</span></div>
-                <span class="node-tag">AI-TRIZ</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-013')" id="btn-node-013">
-                <div class="node-left"><span class="node-icon">🔮</span><span>#013 TRIZ Principle #10 Preliminary Act</span></div>
-                <span class="node-tag">AI-TRIZ</span>
-            </div>
-            <div class="tree-node" onclick="loadContent('node-014')" id="btn-node-014">
-                <div class="node-left"><span class="node-icon">🗂️</span><span>#014 Obsidian + Google AGY Workflow</span></div>
-                <span class="node-tag">PKM/AGY</span>
+        <!-- Sidebar Multi-Platform Footer Links -->
+        <div class="sidebar-social-footer">
+            <div class="social-title">🌐 Multi-Platform Hubs</div>
+            <div class="social-grid">
+                <a href="https://x.com/SDRmsung" target="_blank" class="social-btn">𝕏 X Profile</a>
+                <a href="https://huggingface.co/msung" target="_blank" class="social-btn">🤗 HuggingFace</a>
+                <a href="https://www.threads.com/@sdrmsung" target="_blank" class="social-btn">🌀 Threads</a>
+                <a href="https://github.com/SDRmsung/DLOS" target="_blank" class="social-btn">🐙 GitHub Repo</a>
             </div>
         </div>
     </div>
@@ -354,6 +425,14 @@
         }
     };
 
+    function toggleFolder(folderId) {
+        const content = document.getElementById(folderId);
+        const toggle = content.previousElementSibling;
+        
+        content.classList.toggle('collapsed');
+        toggle.classList.toggle('collapsed');
+    }
+
     function loadContent(nodeId) {
         document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('active'));
         const btn = document.getElementById(`btn-${nodeId}`);
@@ -382,6 +461,10 @@
             const text = node.textContent.toLowerCase();
             node.style.display = text.includes(query) ? 'flex' : 'none';
         });
+        // Auto expand all folders when searching
+        if(query !== '') {
+            document.querySelectorAll('.folder-content').forEach(f => f.classList.remove('collapsed'));
+        }
     }
 
     // Default Load #001 (DLOS Core Hub)

@@ -406,6 +406,10 @@
                     <div class="node-left"><span class="node-icon">🧬</span><span>#006 Spoke 5: MAMS-161 Motive Tax</span></div>
                     <span class="node-tag">q-bio.NC</span>
                 </div>
+                <div class="tree-node" onclick="loadContent('node-015')" id="btn-node-015">
+                    <div class="node-left"><span class="node-icon">🛡️</span><span>#015 DLOS 09c: Agent 13-Point Health Audit</span></div>
+                    <span class="node-tag">Audit</span>
+                </div>
             </div>
 
             <!-- FOLDER 2: PCOS Personal Cognitive OS -->
@@ -512,10 +516,10 @@
                 <h3 style="margin-bottom:20px; font-weight:600; color:var(--text-primary);">Master System Topology</h3>
                 <div class="bento-grid">
                     <div class="bento-card" onclick="loadContent('node-001')">
-                        <span class="bento-count">6 Nodes</span>
+                        <span class="bento-count">7 Nodes</span>
                         <div class="bento-tag">Module 01</div>
                         <h4 class="bento-card-title">🛡️ DLOS Framework</h4>
-                        <p class="bento-card-desc">Dual-Loop OS Hub + 5 Spokes: CartPole CBF, SysML v2.0, Friston FEP, Cortex-M7 MCU & MAMS-161.</p>
+                        <p class="bento-card-desc">Dual-Loop OS Hub + 5 Spokes: CartPole CBF, SysML v2.0, Friston FEP, MCU & 13-Point Health Audit.</p>
                     </div>
 
                     <div class="bento-card" onclick="loadContent('node-007')">
@@ -552,6 +556,42 @@
                         <h4 class="bento-card-title">🧩 Research Extensions</h4>
                         <p class="bento-card-desc">Reserved workspace for future multi-domain expansion and satellite library archiving.</p>
                     </div>
+                </div>
+            `
+        },
+        'node-015': {
+            id: '#015',
+            tag: 'DLOS / Audit Spec',
+            title: 'DLOS 09c: Agent 13-Point Health & Safety Audit Spec',
+            subtitle: 'Three Lines of Defense: Completeness, Security Protection, and Anti-Hallucination Grounding',
+            content: `
+                <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:20px; margin-bottom:30px;">
+                    <span style="color:var(--accent-cyan); font-size:0.8rem; font-weight:600; letter-spacing:1px;">[ID: #015] [DLOS AUDIT SPEC]</span>
+                    <h2 style="font-size:2rem; margin:8px 0 10px 0; color:#fff;">Agent 13-Point Health & Safety Audit Specification</h2>
+                    <p style="color:var(--text-secondary); margin:0;">Evaluating 13 MECE Architecture Components across Completeness, Security & Anti-Hallucination</p>
+                </div>
+
+                <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-radius:16px; padding:32px;">
+                    <h3 style="color:#fff; margin-top:0;">🛡️ 13-Point Inspection Matrix</h3>
+                    <p style="color:var(--text-secondary);">Every Agent deployed in the DLOS ecosystem must pass this 3-tier safety evaluation before production signoff.</p>
+
+                    <table class="tech-table">
+                        <tr><th>Layer</th><th>MECE Component</th><th>1. Completeness</th><th>2. Security Protection</th><th>3. Anti-Hallucination</th></tr>
+                        <tr><td><strong>Interface</strong></td><td><strong>1. Context Eng.</strong></td><td>Token Budget & Compression</td><td>Buffer Overflow Defense</td><td>Detect Stale Context Noise</td></tr>
+                        <tr><td><strong>Interface</strong></td><td><strong>2. Prompt Eng.</strong></td><td>Structured System Prompt</td><td>Prompt Injection Sanitization</td><td>No Ambiguous Fluff</td></tr>
+                        <tr><td><strong>Interface</strong></td><td><strong>3. Tools</strong></td><td>Tool Count Bound (&le; 10)</td><td>Sandbox & API Limit</td><td>Type Check Enforced</td></tr>
+                        <tr><td><strong>Interface</strong></td><td><strong>4. Plugin</strong></td><td>Version Locked</td><td>No Unsigned Plugins</td><td>Logic Return Verify</td></tr>
+                        <tr><td><strong>Interface</strong></td><td><strong>5. MCP Protocol</strong></td><td>Standard Protocol Spec</td><td>Encrypted Token Auth</td><td>Schema Audit Guard</td></tr>
+                        <tr><td><strong>Cognitive</strong></td><td><strong>6. Goal Eng.</strong></td><td>Multi-step DAG Complete</td><td>Anti Goal Hijacking</td><td>Physics Law Constraint</td></tr>
+                        <tr><td><strong>Cognitive</strong></td><td><strong>7. Reasoning</strong></td><td>CoT Step Closed-loop</td><td>Privacy Leak Defense</td><td>Grounding Evidence Required</td></tr>
+                        <tr><td><strong>Cognitive</strong></td><td><strong>8. Skills (SOP)</strong></td><td>SKILL.md Spec Coverage</td><td>Execution Command Ban</td><td>Unambiguous Step Audit</td></tr>
+                        <tr><td><strong>Memory</strong></td><td><strong>9. Memory</strong></td><td>Dual-loop Read/Write</td><td>Cross-session PII Scrub</td><td>Memory Decay Pruning</td></tr>
+                        <tr><td><strong>Memory</strong></td><td><strong>10. RAG</strong></td><td>GraphRAG Top-k Cover</td><td>Vault Access Control</td><td>Grounding Ratio &ge; 95%</td></tr>
+                        <tr><td><strong>Control</strong></td><td><strong>11. Harness</strong></td><td>Veto Sandbox Armor</td><td>CBF-QP 1.08&mu;s Meltdown</td><td>Boundary Interception</td></tr>
+                        <tr><td><strong>Control</strong></td><td><strong>12. Loop Eng.</strong></td><td>ReAct Loop Terminate</td><td>Prevent Infinite Loop Token Leak</td><td>Observation Corrected</td></tr>
+                        <tr><td><strong>Control</strong></td><td><strong>13. Graph Eng.</strong></td><td>LangGraph State Bound</td><td>State Transfer Auth</td><td>Causal Unit Audit</td></tr>
+                        <tr><td><strong>Cross-Layer</strong></td><td><strong>[HOOK]</strong></td><td>6 Lifecycle Hooks Monitored</td><td>Security Fuse Interrupt</td><td>Audit Log Trajectory Record</td></tr>
+                    </table>
                 </div>
             `
         },

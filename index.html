@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI365 Master Portal | Sovereign Knowledge Network</title>
+    <title>AI365 Master Portal | DLOS Sovereign Knowledge Network (35 Satellites)</title>
     <style>
         :root {
             --bg-dark: #05070a;
@@ -11,6 +11,7 @@
             --card-bg: rgba(255, 255, 255, 0.03);
             --card-hover-bg: rgba(255, 255, 255, 0.06);
             --accent-cyan: #38bdf8;
+            --accent-purple: #c084fc;
             --accent-cyan-glow: rgba(56, 189, 248, 0.15);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
@@ -37,7 +38,7 @@
             left: 0;
             right: 0;
             height: 56px;
-            background: rgba(9, 13, 22, 0.75);
+            background: rgba(9, 13, 22, 0.85);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-subtle);
             display: flex;
@@ -63,206 +64,195 @@
             background-color: var(--accent-cyan);
             box-shadow: 0 0 10px var(--accent-cyan);
         }
-
-        .app-body {
+        .top-actions {
             display: flex;
-            width: 100%;
-            height: calc(100vh - 56px);
-            margin-top: 56px;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--accent-cyan);
+            background: var(--accent-cyan-glow);
         }
 
+        .layout-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            padding-top: 56px;
+        }
+
+        /* Sidebar */
         .sidebar {
-            width: 340px;
+            width: 380px;
+            min-width: 340px;
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-subtle);
             display: flex;
             flex-direction: column;
-            flex-shrink: 0;
+            overflow-y: auto;
         }
-        .search-area {
+        .sidebar-header {
             padding: 16px 20px;
             border-bottom: 1px solid var(--border-subtle);
         }
-        .search-input {
+        .search-box {
             width: 100%;
-            padding: 9px 14px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-subtle);
             border-radius: 8px;
+            padding: 8px 12px;
             color: var(--text-primary);
             font-size: 0.85rem;
             outline: none;
-            transition: all 0.2s ease;
         }
-        .search-input:focus {
+        .search-box:focus {
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 12px var(--accent-cyan-glow);
         }
-
         .tree-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px 12px;
-        }
-        
-        .folder-toggle {
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: var(--text-secondary);
-            margin-top: 14px;
-            margin-bottom: 4px;
+            padding: 12px 10px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.15s ease;
+            flex-direction: column;
+            gap: 4px;
         }
-        .folder-toggle:hover { color: var(--text-primary); }
-        .folder-toggle:first-child { margin-top: 0; }
-        .folder-arrow {
-            transition: transform 0.2s ease;
-            font-size: 0.7rem;
+        .tree-section-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
             color: var(--text-muted);
+            padding: 12px 10px 4px 10px;
         }
-        .folder-toggle.collapsed .folder-arrow { transform: rotate(-90deg); }
-        
-        .folder-content {
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        .folder-content.collapsed { display: none; }
-
         .tree-node {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 8px 12px;
-            margin-bottom: 2px;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            font-size: 0.86rem;
             cursor: pointer;
             transition: all 0.15s ease;
         }
         .tree-node:hover {
-            background: rgba(255, 255, 255, 0.04);
+            background-color: var(--card-hover-bg);
             color: var(--text-primary);
         }
         .tree-node.active {
-            background: var(--accent-cyan-glow);
+            background-color: var(--accent-cyan-glow);
             color: var(--accent-cyan);
             font-weight: 500;
-        }
-        .node-icon {
-            font-size: 0.95rem;
-            margin-right: 8px;
-            opacity: 0.85;
+            border: 1px solid var(--border-highlight);
         }
         .node-left {
             display: flex;
             align-items: center;
+            gap: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
+        .node-icon { font-size: 1rem; }
         .node-tag {
-            font-size: 0.68rem;
-            font-weight: 500;
-            padding: 2px 7px;
+            font-size: 0.7rem;
+            padding: 2px 6px;
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-muted);
-            border: 1px solid var(--border-subtle);
-        }
-        .tree-node.active .node-tag {
-            color: var(--accent-cyan);
-            border-color: var(--accent-cyan-glow);
         }
 
-        .social-btn {
-            display: flex;
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.03) 0%, transparent 60%);
+        }
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Hero & Bento */
+        .hero {
+            margin-bottom: 36px;
+        }
+        .hero-badge {
+            display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 6px 14px;
+            background: var(--accent-cyan-glow);
+            border: 1px solid var(--border-highlight);
+            color: var(--accent-cyan);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .social-btn:hover {
-            border-color: var(--accent-cyan);
-            color: var(--text-primary);
-        }
-
-        .content-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 48px 56px;
-            background: var(--bg-dark);
-        }
-
-        .hero-banner {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 12px;
         }
         .hero-title {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 700;
-            margin: 0 0 12px 0;
             letter-spacing: -0.8px;
-            color: #ffffff;
+            margin: 0 0 12px 0;
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .hero-desc {
             font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 640px;
-            margin: 0;
             line-height: 1.6;
+            margin: 0;
         }
-        
+
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
         }
         .bento-card {
             background: var(--card-bg);
             border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 28px;
+            border-radius: 14px;
+            padding: 22px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.2s ease;
             position: relative;
+            overflow: hidden;
         }
         .bento-card:hover {
-            background: var(--card-hover-bg);
             border-color: var(--border-highlight);
+            background: var(--card-hover-bg);
             transform: translateY(-2px);
         }
         .bento-tag {
             font-size: 0.72rem;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--accent-cyan);
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            margin-bottom: 8px;
         }
         .bento-card-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            margin: 12px 0 8px 0;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin: 0 0 8px 0;
+            color: #fff;
         }
         .bento-card-desc {
             font-size: 0.88rem;
@@ -270,480 +260,238 @@
             line-height: 1.5;
             margin: 0;
         }
-        .bento-count {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: rgba(255, 255, 252, 0.05);
-            color: var(--accent-cyan);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 2px 10px;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
 
-        .diag-card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 20px;
+        /* Detail Card */
+        .detail-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 32px;
             margin-top: 24px;
         }
-        .diag-card {
-            background: rgba(255, 255, 252, 0.02);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 24px;
-        }
-        .diag-card-header {
+        .detail-meta {
             display: flex;
+            gap: 12px;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
-        .diag-icon {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
+        .detail-badge {
             background: var(--accent-cyan-glow);
-            padding: 6px 16px;
-            border-radius: 10px;
             border: 1px solid var(--border-highlight);
-        }
-
-        .tech-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 24px;
-        }
-        .tech-table th, .tech-table td {
-            border: 1px solid var(--border-subtle);
-            padding: 14px 18px;
-            text-align: left;
-            font-size: 0.88rem;
-        }
-        .tech-table th {
-            background: rgba(255, 255, 252, 0.03);
             color: var(--accent-cyan);
+            font-size: 0.8rem;
             font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+        .detail-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 8px 0;
+        }
+        .detail-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin: 0 0 20px 0;
+        }
+        .detail-body {
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            line-height: 1.7;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 20px;
         }
 
-        .ext-link-box {
-            background: rgba(56, 189, 248, 0.04);
-            border: 1px solid var(--border-highlight);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-top: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .ext-link-btn {
-            background: var(--text-primary);
-            color: var(--bg-dark);
-            font-weight: 600;
-            padding: 9px 18px;
+        .code-block {
+            background: #020408;
+            border: 1px solid var(--border-subtle);
             border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: opacity 0.2s;
+            padding: 16px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.88rem;
+            color: #38bdf8;
+            margin: 16px 0;
+            overflow-x: auto;
         }
-        .ext-link-btn:hover { opacity: 0.9; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <div class="brand" onclick="loadContent('home')">
-        <div class="brand-dot"></div> AI365 Master Portal
-    </div>
-    <div style="display:flex; gap:10px;">
-        <a href="https://x.com/SDRmsung" target="_blank" class="social-btn">𝕏 @SDRmsung</a>
-        <a href="https://huggingface.co/msung" target="_blank" class="social-btn">🤗 HuggingFace</a>
-        <a href="https://www.threads.com/@sdrmsung" target="_blank" class="social-btn">🌀 Threads</a>
-        <a href="https://www.reddit.com/user/ClemsonTigerTW/" target="_blank" class="social-btn">👾 Reddit</a>
-        <a href="https://github.com/SDRmsung/DLOS" target="_blank" class="social-btn">💻 GitHub DLOS</a>
-    </div>
-</div>
-
-<div class="app-body">
-    <div class="sidebar">
-        <div class="search-area">
-            <input type="text" id="nodeSearch" class="search-input" placeholder="Search architecture nodes..." oninput="filterTreeNodes()">
+    <div class="top-bar">
+        <div class="brand" onclick="loadContent('home')">
+            <span class="brand-dot"></span>
+            <span>AI365 Master Portal</span>
+            <span style="font-size:0.75rem; color:var(--text-muted); margin-left:6px;">v59 SSOT</span>
         </div>
-        
-        <div class="tree-container" id="treeContainer">
-            <div class="tree-node active" onclick="loadContent('home')" id="btn-node-home">
-                <div class="node-left"><span class="node-icon">🌌</span><span>System Architecture Overview</span></div>
-                <span class="node-tag">Home</span>
-            </div>
+        <div class="top-actions">
+            <a href="https://sdrmsung.github.io/DLOS/" target="_blank" class="nav-btn">
+                <span>🛡️ DLOS Hub</span>
+            </a>
+            <a href="https://github.com/SDRmsung/DLOS" target="_blank" class="nav-btn">
+                <span>⭐ GitHub Repo</span>
+            </a>
+        </div>
+    </div>
 
-            <!-- FOLDER 1: DLOS Framework (Hub + 5 Spokes) -->
-            <div class="folder-toggle" onclick="toggleFolder('folder-dlos')">
-                <span>1. DLOS Framework (Hub + 5 Spokes)</span>
-                <span class="folder-arrow" id="arrow-folder-dlos">▼</span>
+    <div class="layout-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <input type="text" class="search-box" id="nodeSearch" placeholder="Search 35 Satellite Nodes..." onkeyup="filterNodes()">
             </div>
-            <div class="folder-content" id="folder-dlos">
-                <div class="tree-node" onclick="loadContent('node-001')" id="btn-node-001">
-                    <div class="node-left"><span class="node-icon">🛡️</span><span>#001 Dual-Loop OS Core Hub</span></div>
-                    <span class="node-tag">cs.AI</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-002')" id="btn-node-002">
-                    <div class="node-left"><span class="node-icon">🎯</span><span>#002 Spoke 1: CartPole CBF</span></div>
-                    <span class="node-tag">cs.SY</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-003')" id="btn-node-003">
-                    <div class="node-left"><span class="node-icon">📐</span><span>#003 Spoke 2: SysML v2.0 & IDEF0</span></div>
-                    <span class="node-tag">cs.SE</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-004')" id="btn-node-004">
-                    <div class="node-left"><span class="node-icon">🧠</span><span>#004 Spoke 3: Friston FEP Active Inf</span></div>
-                    <span class="node-tag">q-bio.NC</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-005')" id="btn-node-005">
-                    <div class="node-left"><span class="node-icon">⚡</span><span>#005 Spoke 4: Edge MCU Cortex-M7</span></div>
-                    <span class="node-tag">cs.AR</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-006')" id="btn-node-006">
-                    <div class="node-left"><span class="node-icon">🧬</span><span>#006 Spoke 5: MAMS-161 Motive Tax</span></div>
-                    <span class="node-tag">q-bio.NC</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-015')" id="btn-node-015">
-                    <div class="node-left"><span class="node-icon">🛡️</span><span>#015 DLOS 09c: Agent 13-Point Health Audit</span></div>
-                    <span class="node-tag">Audit</span>
-                </div>
+            <div class="tree-container" id="treeContainer">
+                <!-- Dynamically populated via JS -->
             </div>
+        </div>
 
-            <!-- FOLDER 2: PCOS Personal Cognitive OS -->
-            <div class="folder-toggle" onclick="toggleFolder('folder-pcos')">
-                <span>2. PCOS Personal Cognitive OS</span>
-                <span class="folder-arrow" id="arrow-folder-pcos">▼</span>
-            </div>
-            <div class="folder-content" id="folder-pcos">
-                <div class="tree-node" onclick="loadContent('node-007')" id="btn-node-007">
-                    <div class="node-left"><span class="node-icon">⚖️</span><span>#007 DLOS 05: Seven Decision Layers</span></div>
-                    <span class="node-tag">Theory</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-008')" id="btn-node-008">
-                    <div class="node-left"><span class="node-icon">☯️</span><span>#008 Taiji Decision Topology</span></div>
-                    <span class="node-tag">Dual</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-009')" id="btn-node-009">
-                    <div class="node-left"><span class="node-icon">🪜</span><span>#009 11-Stage Representation Ladder</span></div>
-                    <span class="node-tag">AI</span>
-                </div>
-            </div>
-
-            <!-- FOLDER 3: PKM Architecture & Diagnostics -->
-            <div class="folder-toggle" onclick="toggleFolder('folder-pkm')">
-                <span>3. PKM Architecture & Diagnostics</span>
-                <span class="folder-arrow" id="arrow-folder-pkm">▼</span>
-            </div>
-            <div class="folder-content" id="folder-pkm">
-                <div class="tree-node" onclick="loadContent('node-010')" id="btn-node-010">
-                    <div class="node-left"><span class="node-icon">🩺</span><span>#010 Four Diagnostics (望聞問切)</span></div>
-                    <span class="node-tag">Audit</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-011')" id="btn-node-011">
-                    <div class="node-left"><span class="node-icon">🌐</span><span>#011 Indra's Net GNN Topology</span></div>
-                    <span class="node-tag">GNN</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-014')" id="btn-node-014">
-                    <div class="node-left"><span class="node-icon">🗂️</span><span>#014 Obsidian + Google AGY Workflow</span></div>
-                    <span class="node-tag">Workflow</span>
-                </div>
-            </div>
-
-            <!-- FOLDER 4: TRIZ & Systematic Innovation -->
-            <div class="folder-toggle" onclick="toggleFolder('folder-triz')">
-                <span>4. TRIZ & Systematic Innovation</span>
-                <span class="folder-arrow" id="arrow-folder-triz">▼</span>
-            </div>
-            <div class="folder-content" id="folder-triz">
-                <div class="tree-node" onclick="loadContent('node-012')" id="btn-node-012">
-                    <div class="node-left"><span class="node-icon">💡</span><span>#012 TRIZ Principle #15 Dynamization</span></div>
-                    <span class="node-tag">TRIZ</span>
-                </div>
-                <div class="tree-node" onclick="loadContent('node-013')" id="btn-node-013">
-                    <div class="node-left"><span class="node-icon">🔮</span><span>#013 TRIZ Principle #10 Preliminary Act</span></div>
-                    <span class="node-tag">TRIZ</span>
-                </div>
-                <div id="triz-placeholders"></div>
-            </div>
-
-            <!-- FOLDER 5: AI Applications & Telemetry -->
-            <div class="folder-toggle" onclick="toggleFolder('folder-ai')">
-                <span>5. AI Applications & Telemetry</span>
-                <span class="folder-arrow" id="arrow-folder-ai">▼</span>
-            </div>
-            <div class="folder-content" id="folder-ai">
-                <div class="tree-node" onclick="loadContent('node-020')" id="btn-node-020">
-                    <div class="node-left"><span class="node-icon">🕳️</span><span>#020 Live Post & Meta AI Prompt</span></div>
-                    <span class="node-tag">Telemetry</span>
-                </div>
-                <div id="ai-placeholders"></div>
-            </div>
-
-            <!-- FOLDER 6: Extensions -->
-            <div class="folder-toggle" onclick="toggleFolder('folder-other')">
-                <span>6. Research Extensions</span>
-                <span class="folder-arrow" id="arrow-folder-other">▼</span>
-            </div>
-            <div class="folder-content" id="folder-other">
-                <div class="tree-node" onclick="loadContent('node-099')" id="btn-node-099">
-                    <div class="node-left"><span class="node-icon">🧩</span><span>#099 General Research Archive</span></div>
-                    <span class="node-tag">Archive</span>
-                </div>
+        <div class="main-content">
+            <div class="content-wrapper" id="mainContent">
+                <!-- Main Display Area -->
             </div>
         </div>
     </div>
 
-    <div class="content-area" id="contentDisplayArea">
-    </div>
-</div>
+    <script>
+        const nodesData = [{"id": "node-001", "num": "#001", "module": "M01: Classical Spokes", "module_zh": "經典五大樞紐", "category": "spoke", "tag": "cs.SE", "icon": "📐", "title": "Spoke 1: From IDEF0 to SysML v2.0 Safety Traceability", "subtitle": "A Formal Traceability Framework for Safety-Critical Energy-Based Models", "desc": "以 SysML v2.0 形式化語義取代傳統文字與 IDEF0 規格，建立航太級安全追溯因果矩陣，消除需求歧義。", "badge": "Systems Engineering", "date": "2026-08-17"}, {"id": "node-002", "num": "#002", "module": "M01: Classical Spokes", "module_zh": "經典五大樞紐", "category": "spoke", "tag": "cs.SY", "icon": "🎯", "title": "Spoke 2: Differentiable Logarithmic Barrier via STE for CBF", "subtitle": "Continuous-to-Discrete Straight-Through Estimator in Control Barrier Functions", "desc": "利用可微直通估計器 (STE) 解決對數障礙函數在安全邊界處的梯度消失與死區問題，保證 100% 邊界不侵犯。", "badge": "Control Theory", "date": "2026-08-17"}, {"id": "node-003", "num": "#003", "module": "M01: Classical Spokes", "module_zh": "經典五大樞紐", "category": "spoke", "tag": "q-bio.NC", "icon": "🧠", "title": "Spoke 3: Active Inference Grounded by Energy Manifold", "subtitle": "Friston Free Energy Principle Mapped to Non-Euclidean Latent Geometric Wells", "desc": "將卡爾·弗里斯頓主動推理 (Active Inference) 自由能原理錨定於幾何能量流形，實現認知預測誤差的最小化動態適應。", "badge": "Cognitive Science", "date": "2026-08-17"}, {"id": "node-004", "num": "#004", "module": "M01: Classical Spokes", "module_zh": "經典五大樞紐", "category": "spoke", "tag": "cs.AR", "icon": "⚡", "title": "Spoke 4: 50MB Constant Edge EBM for ICD-11 Reasoning", "subtitle": "Deterministic Metabolic Redline Interception in Ultra-Constrained SRAM", "desc": "在 50MB 靜態記憶體極致約束下，實現 WHO ICD-11 罕見遺傳代謝疾病 (E70.0~I70) 與毒理紅線微秒級推理。", "badge": "Edge Clinical AI", "date": "2026-08-17"}, {"id": "node-005", "num": "#005", "module": "M01: Classical Spokes", "module_zh": "經典五大樞紐", "category": "spoke", "tag": "q-bio.NC", "icon": "🧬", "title": "Spoke 5: MAMS-161: A 9D Geometric Manifold of Human Motives", "subtitle": "Structured Prior Matrix Resolving Cold-Start Sparsity in Social Robotics", "desc": "突破傳統 16 維慾望模型，構建 161 維人類動機在 9D 正交流形上的幾何拓撲，為 HRI 人機理解提供強大先驗。", "badge": "Psychology Ontology", "date": "2026-08-17"}, {"id": "node-006", "num": "#006", "module": "M02: FFF & Embodied AI", "module_zh": "FFF 語義與具身智能", "category": "theory", "tag": "HRI", "icon": "🎭", "title": "FFF Tri-Semantic Loop: Form Follows Meaning Closure", "subtitle": "Form Follows Function ➔ Form Follows Meaning ➔ Meaning Follows Form", "desc": "將機器人行為形式提升至意涵層級，形式化定義 Form = Φ(身, 口, 意)，讓外在姿態精確傳遞深層關懷與邊界。", "badge": "Semantic Philosophy", "date": "2026-08-17"}, {"id": "node-007", "num": "#007", "module": "M02: FFF & Embodied AI", "module_zh": "FFF 語義與具身智能", "category": "theory", "tag": "Multimodal", "icon": "🕺", "title": "Body-Speech-Mind (身口意) Multimodal Actuation", "subtitle": "Tri-Modal Joint Coupling: Kinematic Pose, Acoustic Prosody, and 161D Motives", "desc": "行為姿態 (身)、語調微顫 (口) 與 161D 動機向量 (意) 的多模態聯合致動，消除傳統機器人僵硬冷血的指令感。", "badge": "Embodied Multimodal", "date": "2026-08-17"}, {"id": "node-008", "num": "#008", "module": "M02: FFF & Embodied AI", "module_zh": "FFF 語義與具身智能", "category": "theory", "tag": "Alignment", "icon": "🤝", "title": "Structured Communion, Agency, and Meaning Alignment", "subtitle": "Beyond Cold-Blooded Execution: Human Dignity and Boundary Preservation", "desc": "在人機共處中實現共融感 (Communion) 與自主性 (Agency) 的動態平衡，主動維護弱勢群體尊嚴而不產生依賴。", "badge": "Humanity Alignment", "date": "2026-08-17"}, {"id": "node-009", "num": "#009", "module": "M02: FFF & Embodied AI", "module_zh": "FFF 語義與具身智能", "category": "embodied", "tag": "Anti-Overfit", "icon": "🧹", "title": "Anti-Overfitting Mid-Tier Physical AI", "subtitle": "Clean Floors and Safe Cooking: Rejecting Massive Cloud LLM Over-Engineering", "desc": "明確反對家庭機器人調用千億雲端大模型。專注於端側 NPU 空間幾何、接觸力學與物理常識，地掃乾淨避障做好即可。", "badge": "Physical AI", "date": "2026-08-17"}, {"id": "node-010", "num": "#010", "module": "M02: FFF & Embodied AI", "module_zh": "FFF 語義與具身智能", "category": "hri", "tag": "Cold-Start", "icon": "🌱", "title": "Overcoming Cold-Start & Sparsity in Personalized HRI", "subtitle": "161D Motive Ontology as Structured Priors for Zero-Shot Human Understanding", "desc": "利用 161D 動機拓撲作為結構化先驗，在新用戶首次互動的極端數據稀疏下，依然能迅速收斂至正確互動姿態。", "badge": "HRI Personalization", "date": "2026-08-17"}, {"id": "node-011", "num": "#011", "module": "M03: Decision & Funnel", "module_zh": "決策光譜與知識漏斗", "category": "decision", "tag": "L1-L7", "icon": "🪜", "title": "Seven Decision Layers: From Physical Laws to Wisdom", "subtitle": "Hierarchical Convergence: L1 Physical, L2 Institutional, L3 System, L4 Preference, L5 Value, L6 Stance, L7 Action", "desc": "客觀約束層 (L1~L3) 奠定不可侵犯硬底線，主觀價值層 (L4~L6) 權衡偏好，終極 L7 降維封裝為單一可執行物理動作。", "badge": "Decision Spectrum", "date": "2026-08-17"}, {"id": "node-012", "num": "#012", "module": "M03: Decision & Funnel", "module_zh": "決策光譜與知識漏斗", "category": "knowledge", "tag": "Funnel", "icon": "⏳", "title": "DLOS 08 Knowledge Funnel: 64 Kernels, 256 Pillars, 1024 Plugins", "subtitle": "Minimal AGI Invariants Grounding Dynamic Ephemeral Contexts", "desc": "以 64 個第一性原理不變量為內核，支撐 10 大學科 256 基底，外部掛載動態千級情境插件，確保因緣果報嚴格收斂。", "badge": "Knowledge Topology", "date": "2026-08-17"}, {"id": "node-013", "num": "#013", "module": "M03: Decision & Funnel", "module_zh": "決策光譜與知識漏斗", "category": "governance", "tag": "Namespace", "icon": "🏰", "title": "Sovereign Namespace Isolation: LOCAL-DLOS vs WIKIDATA", "subtitle": "Epistemic Firewalls Preventing External Open-Data Hallucination Contamination", "desc": "確立內部主權知識命名空間與外部開源網絡的隔離防火牆，嚴防維基百科或公有圖譜中的不一致與偏誤滲入核心推理。", "badge": "Sovereign Governance", "date": "2026-08-17"}, {"id": "node-014", "num": "#014", "module": "M03: Decision & Funnel", "module_zh": "決策光譜與知識漏斗", "category": "decision", "tag": "Kano-Pareto", "icon": "☯️", "title": "Dynamic Personal Kano Model & Pareto Attractor Sharding", "subtitle": "Real-time Tracking of Basic, Performance, and Delighter Needs", "desc": "動態追蹤使用者需求的演化軌跡，在安全基本型與愉悅魅力型之間，自動分池收斂至多目標帕雷托最優吸引子。", "badge": "Dynamic Kano", "date": "2026-08-17"}, {"id": "node-015", "num": "#015", "module": "M03: Decision & Funnel", "module_zh": "決策光譜與知識漏斗", "category": "cognition", "tag": "Ladder", "icon": "🪜", "title": "11-Stage Representation Ladder: Sub-Symbolic to Causal Graphs", "subtitle": "Continuous Neural Embedding Transduction via Spontaneous Symmetry Breaking", "desc": "連續向量神經表徵經由對稱性破缺自動提取離散因果節點，達成白盒可解釋因果圖的無損升維與降維轉換。", "badge": "Representation Theory", "date": "2026-08-17"}, {"id": "node-016", "num": "#016", "module": "M03: Decision & Funnel", "module_zh": "決策光譜與知識漏斗", "category": "causal", "tag": "Karmic Causal", "icon": "🌀", "title": "Karmic Causal Funnel: Converging Multi-Factor Preconditions", "subtitle": "Thermodynamic Deterministic Pruning for High-Yield Decision Making", "desc": "將多因多緣的複雜環境條件通過熱力學漏斗進行硬剪枝，以最低資訊熵輸出唯一無害之物理動作方案。", "badge": "Causal Dynamics", "date": "2026-08-17"}, {"id": "node-017", "num": "#017", "module": "M04: Four Diagnostics", "module_zh": "中醫四診幾何推理", "category": "audit", "tag": "望 (Look)", "icon": "👁️", "title": "Look (望): Non-Euclidean Graph Topology & MOC Sharding", "subtitle": "Visual Inspection of Manifold Curvature and Strict N_links <= 100 Bounds", "desc": "審計知識圖譜拓撲形態 f_topology(G)，監測節點出入度與孤島死鏈，強制執行單一 MOC 鏈接數 ≤ 100 自動分池門禁。", "badge": "Visual Topology", "date": "2026-08-17"}, {"id": "node-018", "num": "#018", "module": "M04: Four Diagnostics", "module_zh": "中醫四診幾何推理", "category": "audit", "tag": "聞 (Listen)", "icon": "👂", "title": "Auscultation (聞): MCR2 Coding Rate Distortion Analysis", "subtitle": "Maximal Coding Rate Reduction Filtering Semantic Redundancy & Clutter", "desc": "利用 MCR2 編碼率失真分析 f_entropy(e)，自動度量語義冗餘並過濾知識庫中的贅詞與語意坍縮，維持最高資訊純度。", "badge": "Entropy Control", "date": "2026-08-17"}, {"id": "node-019", "num": "#019", "module": "M04: Four Diagnostics", "module_zh": "中醫四診幾何推理", "category": "audit", "tag": "問 (Inquiry)", "icon": "❓", "title": "Inquiry (問): Pearl Layer-3 Counterfactual Causal Surgery", "subtitle": "do(X) Graph Intervention and Dependency Grounding Verification", "desc": "執行 Pearl 三層因果反事實檢驗 f_causal(D)，以 do-calculus 介入斷言校驗代碼與邏輯鏈中 causes/enables 的真實性。", "badge": "Causal Verification", "date": "2026-08-17"}, {"id": "node-020", "num": "#020", "module": "M04: Four Diagnostics", "module_zh": "中醫四診幾何推理", "category": "audit", "tag": "切 (Touch)", "icon": "🩺", "title": "Palpation (切): Real-Time Sandbox Pulse & Freshness Decay", "subtitle": "Dynamic Execution Verification and Temporal Exponential Half-Life Modeling", "desc": "在沙盒環境中即時執行代碼片段檢驗動態脈象，結合指數半衰期模型 f_freshness(t) 對過期知識進行主動降權與遺忘。", "badge": "Sandbox Execution", "date": "2026-08-17"}, {"id": "node-021", "num": "#021", "module": "M05: Safety & Hardware", "module_zh": "邊緣安全與雙迴路硬體", "category": "safety", "tag": "OpenFood", "icon": "🏷️", "title": "Physical Food Safety Veto via Open Food Facts Barcodes", "subtitle": "Microsecond Motor Lockout Grounded in Allergy & Favism Redlines", "desc": "機器人視覺掃描條碼比對 Open Food Facts 成份與使用者病歷，慢軌若誤判餵食，快軌護盾在 1.08μs 內強制鎖死機械臂。", "badge": "Physical Veto", "date": "2026-08-17"}, {"id": "node-022", "num": "#022", "module": "M05: Safety & Hardware", "module_zh": "邊緣安全與雙迴路硬體", "category": "privacy", "tag": "Edge Privacy", "icon": "🛡️", "title": "Edge Dignity Shield: 'No Peeping' & 'No Gossip' Protocols", "subtitle": "Hardware Vision Downsampling and Edge-Only Acoustic Intent Extraction", "desc": "進入臥室私密區視覺硬體即時降採樣遮蔽，語音僅在端側提取動機特徵向量，原始 RGB 與語音數據 100% 不外傳。", "badge": "Privacy Shield", "date": "2026-08-17"}, {"id": "node-023", "num": "#023", "module": "M05: Safety & Hardware", "module_zh": "邊緣安全與雙迴路硬體", "category": "loop", "tag": "Slow Track", "icon": "🐢", "title": "Slow-Track Cognitive Exploration: CRATE + JEPA + MPPI", "subtitle": "White-Box Representation World Model for Latent Trajectory Planning", "desc": "慢迴路採用白盒 CRATE Transformer 與 JEPA 抽象世界模型，在潛在空間進行多步前瞻 MPPI 軌跡規劃與動機理解。", "badge": "Cognitive Exploration", "date": "2026-08-17"}, {"id": "node-024", "num": "#024", "module": "M05: Safety & Hardware", "module_zh": "邊緣安全與雙迴路硬體", "category": "loop", "tag": "Fast Track", "icon": "⚡", "title": "Fast-Track Deterministic Safety: 14-Polytope Barrier in Cortex-M7", "subtitle": "28-Cycle Dual-Issue Pipeline Achieving 1.08μs Worst-Case Execution Time", "desc": "快迴路在 ARM Cortex-M7 DTCM 記憶體預燒結 14 面體多面體屏障，在 28 個時鐘週期內完成無條件安全否決。", "badge": "Microsecond Veto", "date": "2026-08-17"}, {"id": "node-025", "num": "#025", "module": "M05: Safety & Hardware", "module_zh": "邊緣安全與雙迴路硬體", "category": "architecture", "tag": "Orthogonality", "icon": "📐", "title": "Zero-Trust Orthogonality: M_9D ⊥ S_4D via MCR2", "subtitle": "Mathematical Proof: Fast Safety Guarantee Without Relying on Neural Accuracy", "desc": "數學證明動機推論流形 (M_9D) 與空間物理屏障流形 (S_4D) 正交解耦，即使慢迴路神經網路產生幻覺，系統依然絕對安全。", "badge": "Zero-Trust Proof", "date": "2026-08-17"}, {"id": "node-026", "num": "#026", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Elderly Care", "icon": "👵", "title": "Dignity-Preserving Long-Term Elder Care Companion", "subtitle": "TRIZ H(0.5) Gait Compensation and H(2) Rigid Boundary Adaptation", "desc": "長者步態不穩時自動放大支撐面；固執推開時切換為 CBF 剛性支撐防跌倒；主動拿捏尊嚴邊界，拒絕過度討好問候。", "badge": "Elderly Care", "date": "2026-08-17"}, {"id": "node-027", "num": "#027", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Food Sentinel", "icon": "🥣", "title": "Microsecond Food Safety Barcode Sentinel", "subtitle": "Handling H(0.5) Label Illiteracy and H(2) Binge Eating Impulses", "desc": "幼童與長輩看不懂成分標籤時主動視覺辨識；搶食暴食時硬體鎖死熱源與餵食臂；條碼破損時切脈標記不可信拒絕餵食。", "badge": "Food Safety", "date": "2026-08-17"}, {"id": "node-028", "num": "#028", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Smart Home", "icon": "🏡", "title": "Zero-Leakage Edge Smart Home Butler", "subtitle": "Local L3 Rule Fallback on Disconnection and Acoustic Privacy Shield", "desc": "家庭網路中斷時自動降級為本地 L3 規則庫維持避障；酒醉喧嘩時 Acoustic Guard 判定為高熵雜訊，不偷聽不外傳。", "badge": "Smart Home", "date": "2026-08-17"}, {"id": "node-029", "num": "#029", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Special Edu", "icon": "🧸", "title": "Empathic Assistant for Special Education & Autistic Children", "subtitle": "Non-Flattery H(-1) Protection and 161D Sparse Motive Convergence", "desc": "面對特教兒童攻擊打砸切換為柔順保護；以 161D 動機先驗快速理解稀疏語言；拒絕過度討好以傳遞健康邊界感。", "badge": "Special Education", "date": "2026-08-17"}, {"id": "node-030", "num": "#030", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "PKM Life OS", "icon": "💡", "title": "Personal PKM Life OS: Curing Information Hoarding", "subtitle": "MCR2 Entropy Pruning and N_links <= 100 Strict Sharding", "desc": "診斷數位筆記囤積症，以 MCR2 編碼率自動修剪冗餘贅詞，透過中醫四診將萬篇筆記降維提煉為可執行行動方案。", "badge": "PKM System", "date": "2026-08-17"}, {"id": "node-031", "num": "#031", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Kitchen Chef", "icon": "🍳", "title": "Mid-Tier Physical AI Kitchen Chef", "subtitle": "Compliant Knife Handover and Thermal Source Lockout Mechanics", "desc": "長輩刀工不穩時遞刀柔順度主動補償；下廚用力過猛或酒醉下廚時 CBF 自動鎖死瓦斯熱源，杜絕廚房火災風險。", "badge": "Kitchen Robotics", "date": "2026-08-17"}, {"id": "node-032", "num": "#032", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Counseling", "icon": "🛋️", "title": "Body-Speech-Mind Motive Decoding Counseling Assistant", "subtitle": "Form Follows Meaning vs Flattery: Meaningful Silence in Anxiety Overload", "desc": "以姿態微表情與語音顫抖解碼憂鬱失語；在使用者焦慮過度傾訴時刻意『留白傾聽』，拒絕毫無原則的迎合諂媚。", "badge": "Psych Counseling", "date": "2026-08-17"}, {"id": "node-033", "num": "#033", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Factory Cobot", "icon": "🏭", "title": "Gentle Industrial Cobot in Human-Robot Collaboration", "subtitle": "Asymmetric Rhythm Adaptation and Zero-Trust Collision Protection", "desc": "新手操作自動放慢預測節奏，熟手操作主動膨脹安全半徑；在潛在碰撞下微秒停機，平衡生產效率與絕對人身安全。", "badge": "Industrial Cobot", "date": "2026-08-17"}, {"id": "node-034", "num": "#034", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Patrol Shield", "icon": "🚨", "title": "Disaster & Fall Prevention Physical Shield Patrol", "subtitle": "Proactive Positioning on Unbalanced Gait and Autonomous Search on Coma", "desc": "圖拓撲出入度失衡提前預警老人跌倒並預先就位；人員昏迷無反應自動切換為醫療法規主導之搜救模式。", "badge": "Patrol & Rescue", "date": "2026-08-17"}, {"id": "node-035", "num": "#035", "module": "M06: TRIZ-HRI Scenarios", "module_zh": "10大具身垂直場景", "category": "app", "tag": "Medication", "icon": "💊", "title": "High-Trust Medication Verification & Cross-Checking Sentinel", "subtitle": "Local Pharmacological Ontology Resolving Polymedication Contradictions", "desc": "長輩多重用藥記憶模糊時，調用本地藥理學庫主動交叉比對藥物配伍禁忌與服藥劑量，防止重複用藥毒性反應。", "badge": "Medication Sentinel", "date": "2026-08-17"}];
 
-<script>
-    const NODE_DATA = {
-        'home': {
-            id: 'HOME',
-            tag: 'Sovereign Network Architecture',
-            title: 'AI365 Master Knowledge & Safety Portal',
-            subtitle: 'Steve Jobs-Inspired Bento Box Architecture across 6 Core Systemic Modules',
-            content: `
-                <div class="hero-banner">
-                    <h1 class="hero-title">Dual-Loop OS & AI-TRIZ Ecosystem</h1>
-                    <p class="hero-desc">A unified neuro-symbolic safety shield, personal cognitive operating system (PCOS), GNN topological vault audit, and systematic invention portal.</p>
-                </div>
-
-                <h3 style="margin-bottom:20px; font-weight:600; color:var(--text-primary);">Master System Topology</h3>
-                <div class="bento-grid">
-                    <div class="bento-card" onclick="loadContent('node-001')">
-                        <span class="bento-count">7 Nodes</span>
-                        <div class="bento-tag">Module 01</div>
-                        <h4 class="bento-card-title">🛡️ DLOS Framework</h4>
-                        <p class="bento-card-desc">Dual-Loop OS Hub + 5 Spokes: CartPole CBF, SysML v2.0, Friston FEP, MCU & 13-Point Health Audit.</p>
-                    </div>
-
-                    <div class="bento-card" onclick="loadContent('node-007')">
-                        <span class="bento-count">3 Nodes</span>
-                        <div class="bento-tag">Module 02</div>
-                        <h4 class="bento-card-title">⚖️ PCOS Cognitive OS</h4>
-                        <p class="bento-card-desc">Seven Decision Layers (L1~L7), Taiji Dual-Topology, and 11-Stage Representation Ladder.</p>
-                    </div>
-
-                    <div class="bento-card" onclick="loadContent('node-010')">
-                        <span class="bento-count">3 Nodes</span>
-                        <div class="bento-tag">Module 03</div>
-                        <h4 class="bento-card-title">🩺 PKM Architecture</h4>
-                        <p class="bento-card-desc">Bian Que's Four Diagnostics (望聞問切), Indra's Net GNN Topology, and Obsidian AGY workflows.</p>
-                    </div>
-
-                    <div class="bento-card" onclick="loadContent('node-012')">
-                        <span class="bento-count">45+ Nodes</span>
-                        <div class="bento-tag">Module 04</div>
-                        <h4 class="bento-card-title">💡 TRIZ Innovation</h4>
-                        <p class="bento-card-desc">40 Altshuller Inventive Principles translated into automated neuro-symbolic prompt engines.</p>
-                    </div>
-
-                    <div class="bento-card" onclick="loadContent('node-020')">
-                        <span class="bento-count">56+ Nodes</span>
-                        <div class="bento-tag">Module 05</div>
-                        <h4 class="bento-card-title">🛰️ AI Telemetry & Apps</h4>
-                        <p class="bento-card-desc">Live X post status telemetry, Meta AI prompt linkages, and autonomous agent case studies.</p>
-                    </div>
-
-                    <div class="bento-card" onclick="loadContent('node-099')">
-                        <span class="bento-count">Archive</span>
-                        <div class="bento-tag">Module 06</div>
-                        <h4 class="bento-card-title">🧩 Research Extensions</h4>
-                        <p class="bento-card-desc">Reserved workspace for future multi-domain expansion and satellite library archiving.</p>
-                    </div>
-                </div>
-            `
-        },
-        'node-015': {
-            id: '#015',
-            tag: 'DLOS / Audit Spec',
-            title: 'DLOS 09c: Agent 13-Point Health & Safety Audit Spec',
-            subtitle: 'Three Lines of Defense: Completeness, Security Protection, and Anti-Hallucination Grounding',
-            content: `
-                <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:20px; margin-bottom:30px;">
-                    <span style="color:var(--accent-cyan); font-size:0.8rem; font-weight:600; letter-spacing:1px;">[ID: #015] [DLOS AUDIT SPEC]</span>
-                    <h2 style="font-size:2rem; margin:8px 0 10px 0; color:#fff;">Agent 13-Point Health & Safety Audit Specification</h2>
-                    <p style="color:var(--text-secondary); margin:0;">Evaluating 13 MECE Architecture Components across Completeness, Security & Anti-Hallucination</p>
-                </div>
-
-                <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-radius:16px; padding:32px;">
-                    <h3 style="color:#fff; margin-top:0;">🛡️ 13-Point Inspection Matrix</h3>
-                    <p style="color:var(--text-secondary);">Every Agent deployed in the DLOS ecosystem must pass this 3-tier safety evaluation before production signoff.</p>
-
-                    <table class="tech-table">
-                        <tr><th>Layer</th><th>MECE Component</th><th>1. Completeness</th><th>2. Security Protection</th><th>3. Anti-Hallucination</th></tr>
-                        <tr><td><strong>Interface</strong></td><td><strong>1. Context Eng.</strong></td><td>Token Budget & Compression</td><td>Buffer Overflow Defense</td><td>Detect Stale Context Noise</td></tr>
-                        <tr><td><strong>Interface</strong></td><td><strong>2. Prompt Eng.</strong></td><td>Structured System Prompt</td><td>Prompt Injection Sanitization</td><td>No Ambiguous Fluff</td></tr>
-                        <tr><td><strong>Interface</strong></td><td><strong>3. Tools</strong></td><td>Tool Count Bound (&le; 10)</td><td>Sandbox & API Limit</td><td>Type Check Enforced</td></tr>
-                        <tr><td><strong>Interface</strong></td><td><strong>4. Plugin</strong></td><td>Version Locked</td><td>No Unsigned Plugins</td><td>Logic Return Verify</td></tr>
-                        <tr><td><strong>Interface</strong></td><td><strong>5. MCP Protocol</strong></td><td>Standard Protocol Spec</td><td>Encrypted Token Auth</td><td>Schema Audit Guard</td></tr>
-                        <tr><td><strong>Cognitive</strong></td><td><strong>6. Goal Eng.</strong></td><td>Multi-step DAG Complete</td><td>Anti Goal Hijacking</td><td>Physics Law Constraint</td></tr>
-                        <tr><td><strong>Cognitive</strong></td><td><strong>7. Reasoning</strong></td><td>CoT Step Closed-loop</td><td>Privacy Leak Defense</td><td>Grounding Evidence Required</td></tr>
-                        <tr><td><strong>Cognitive</strong></td><td><strong>8. Skills (SOP)</strong></td><td>SKILL.md Spec Coverage</td><td>Execution Command Ban</td><td>Unambiguous Step Audit</td></tr>
-                        <tr><td><strong>Memory</strong></td><td><strong>9. Memory</strong></td><td>Dual-loop Read/Write</td><td>Cross-session PII Scrub</td><td>Memory Decay Pruning</td></tr>
-                        <tr><td><strong>Memory</strong></td><td><strong>10. RAG</strong></td><td>GraphRAG Top-k Cover</td><td>Vault Access Control</td><td>Grounding Ratio &ge; 95%</td></tr>
-                        <tr><td><strong>Control</strong></td><td><strong>11. Harness</strong></td><td>Veto Sandbox Armor</td><td>CBF-QP 1.08&mu;s Meltdown</td><td>Boundary Interception</td></tr>
-                        <tr><td><strong>Control</strong></td><td><strong>12. Loop Eng.</strong></td><td>ReAct Loop Terminate</td><td>Prevent Infinite Loop Token Leak</td><td>Observation Corrected</td></tr>
-                        <tr><td><strong>Control</strong></td><td><strong>13. Graph Eng.</strong></td><td>LangGraph State Bound</td><td>State Transfer Auth</td><td>Causal Unit Audit</td></tr>
-                        <tr><td><strong>Cross-Layer</strong></td><td><strong>[HOOK]</strong></td><td>6 Lifecycle Hooks Monitored</td><td>Security Fuse Interrupt</td><td>Audit Log Trajectory Record</td></tr>
-                    </table>
-                </div>
-            `
-        },
-        'node-010': {
-            id: '#010',
-            tag: 'PKM / Audit',
-            title: 'Four Diagnostics Protocol for Knowledge Base Quality (望聞問切)',
-            subtitle: 'Translating Ancient Eastern Medicine to Modern Non-Euclidean GNN Topology & Entropy Control',
-            content: `
-                <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:20px; margin-bottom:30px;">
-                    <span style="color:var(--accent-cyan); font-size:0.8rem; font-weight:600; letter-spacing:1px;">[ID: #010] [PKM ARCHITECTURE]</span>
-                    <h2 style="font-size:2rem; margin:8px 0 10px 0; color:#fff;">Four Diagnostics Protocol for Knowledge Base Quality</h2>
-                    <p style="color:var(--text-secondary); margin:0;">Ancient Canon (《難經·六十一難》): <em>"Seeing is divine, Listening & Smelling is sacred."</em> (望而知之謂之神，聞而知之謂之聖)</p>
-                </div>
-
-                <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-radius:16px; padding:32px;">
-                    <h3 style="color:#fff; margin-top:0;">🩺 Clinical Philosophy & Graph Translation</h3>
-                    <p style="color:var(--text-secondary); line-height:1.5;">In traditional Eastern medicine, <strong>聞 (Wen)</strong> encapsulates both <strong>Auditory Sound (聽語聲/呼吸)</strong> and <strong>Olfactory Odor (嗅氣味/病室)</strong>. We translate both dimensions into graph topology audit:</p>
-
-                    <div class="diag-card-grid">
-                        <div class="diag-card">
-                            <div class="diag-card-header">
-                                <div class="diag-icon">望</div>
-                                <div>
-                                    <div style="font-weight:600; color:#fff;">Look — Visual Topology</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">Visual Manifold Observation</span>
-                                </div>
-                            </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Observe outward physical demeanor & facial complexions.<br><strong>Graph:</strong> Inspect non-Euclidean vault manifold geometry & Yin/Yang balance.</p>
-                        </div>
-
-                        <div class="diag-card">
-                            <div class="diag-card-header">
-                                <div class="diag-icon">聞</div>
-                                <div>
-                                    <div style="font-weight:600; color:#fff;">Listen & Smell — Acoustic & Olfactory</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">Auditory Sound & Olfactory Odor</span>
-                                </div>
-                            </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Listen to internal voice/breath resonance & smell body odor emissions.<br><strong>Graph:</strong> Measure link saturation (20 ≤ N_links ≤ 100) & detect stale document decay (vault odor).</p>
-                        </div>
-
-                        <div class="diag-card">
-                            <div class="diag-card-header">
-                                <div class="diag-icon">問</div>
-                                <div>
-                                    <div style="font-weight:600; color:#fff;">Ask — Causal Interrogation</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">Multi-Hop GNN Propagation</span>
-                                </div>
-                            </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Inquire about medical history and root lifestyle causes.<br><strong>Graph:</strong> Execute multi-hop GNN feature propagation and Pearl L3 counterfactual graph surgery.</p>
-                        </div>
-
-                        <div class="diag-card">
-                            <div class="diag-card-header">
-                                <div class="diag-icon">切</div>
-                                <div>
-                                    <div style="font-weight:600; color:#fff;">Touch — Pulse Palpation</div>
-                                    <span style="color:var(--text-muted); font-size:0.8rem;">1.08μs Edge Safety Veto</span>
-                                </div>
-                            </div>
-                            <p style="color:var(--text-secondary); font-size:0.88rem; margin:0;"><strong>Clinical:</strong> Palpate arterial pulses to assess acute physical conditions.<br><strong>Graph:</strong> Execute deterministic Control Barrier Function (CBF-QP) safety vetoes within 1.08μs.</p>
-                        </div>
-                    </div>
-                </div>
-            `
-        }
-    };
-
-    const DIVERSE_ICONS = ['⚡', '🔬', '🛰️', '⚖️', '🌀', '📐', '🧬', '🛡️', '⚙️', '🌌', '📊', '🔮'];
-
-    function generateStressTestPlaceholders() {
-        const trizContainer = document.getElementById('triz-placeholders');
-        const aiContainer = document.getElementById('ai-placeholders');
-
-        for (let i = 20; i <= 64; i++) {
-            const numStr = String(i).padStart(3, '0');
-            const icon = DIVERSE_ICONS[i % DIVERSE_ICONS.length];
-            const nodeEl = document.createElement('div');
-            nodeEl.className = 'tree-node';
-            nodeEl.id = `btn-node-${numStr}`;
-            nodeEl.setAttribute('onclick', `loadContent('node-${numStr}')`);
-            nodeEl.innerHTML = `
-                <div class="node-left"><span class="node-icon">${icon}</span><span>#${numStr} Inventive Principle #${(i%40)+1}</span></div>
-                <span class="node-tag">TRIZ</span>
-            `;
-            trizContainer.appendChild(nodeEl);
-        }
-
-        for (let i = 65; i <= 120; i++) {
-            const numStr = String(i).padStart(3, '0');
-            const icon = DIVERSE_ICONS[(i * 3) % DIVERSE_ICONS.length];
-            const nodeEl = document.createElement('div');
-            nodeEl.className = 'tree-node';
-            nodeEl.id = `btn-node-${numStr}`;
-            nodeEl.setAttribute('onclick', `loadContent('node-${numStr}')`);
-            nodeEl.innerHTML = `
-                <div class="node-left"><span class="node-icon">${icon}</span><span>#${numStr} Autonomous Agent Case #${i-64}</span></div>
-                <span class="node-tag">AI/App</span>
-            `;
-            aiContainer.appendChild(nodeEl);
-        }
-    }
-
-    function toggleFolder(folderId) {
-        const content = document.getElementById(folderId);
-        const toggle = content.previousElementSibling;
-        content.classList.toggle('collapsed');
-        toggle.classList.toggle('collapsed');
-    }
-
-    function loadContent(nodeId) {
-        document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('active'));
-        const btn = document.getElementById(`btn-node-${nodeId}`);
-        if(btn) btn.classList.add('active');
-
-        const display = document.getElementById('contentDisplayArea');
-        if (NODE_DATA[nodeId]) {
-            display.innerHTML = NODE_DATA[nodeId].content;
-        } else {
-            display.innerHTML = `
-                <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:20px; margin-bottom:30px;">
-                    <span style="color:var(--accent-cyan); font-size:0.8rem; font-weight:600; letter-spacing:1px;">[ID: ${nodeId}] [STRESS TEST]</span>
-                    <h2 style="font-size:2rem; margin:8px 0 10px 0; color:#fff;">Satellite Node ${nodeId}</h2>
-                    <p style="color:var(--text-secondary); margin:0;">Scalability Verification Placeholder</p>
-                </div>
-                <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-radius:16px; padding:32px;">
-                    <h3 style="color:#fff; margin-top:0;">⚙️ Systemic Scalability Verified</h3>
-                    <p style="color:var(--text-secondary);">This node represents 1 of 120+ active nodes in the AI365 Master Portal network tree. Rendering performance, tree scroll behavior, and search indexing are operating at peak efficiency.</p>
+        function renderSidebar() {
+            const container = document.getElementById('treeContainer');
+            container.innerHTML = `
+                <div class="tree-node active" onclick="loadContent('home')" id="btn-home">
+                    <div class="node-left"><span class="node-icon">🌌</span><span>Global 35-Satellite Overview</span></div>
+                    <span class="node-tag">Home</span>
                 </div>
             `;
-        }
-    }
 
-    function filterTreeNodes() {
-        const query = document.getElementById('nodeSearch').value.toLowerCase();
-        document.querySelectorAll('.tree-node').forEach(node => {
-            const text = node.textContent.toLowerCase();
-            node.style.display = text.includes(query) ? 'flex' : 'none';
-        });
-        if(query !== '') {
-            document.querySelectorAll('.folder-content').forEach(f => f.classList.remove('collapsed'));
-        }
-    }
+            let currentModule = '';
+            nodesData.forEach(n => {
+                if (n.module_zh !== currentModule) {
+                    currentModule = n.module_zh;
+                    const secTitle = document.createElement('div');
+                    secTitle.className = 'tree-section-title';
+                    secTitle.innerText = currentModule;
+                    container.appendChild(secTitle);
+                }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        generateStressTestPlaceholders();
+                const nodeEl = document.createElement('div');
+                nodeEl.className = 'tree-node';
+                nodeEl.id = `btn-${n.id}`;
+                nodeEl.onclick = () => loadContent(n.id);
+                nodeEl.innerHTML = `
+                    <div class="node-left">
+                        <span class="node-icon">${n.icon}</span>
+                        <span>${n.num} ${n.title}</span>
+                    </div>
+                    <span class="node-tag">${n.tag}</span>
+                `;
+                container.appendChild(nodeEl);
+            });
+        }
+
+        function loadContent(nodeId) {
+            document.querySelectorAll('.tree-node').forEach(el => el.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-${nodeId}`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            const contentArea = document.getElementById('mainContent');
+
+            if (nodeId === 'home') {
+                contentArea.innerHTML = `
+                    <div class="hero">
+                        <div class="hero-badge">35 Satellite Nodes Active</div>
+                        <h1 class="hero-title">DLOS 決策生命作業系統：全域衛星網絡</h1>
+                        <p class="hero-desc">本站點整合 5 大經典理論 Spokes、樹狀大綱 7 大主幹 (M1~M7)、中醫四診 4D 幾何推理與 10 大 TRIZ-HRI 具身垂直落地場景，構建微秒級安全護盾與人性化身口意決策生命體系。</p>
+                    </div>
+
+                    <h3 style="color:#fff; margin-bottom:16px;">🌐 六大核心模組全域導航 (Bento Matrix)</h3>
+                    <div class="bento-grid">
+                        <div class="bento-card" onclick="loadContent('node-001')">
+                            <div class="bento-tag">Module 01</div>
+                            <h4 class="bento-card-title">🏛️ 經典五大理論樞紐</h4>
+                            <p class="bento-card-desc">SysML v2.0 形式化追溯、STE 可微對數障礙、FEP 主動推理、50MB 端側 EBM 與 MAMS-161 9D 動機流形。</p>
+                        </div>
+                        <div class="bento-card" onclick="loadContent('node-006')">
+                            <div class="bento-tag">Module 02</div>
+                            <h4 class="bento-card-title">🧠 FFF 語義與中階具身</h4>
+                            <p class="bento-card-desc">Form Follows Meaning 三元閉環、身口意多模態致動、去過度擬合哲學與冷啟動稀疏性突破。</p>
+                        </div>
+                        <div class="bento-card" onclick="loadContent('node-011')">
+                            <div class="bento-tag">Module 03</div>
+                            <h4 class="bento-card-title">⚖️ 決策光譜與知識漏斗</h4>
+                            <p class="bento-card-desc">L1~L7 決策光譜、DLOS 08 三層漏斗 (64 內核/256 基底/1024 插件)、動態 Kano 模型與主權隔離。</p>
+                        </div>
+                        <div class="bento-card" onclick="loadContent('node-017')">
+                            <div class="bento-tag">Module 04</div>
+                            <h4 class="bento-card-title">🩺 中醫四診 4D 幾何推理</h4>
+                            <p class="bento-card-desc">望 (拓撲審計 N_links≤100)、聞 (MCR2 資訊熵)、問 (Pearl 反事實)、切 (沙盒脈象與新鮮度衰減)。</p>
+                        </div>
+                        <div class="bento-card" onclick="loadContent('node-021')">
+                            <div class="bento-tag">Module 05</div>
+                            <h4 class="bento-card-title">🛡️ 邊緣安全與雙迴路硬體</h4>
+                            <p class="bento-card-desc">Open Food Facts 食品條碼微秒熔斷、不偷窺/不八卦隱私護盾、1.08μs DTCM 14面體屏障與正交解耦。</p>
+                        </div>
+                        <div class="bento-card" onclick="loadContent('node-026')">
+                            <div class="bento-tag">Module 06</div>
+                            <h4 class="bento-card-title">🤖 10大 TRIZ-HRI 具身場景</h4>
+                            <p class="bento-card-desc">長照伴侶尊嚴守護、智慧宅管家、特教共感助教、第二大腦 PKM、廚房主廚、用藥核驗等垂直落地。</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const node = nodesData.find(n => n.id === nodeId);
+                if (node) {
+                    contentArea.innerHTML = `
+                        <div class="detail-card">
+                            <div class="detail-meta">
+                                <span class="detail-badge">${node.num} [${node.module_zh}]</span>
+                                <span style="color:var(--text-muted); font-size:0.85rem;">Tag: ${node.tag} | ${node.badge}</span>
+                            </div>
+                            <h2 class="detail-title">${node.icon} ${node.title}</h2>
+                            <p class="detail-subtitle">${node.subtitle}</p>
+                            <div class="detail-body">
+                                <h4 style="color:#fff; margin-top:0;">📌 核心突破與工程定義</h4>
+                                <p style="color:var(--text-secondary); line-height:1.7;">${node.desc}</p>
+                                
+                                <div class="code-block">
+// Satellite Node Formal Anchor: ${node.id}
+// Academic Track: ${node.badge} | Venue Target: IEEE / ACM / arXiv cs.RO
+SAT_NODE_PAYLOAD = {
+    "node_id": "${node.id}",
+    "title": "${node.title}",
+    "module": "${node.module}",
+    "tag": "${node.tag}",
+    "status": "active_sintered"
+};
+                                </div>
+
+                                <div style="margin-top:20px; display:flex; gap:10px;">
+                                    <button class="nav-btn" onclick="loadContent('home')">⬅️ Back to Matrix Overview</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function filterNodes() {
+            const query = document.getElementById('nodeSearch').value.toLowerCase();
+            document.querySelectorAll('.tree-node').forEach(el => {
+                if (el.id === 'btn-home') return;
+                const text = el.innerText.toLowerCase();
+                el.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        }
+
+        // Init
+        renderSidebar();
         loadContent('home');
-    });
-</script>
-
+    </script>
 </body>
 </html>

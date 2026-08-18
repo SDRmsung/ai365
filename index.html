@@ -321,6 +321,7 @@
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
     </style>
+<script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 <body>
 
@@ -331,6 +332,9 @@
             <span style="font-size:0.75rem; color:var(--text-muted); margin-left:6px;">v59 SSOT</span>
         </div>
         <div class="top-actions">
+                        <button class="nav-btn" onclick="openQrScannerModal()" style="border-color:rgba(239, 68, 68, 0.5); background:rgba(239, 68, 68, 0.15); color:#f87171;">
+                <span>🛡️ 食安條碼掃描 (P003)</span>
+            </button>
             <a href="https://local.ai/ai365" target="_blank" class="nav-btn" style="border-color:rgba(56, 189, 248, 0.4); background:rgba(56, 189, 248, 0.12); color:#38bdf8;">
                 <span>⚡ local.ai/ai365</span>
             </a>
@@ -505,5 +509,240 @@ SAT_NODE_PAYLOAD = {
         renderSidebar();
         loadContent('home');
     </script>
+
+    <!-- P003 Food Safety Scanner Modal -->
+    <div id="qrModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(12px); z-index:9999; justify-content:center; align-items:center; padding:20px;">
+        <div style="background:#0b1120; border:1px solid rgba(255,255,255,0.15); border-radius:16px; max-width:600px; width:100%; max-height:90vh; overflow-y:auto; padding:24px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.7); position:relative;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.4rem;">🛡️</span>
+                    <h3 style="margin:0; color:#f8fafc; font-size:1.15rem;">P003 Microsecond Food Safety Sentinel</h3>
+                </div>
+                <button onclick="closeQrScannerModal()" style="background:rgba(255,255,255,0.1); border:none; color:#94a3b8; font-size:1.2rem; border-radius:50%; width:32px; height:32px; cursor:pointer;">✕</button>
+            </div>
+            
+            <p style="color:#94a3b8; font-size:0.85rem; margin-top:0;">利用相機掃描食品包裝條碼 (EAN-13/QR)，即時查詢 Open Food Facts 資料庫並進行過敏原多模態護盾判定。</p>
+            
+            <!-- Scanner Area -->
+            <div id="qr-reader" style="width:100%; border-radius:12px; overflow:hidden; border:1px solid rgba(56,189,248,0.3); background:#020408; margin-bottom:16px;"></div>
+            
+            <div style="display:flex; gap:10px; margin-bottom:16px;">
+                <input type="text" id="manualBarcode" placeholder="手動輸入或測試條碼 (如: 3017620422003)" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px 12px; color:#fff; font-size:0.9rem; outline:none;">
+                <button onclick="testManualBarcode()" style="background:rgba(56,189,248,0.2); border:1px solid #38bdf8; color:#38bdf8; padding:10px 16px; border-radius:8px; cursor:pointer; font-weight:600;">查詢</button>
+            </div>
+            
+            <!-- Quick Test Presets -->
+            <div style="margin-bottom:16px; display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+                <span style="font-size:0.75rem; color:#64748b;">快速測試:</span>
+                <button onclick="setAndQuery('3017620422003')" style="background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.4); color:#fca5a5; font-size:0.75rem; padding:4px 8px; border-radius:6px; cursor:pointer;">Nutella (堅果L3)</button>
+                <button onclick="setAndQuery('7622210449283')" style="background:rgba(249,115,22,0.15); border:1px solid rgba(249,115,22,0.4); color:#fdba74; font-size:0.75rem; padding:4px 8px; border-radius:6px; cursor:pointer;">Prince餅乾 (麩質L2)</button>
+            </div>
+
+            <!-- Result Display Box -->
+            <div id="scanResultArea" style="display:none; padding:16px; border-radius:12px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1);">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let html5QrCode = null;
+        const USER_ALLERGEN_PROFILE = {
+            'peanuts': 'L3',
+            'nuts': 'L3',
+            'gluten': 'L2',
+            'milk': 'L1',
+            'eggs': 'L1',
+            'soybeans': 'L1'
+        };
+
+        function openQrScannerModal() {
+            const modal = document.getElementById('qrModal');
+            modal.style.display = 'flex';
+            startScanner();
+        }
+
+        function closeQrScannerModal() {
+            const modal = document.getElementById('qrModal');
+            modal.style.display = 'none';
+            stopScanner();
+        }
+
+        function startScanner() {
+            if (typeof Html5Qrcode === 'undefined') {
+                console.warn('Html5Qrcode library not loaded');
+                return;
+            }
+            if (!html5QrCode) {
+                html5QrCode = new Html5Qrcode('qr-reader');
+            }
+            const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+            html5QrCode.start(
+                { facingMode: 'environment' },
+                config,
+                (decodedText) => {
+                    handleDecodedBarcode(decodedText);
+                },
+                (errorMessage) => {}
+            ).catch(err => {
+                console.warn('Camera start error or permission denied:', err);
+            });
+        }
+
+        function stopScanner() {
+            if (html5QrCode) {
+                html5QrCode.stop().then(() => {
+                    html5QrCode.clear();
+                }).catch(err => {
+                    console.log('Stop failed', err);
+                });
+            }
+        }
+
+        function setAndQuery(code) {
+            document.getElementById('manualBarcode').value = code;
+            handleDecodedBarcode(code);
+        }
+
+        function testManualBarcode() {
+            const code = document.getElementById('manualBarcode').value.trim();
+            if (code) handleDecodedBarcode(code);
+        }
+
+        async function handleDecodedBarcode(barcode) {
+            const resArea = document.getElementById('scanResultArea');
+            resArea.style.display = 'block';
+            resArea.innerHTML = `
+                <div style="display:flex; align-items:center; gap:10px; color:#38bdf8;">
+                    <div style="border:2px solid #38bdf8; border-top-color:transparent; border-radius:50%; width:16px; height:16px; animation:spin 1s linear infinite;"></div>
+                    <span>正在查詢 Open Food Facts API (條碼: ${barcode})...</span>
+                </div>
+                <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+            `;
+
+            // Check LocalStorage Cache
+            const cacheKey = 'p003_off_cache_' + barcode;
+            let product = null;
+            const cachedStr = localStorage.getItem(cacheKey);
+            if (cachedStr) {
+                try { product = JSON.parse(cachedStr); } catch(e){}
+            }
+
+            if (!product) {
+                try {
+                    const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}?fields=product_name,allergens_tags,ingredients_text`;
+                    const resp = await fetch(url);
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        if (data.status === 1) {
+                            product = data.product;
+                            localStorage.setItem(cacheKey, JSON.stringify(product));
+                        }
+                    }
+                } catch (e) {
+                    console.error('API Fetch failed', e);
+                }
+            }
+
+            if (!product) {
+                renderAlertResult({
+                    product_name: '未知商品 (查無資料)',
+                    barcode: barcode,
+                    triggered: {},
+                    max_level: 'L1',
+                    is_fallback: true
+                });
+                return;
+            }
+
+            const analysis = analyzeProductAllergens(product, barcode);
+            renderAlertResult(analysis);
+        }
+
+        function analyzeProductAllergens(product, barcode) {
+            const allergensTags = product.allergens_tags || [];
+            const ingredients = (product.ingredients_text || '').toLowerCase();
+            const name = product.product_name || '未命名商品';
+
+            const triggered = {};
+            for (const [allergen, level] of Object.entries(USER_ALLERGEN_PROFILE)) {
+                const tag = 'en:' + allergen;
+                if (allergensTags.includes(tag) || ingredients.includes(allergen)) {
+                    triggered[allergen] = level;
+                }
+            }
+
+            const levelWeights = { 'L0': 0, 'L1': 1, 'L2': 2, 'L3': 3 };
+            let maxLevel = 'L0';
+            for (const lvl of Object.values(triggered)) {
+                if (levelWeights[lvl] > levelWeights[maxLevel]) {
+                    maxLevel = lvl;
+                }
+            }
+
+            return {
+                product_name: name,
+                barcode: barcode,
+                allergens_raw: allergensTags,
+                triggered: triggered,
+                max_level: maxLevel
+            };
+        }
+
+        function renderAlertResult(res) {
+            const resArea = document.getElementById('scanResultArea');
+            const level = res.max_level;
+            
+            const styles = {
+                'L0': { border: '#22c55e', bg: 'rgba(34,197,94,0.1)', color: '#4ade80', title: '✅ L0 Clean — 安全無虞', msg: '未偵測到您的已知過敏原，可安心使用。' },
+                'L1': { border: '#eab308', bg: 'rgba(234,179,8,0.1)', color: '#facc15', title: '💛 L1 Caution — 微量注意', msg: '商品可能含有微量成分，請視個人情況注意。' },
+                'L2': { border: '#f97316', bg: 'rgba(249,115,22,0.15)', color: '#fb923c', title: '🟠 L2 Warning — 過敏原警告', msg: '偵測到明確過敏原成分，請謹慎評估！' },
+                'L3': { border: '#ef4444', bg: 'rgba(239,68,68,0.25)', color: '#f87171', title: '🚨 L3 VETO — 致命過敏原！物理融斷觸發！', msg: '【安全護盾啟動】禁止食用！機械臂已鎖定！' }
+            };
+
+            const conf = styles[level] || styles['L1'];
+
+            let allergenListHtml = '';
+            if (Object.keys(res.triggered || {}).length > 0) {
+                allergenListHtml = '<div style="margin-top:10px; font-size:0.85rem;"><strong>觸發項目:</strong><ul style="margin:4px 0 0 16px; padding:0;">';
+                for (const [k, v] of Object.entries(res.triggered)) {
+                    allergenListHtml += `<li><span style="color:${conf.color};">${k}</span> [${v}]</li>`;
+                }
+                allergenListHtml += '</ul></div>';
+            }
+
+            resArea.style.display = 'block';
+            resArea.style.border = `1px solid ${conf.border}`;
+            resArea.style.background = conf.bg;
+            resArea.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div>
+                        <h4 style="margin:0 0 4px 0; color:${conf.color}; font-size:1.05rem;">${conf.title}</h4>
+                        <div style="font-size:0.95rem; color:#fff; font-weight:600;">📦 ${res.product_name}</div>
+                        <div style="font-size:0.75rem; color:#94a3b8;">條碼: ${res.barcode}</div>
+                    </div>
+                    <span style="padding:4px 8px; border-radius:6px; font-size:0.75rem; font-weight:700; background:${conf.color}; color:#000;">${level}</span>
+                </div>
+                <p style="margin:8px 0 0 0; font-size:0.85rem; color:#f1f5f9;">${conf.msg}</p>
+                ${allergenListHtml}
+            `;
+
+            // Web Speech API Voice Alert
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let speechText = '';
+                if (level === 'L3') speechText = `警告！此商品含有致命過敏原，禁止食用！`;
+                else if (level === 'L2') speechText = `請注意，此商品含有過敏原。`;
+                else if (level === 'L0') speechText = `檢測完成，未發現過敏原。`;
+                
+                if (speechText) {
+                    const utter = new SpeechSynthesisUtterance(speechText);
+                    utter.lang = 'zh-TW';
+                    window.speechSynthesis.speak(utter);
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>

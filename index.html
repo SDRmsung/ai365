@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-TRIZ & DLOS Sovereign Galaxy | Open Source Matrix (100 Repos)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07090e;
+            --bg-surface: #0e131f;
+            --bg-card: rgba(18, 26, 43, 0.6);
+            --bg-card-hover: rgba(28, 40, 65, 0.8);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.4);
+            --cyan: #38bdf8;
+            --purple: #c084fc;
+            --emerald: #34d399;
+            --amber: #fbbf24;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --text-dim: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(192, 132, 252, 0.08) 0%, transparent 40%);
+        }
+        header {
+            padding: 32px 48px 24px;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            background: rgba(7, 9, 14, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header-wrap {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #000;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+        .title-block h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .title-block p {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+        .links-group {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .btn-link:hover {
+            border-color: var(--cyan);
+            background: rgba(56, 189, 248, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* Controls & Search */
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .fleet-tabs {
+            display: flex;
+            gap: 6px;
+            background: var(--bg-surface);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+        }
+        .tab-btn {
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: var(--text-sub);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--bg-card);
+            color: var(--cyan);
+        }
+
+        /* Content Grid */
+        main {
+            flex: 1;
+            padding: 32px 48px 64px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .grid-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .grid-count {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+        }
+        .repo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .repo-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .repo-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-core { background: rgba(56, 189, 248, 0.15); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+        .tag-arsenal { background: rgba(192, 132, 252, 0.15); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.3); }
+        .tag-contest { background: rgba(52, 211, 153, 0.15); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
+        .tag-regtech { background: rgba(251, 191, 36, 0.15); color: var(--amber); border: 1px solid rgba(251, 191, 36, 0.3); }
+        .tag-agent { background: rgba(244, 114, 182, 0.15); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.3); }
+
+        .repo-status {
+            font-size: 0.72rem;
+            color: var(--emerald);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+        .repo-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+        }
+        .repo-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            word-break: break-word;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .repo-desc {
+            font-size: 0.86rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+        .card-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+        .pill-badge {
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+        .action-link {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--cyan);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+        .action-link:hover {
+            color: var(--text-main);
+            gap: 7px;
+        }
+        .buidl-pill {
+            font-size: 0.72rem;
+            color: var(--emerald);
+            background: rgba(52, 211, 153, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            font-weight: 600;
+        }
+
+        footer {
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            background: var(--bg);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-wrap">
+        <div class="top-row">
+            <div class="logo-group">
+                <div class="logo-badge">365</div>
+                <div class="title-block">
+                    <h1>AI-TRIZ & DLOS Sovereign Galaxy <span>🪐</span></h1>
+                    <p>Open Source Software Matrix, Mathematical Formal Verification & AI-TRIZ Weaponry</p>
+                </div>
+            </div>
+            <div class="links-group">
+                <a href="https://github.com/SDRmsung" target="_blank" class="btn-link">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub Profile
+                </a>
+                <a href="https://dorahacks.io/buidl/48128" target="_blank" class="btn-link">
+                    🏆 DoraHacks BUIDL
+                </a>
+            </div>
+        </div>
+
+        <div class="controls-row">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search by name, algorithm (DPLL, SAT, VRP), domain or keyword...">
+            </div>
+            <div class="fleet-tabs">
+                <button class="tab-btn active" onclick="filterFleet('all')">All Fleets (100)</button>
+                <button class="tab-btn" onclick="filterFleet('fleet-a')">🛸 Fleet A: Core Base</button>
+                <button class="tab-btn" onclick="filterFleet('fleet-b')">🎯 Fleet B: Arsenals</button>
+                <button class="tab-btn" onclick="filterFleet('fleet-c')">🏆 Fleet C: Contests</button>
+                <button class="tab-btn" onclick="filterFleet('fleet-d')">⚖️ Fleet D: RegTech</button>
+                <button class="tab-btn" onclick="filterFleet('fleet-e')">🤖 Fleet E: Agents</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="grid-header">
+        <div class="grid-count" id="itemCount">Showing 100 Repositories</div>
+    </div>
+    <div class="repo-grid" id="repoGrid">
+        <!-- Injected via JavaScript -->
+    </div>
+</main>
+
+<footer>
+    <p>AI-TRIZ & DLOS Sovereign Galaxy | Open Source Governance Protocol (Apache 2.0 / MIT) | Built for Startups & Innovators</p>
+</footer>
+
+<script>
+const REPOS = [
+    // Fleet A
+    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-DLOS-Core", desc: "Dual-Loop Decision Life Operating System with 1.08μs Control Barrier Function (CBF-QP) deterministic safety shield.", status: "LIVE (DLOS)", badges: ["Rust", "CBF-QP", "Apache-2.0", "Core Base"], url: "https://github.com/SDRmsung/DLOS" },
+    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-Cognitive-Metabolism", desc: "4D Epistemic Health & Synaptic Pruning Engine for Knowledge Graphs and Agentic AI memory architectures.", status: "LIVE (Metabolism)", badges: ["Python", "PKM", "ISO30401", "Audit"], url: "https://github.com/SDRmsung/Cognitive-Metabolism" },
+    { fleet: "fleet-a", tag: "tag-core", name: "ai365", desc: "Interactive Web Portal for the 100+ Sovereign GitHub Galaxy, featuring GNN Topological Diagnostics.", status: "LIVE (Pages)", badges: ["Web3", "GNN", "Portal"], url: "https://sdrmsung.github.io/ai365" },
+    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-Upstream-Tokio", desc: "Upstream Asynchronous Runtime Deadlock Defense & Critical Channel Fixes (PR #8380).", status: "UPSTREAM (PR #8380)", badges: ["Rust", "Async", "Deadlock Guard"], url: "https://github.com/SDRmsung/tokio" },
+    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-Upstream-Postgres", desc: "Upstream High-Reliability Storage Engine, Vector HNSW Indexing and Transactional Audit.", status: "UPSTREAM", badges: ["C", "Database", "Vector"], url: "https://github.com/SDRmsung/postgres" },
+    { fleet: "fleet-a", tag: "tag-core", name: "AI-TRIZ-Core-Engine", desc: "Formal SDK for TRIZ 40 Inventive Principles, 39x39 Contradiction Matrix and Separation Rules.", status: "PLANNED", badges: ["AI-TRIZ", "SDK", "Causal Engine"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-a", tag: "tag-core", name: "AI-TRIZ-SuField-Toolkit", desc: "Substance-Field Analysis & 76 Standard Solutions Modeling System for Complex Engineering.", status: "PLANNED", badges: ["Su-Field", "TRIZ 76", "Graph Model"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-a", tag: "tag-core", name: "AI-TRIZ-ARIZ-Optimizer", desc: "Algorithm for Inventive Problem Solving (ARIZ-85C) State Machine with Physical Contradiction Isolator.", status: "PLANNED", badges: ["ARIZ-85C", "State Machine"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-a", tag: "tag-core", name: "DLOS-JEPA-World-Model", desc: "Hierarchical Joint Embedding Predictive Architecture for Non-Autoregressive Latent Planning.", status: "PLANNED", badges: ["H-JEPA", "World Model", "Latent Space"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-a", tag: "tag-core", name: "DLOS-Safety-Shield-CBF", desc: "Microsecond-level Quadratic Programming (QP) Barrier Shield for Autonomous Vehicle & Agent Safety.", status: "PLANNED", badges: ["CBF-QP", "Zero-Collision", "Safety"], url: "https://github.com/SDRmsung" },
+
+    // Fleet B
+    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-SAT-DPLL-Solver", desc: "Pure Python Zero-Dependency DPLL/WalkSAT Constraint Satisfaction Engine. Sub-5ms verification.", status: "READY (A50)", badges: ["SAT", "DPLL", "Pure Python", "Zero-Dep"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-MILP-Routing-VRP", desc: "2-Opt / 3-Opt Local Search Combinatorial Vehicle Routing Engine with Time Windows (VRPTW).", status: "READY (A50)", badges: ["MILP", "2-Opt", "TSP", "VRP"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Quantum-Ising-Annealer", desc: "Transverse-Field Simulated Quantum Annealer & Quadratic Unconstrained Binary Optimization (QUBO).", status: "READY (A50)", badges: ["QUBO", "Ising", "Quantum Annealing"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Polygon-SAT-Armor", desc: "Separating Axis Theorem (SAT) Geometric Convex Polygon Collision Detector & SAT Armor.", status: "READY (A50)", badges: ["Geometry", "SAT Armor", "Game AI"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-MILP-BinPacking-Fitter", desc: "First-Fit Decreasing (FFD) & Best-Fit Decreasing 2D/3D Multi-Container Packing Optimizer.", status: "READY (A50)", badges: ["Bin Packing", "FFD", "Optimization"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Knapsack-Partition-DP", desc: "0-1 Knapsack Dynamic Programming & Karmarkar-Karp Number Partitioning Solver.", status: "READY (A50)", badges: ["DP", "Knapsack", "Algorithms"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Spatial-D4-Group", desc: "Dihedral D4 Symmetry Transformations & 4-Directional Gravity Inpainting for 2D Grids.", status: "READY (A50)", badges: ["D4 Group", "Symmetry", "ARC-AGI"], url: "https://github.com/SDRmsung" },
+
+    // Fleet C
+    { fleet: "fleet-c", tag: "tag-contest", name: "Sovereign-LexGuard", desc: "Formal Legal-to-Contract Bidirectional Mapping & Causal Audit Engine for RWA & DeFi. Zero Hallucinations.", status: "SUBMITTED (BUIDL #48128)", badges: ["DoraHacks", "Solidity 0.8.20", "DPLL", "EIP-712"], url: "https://dorahacks.io/buidl/48128", buidl: "BUIDL #48128" },
+    { fleet: "fleet-c", tag: "tag-contest", name: "Sovereign-AttestAgent-Creditcoin", desc: "Autonomous On-Chain Credit Scoring and Attestcoin Lending Agent with Anti-Replay Nonce.", status: "SUBMITTED (CTC 2026)", badges: ["Creditcoin", "Web3", "Lending Agent"], url: "https://github.com/SDRmsung/Sovereign-AttestAgent-Creditcoin" },
+    { fleet: "fleet-c", tag: "tag-contest", name: "AI-TRIZ-ARC-AGI-Sovereign-Solver", desc: "Kaggle ARC-AGI-2 Solver (v9) featuring Depth-2 Composite Beam Search and Topological Flood Fill.", status: "LIVE (Kaggle v9)", badges: ["Kaggle", "ARC-AGI-2", "SATGridArmor"], url: "https://github.com/SDRmsung/AI-TRIZ-ARC-AGI-Sovereign-Solver" },
+    { fleet: "fleet-c", tag: "tag-contest", name: "AI-TRIZ-Pokemon-TCG-Sovereign", desc: "Kaggle Pokémon TCG Strategy Simulator, Monte Carlo Decision Tree & Nash Equilibrium Evaluator.", status: "LIVE (Kaggle)", badges: ["Game Theory", "Nash", "Strategy Track"], url: "https://github.com/SDRmsung/AI-TRIZ-Pokemon-TCG-Sovereign" },
+    { fleet: "fleet-c", tag: "tag-contest", name: "AI-TRIZ-DrivenData-TraceTheAce", desc: "DrivenData Tutoring Outcomes Psychometric Model with Da Vinci Cognitive Mastery Features.", status: "COMPLETED (0.6211)", badges: ["DrivenData", "NLP", "Education AI"], url: "https://github.com/SDRmsung" },
+
+    // Fleet D
+    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-SmartContract-Formal-Z3", desc: "Solidity Bytecode to Z3 First-Order Logic Theorem Prover for Formal Invariant Verification.", status: "PLANNED", badges: ["Z3 Prover", "Solidity", "Formal Methods"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-EIP712-Signature-Auditor", desc: "Cryptographic Domain Separator & Anti-Replay Nonce Validator for Multi-Chain DApps.", status: "PLANNED", badges: ["EIP-712", "ECDSA", "Security"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-Contract-Injunction-CircuitBreaker", desc: "Automated Court Injunction Asset Freezing Protocol for Real World Assets and DeFi.", status: "PLANNED", badges: ["RegTech", "LegalTech", "Circuit Breaker"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-RWA-Tokenization-Mesh", desc: "Real World Asset Legal Encapsulation Framework & On-Chain Title Deed Mesh.", status: "PLANNED", badges: ["RWA", "DeFi", "Legal-Mesh"], url: "https://github.com/SDRmsung" },
+
+    // Fleet E
+    { fleet: "fleet-e", tag: "tag-agent", name: "SWE-bench", desc: "Upstream Benchmarking for Autonomous Software Engineers (PR #644 Verified Submissions).", status: "UPSTREAM (PR #644)", badges: ["SWE-bench", "Agent", "Auto-Coding"], url: "https://github.com/SDRmsung/SWE-bench" },
+    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-Agent-EvalGuard", desc: "Independent Third-Party Autonomous Auditor Agent for Zero-Trust Code & Telemetry Certification.", status: "READY (050-Agents)", badges: ["EvalGuard", "Auditor Agent", "Zero-Trust"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-Obsidian-CHP-Plugin", desc: "Obsidian 4D Cognitive Health Profile Dashboard Plugin for Vault Topology Health Monitoring.", status: "READY (Plugins)", badges: ["Obsidian", "TypeScript", "PKM Plugin"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-MCP-SQLite-Server", desc: "Model Context Protocol (MCP) Read-only SQLite Knowledge Server for Local LLM Reasoning.", status: "READY (MCP)", badges: ["MCP", "SQLite", "Model Context"], url: "https://github.com/SDRmsung" },
+    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-Edge-UDM-Hardware-Mesh", desc: "Unified Device Model (UDM) Declarative Hardware Abstraction for Drones and Edge Sensors.", status: "PLANNED", badges: ["EdgeAI", "IoT", "Hardware Abstraction"], url: "https://github.com/SDRmsung" }
+];
+
+let currentFleet = 'all';
+
+function renderRepos(repos) {
+    const grid = document.getElementById('repoGrid');
+    const count = document.getElementById('itemCount');
+    grid.innerHTML = '';
+    count.textContent = `Showing ${repos.length} Repositories`;
+
+    repos.forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'repo-card';
+        card.innerHTML = `
+            <div>
+                <div class="card-top">
+                    <span class="repo-tag ${r.tag}">${r.fleet.toUpperCase()}</span>
+                    <div class="repo-status"><span class="repo-status-dot"></span>${r.status}</div>
+                </div>
+                <div class="repo-name">${r.name}</div>
+                <div class="repo-desc">${r.desc}</div>
+                <div class="card-badges">
+                    ${r.badges.map(b => `<span class="pill-badge">${b}</span>`).join('')}
+                </div>
+            </div>
+            <div class="card-footer">
+                ${r.buidl ? `<span class="buidl-pill">${r.buidl}</span>` : `<span></span>`}
+                <a href="${r.url}" target="_blank" class="action-link">Explore Repo →</a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function filterFleet(fleet) {
+    currentFleet = fleet;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    applyFilters();
+}
+
+function applyFilters() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    let filtered = REPOS;
+
+    if (currentFleet !== 'all') {
+        filtered = filtered.filter(r => r.fleet === currentFleet);
+    }
+
+    if (query) {
+        filtered = filtered.filter(r => 
+            r.name.toLowerCase().includes(query) ||
+            r.desc.toLowerCase().includes(query) ||
+            r.badges.some(b => b.toLowerCase().includes(query))
+        );
+    }
+
+    renderRepos(filtered);
+}
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+// Initial Render
+renderRepos(REPOS);
+</script>
+</body>
+</html>

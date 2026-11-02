@@ -1,0 +1,131 @@
+/* ==========================================================================
+   _archive/atlas-unused.css
+   Extracted from index.html (lines ~180-303) on 2026-11-02
+   A23 Data Atlas Spatiotemporal Grid Header (s01-s12, z01)
+   No references found in HTML or JS.
+   ========================================================================== */
+
+/* A23 Data Atlas Spatiotemporal Grid Header (s01-s12, z01) */
+.atlas-spatio-strip {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(14, 19, 31, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.atlas-strip-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.atlas-strip-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+}
+.atlas-strip-badge {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--cyan);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+.atlas-strip-link {
+    font-size: 0.75rem;
+    color: var(--text-sub);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    transition: color 0.15s;
+}
+.atlas-strip-link:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+}
+.atlas-chip-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+}
+@media (max-width: 1280px) {
+    .atlas-chip-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+    .atlas-chip-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+    .atlas-chip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.atlas-chip {
+    background: rgba(18, 26, 43, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.15s ease-out;
+    min-width: 0;
+}
+.atlas-chip:hover {
+    border-color: var(--cyan);
+    background: rgba(56, 189, 248, 0.12);
+    transform: translateY(-1px);
+}
+.atlas-chip-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    overflow: hidden;
+    flex: 1;
+}
+.atlas-code-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--cyan);
+    background: rgba(56, 189, 248, 0.16);
+    padding: 1px 4px;
+    border-radius: 4px;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+.atlas-emoji {
+    font-size: 0.9rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.atlas-chip-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-main);
+}
+.atlas-popout-icon {
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    line-height: 1;
+    transition: color 0.15s;
+}
+.atlas-chip:hover .atlas-popout-icon {
+    color: var(--cyan);
+}

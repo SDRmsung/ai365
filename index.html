@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-TRIZ & DLOS Sovereign Galaxy | Open Source Matrix (100 Repos)</title>
+    <title>AI-TRIZ & DLOS Sovereign Galaxy | Open Source Matrix (Sovereign Galaxy)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -368,7 +368,6 @@
 
         .repo-status {
             font-size: 0.72rem;
-            color: var(--emerald);
             display: flex;
             align-items: center;
             gap: 5px;
@@ -378,8 +377,49 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
+        }
+        /* Status Variants */
+        .status-live {
+            color: var(--emerald);
+        }
+        .status-live .repo-status-dot {
             background: var(--emerald);
             box-shadow: 0 0 8px var(--emerald);
+        }
+        .status-upstream,
+        .status-ready,
+        .status-submitted {
+            color: var(--cyan);
+        }
+        .status-upstream .repo-status-dot,
+        .status-ready .repo-status-dot,
+        .status-submitted .repo-status-dot {
+            background: var(--cyan);
+            box-shadow: none;
+        }
+        .status-completed {
+            color: var(--purple);
+        }
+        .status-completed .repo-status-dot {
+            background: var(--purple);
+            box-shadow: none;
+        }
+        .status-planned {
+            color: var(--text-dim);
+        }
+        .status-planned .repo-status-dot {
+            background: var(--text-dim);
+            box-shadow: none;
+        }
+        .pending-text {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            user-select: none;
+            cursor: default;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
         .repo-name {
             font-size: 1.15rem;
@@ -465,11 +505,11 @@
                 </div>
             </div>
             <div class="links-group">
-                <a href="https://github.com/SDRmsung" target="_blank" class="btn-link">
+                <a href="https://github.com/SDRmsung" target="_blank" rel="noopener noreferrer" class="btn-link">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     GitHub Profile
                 </a>
-                <a href="https://dorahacks.io/buidl/48128" target="_blank" class="btn-link">
+                <a href="https://dorahacks.io/buidl/48128" target="_blank" rel="noopener noreferrer" class="btn-link">
                     🏆 DoraHacks BUIDL
                 </a>
             </div>
@@ -481,12 +521,12 @@
                 <input type="text" id="searchInput" class="search-input" placeholder="Search by name, algorithm (DPLL, SAT, VRP), domain or keyword...">
             </div>
             <div class="fleet-tabs">
-                <button class="tab-btn active" onclick="filterFleet('all')">All Fleets (100)</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-a')">🛸 Fleet A: Core Base</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-b')">🎯 Fleet B: Arsenals</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-c')">🏆 Fleet C: Contests</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-d')">⚖️ Fleet D: RegTech</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-e')">🤖 Fleet E: Agents</button>
+                <button class="tab-btn active" data-fleet="all" onclick="filterFleet('all')">All Fleets (<span id="count-all">0</span>)</button>
+                <button class="tab-btn" data-fleet="fleet-a" onclick="filterFleet('fleet-a')">🛸 Fleet A: Core Base (<span id="count-fleet-a">0</span>)</button>
+                <button class="tab-btn" data-fleet="fleet-b" onclick="filterFleet('fleet-b')">🎯 Fleet B: Arsenals (<span id="count-fleet-b">0</span>)</button>
+                <button class="tab-btn" data-fleet="fleet-c" onclick="filterFleet('fleet-c')">🏆 Fleet C: Contests (<span id="count-fleet-c">0</span>)</button>
+                <button class="tab-btn" data-fleet="fleet-d" onclick="filterFleet('fleet-d')">⚖️ Fleet D: RegTech (<span id="count-fleet-d">0</span>)</button>
+                <button class="tab-btn" data-fleet="fleet-e" onclick="filterFleet('fleet-e')">🤖 Fleet E: Agents (<span id="count-fleet-e">0</span>)</button>
             </div>
         </div>
     </div>
@@ -553,6 +593,26 @@ const REPOS = [
 
 let currentFleet = 'all';
 
+function getStatusClass(status) {
+    const s = (status || '').toUpperCase();
+    if (s.startsWith('LIVE')) return 'status-live';
+    if (s.startsWith('UPSTREAM') || s.startsWith('READY') || s.startsWith('SUBMITTED')) return 'status-upstream';
+    if (s.startsWith('COMPLETED')) return 'status-completed';
+    if (s.startsWith('PLANNED')) return 'status-planned';
+    return 'status-upstream';
+}
+
+function updateDynamicCounts() {
+    document.title = `AI-TRIZ & DLOS Sovereign Galaxy | Open Source Matrix (${REPOS.length} Repos)`;
+    const countAll = document.getElementById('count-all');
+    if (countAll) countAll.textContent = REPOS.length;
+    const fleets = ['fleet-a', 'fleet-b', 'fleet-c', 'fleet-d', 'fleet-e'];
+    fleets.forEach(f => {
+        const el = document.getElementById(`count-${f}`);
+        if (el) el.textContent = REPOS.filter(r => r.fleet === f).length;
+    });
+}
+
 function renderRepos(repos) {
     const grid = document.getElementById('repoGrid');
     const count = document.getElementById('itemCount');
@@ -562,11 +622,22 @@ function renderRepos(repos) {
     repos.forEach(r => {
         const card = document.createElement('div');
         card.className = 'repo-card';
+        const isPersonal = r.url.replace(/\/+$/, '') === 'https://github.com/SDRmsung';
+        const isPlanned = (r.status || '').toUpperCase().includes('PLANNED');
+
+        let actionMarkup = '';
+        if (isPersonal) {
+            const pendingLabel = isPlanned ? 'Roadmap Only' : 'Repository Pending';
+            actionMarkup = `<span class="pending-text">${pendingLabel}</span>`;
+        } else {
+            actionMarkup = `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="action-link">Explore Repo →</a>`;
+        }
+
         card.innerHTML = `
             <div>
                 <div class="card-top">
                     <span class="repo-tag ${r.tag}">${r.fleet.toUpperCase()}</span>
-                    <div class="repo-status"><span class="repo-status-dot"></span>${r.status}</div>
+                    <div class="repo-status ${getStatusClass(r.status)}"><span class="repo-status-dot"></span>${r.status}</div>
                 </div>
                 <div class="repo-name">${r.name}</div>
                 <div class="repo-desc">${r.desc}</div>
@@ -576,7 +647,7 @@ function renderRepos(repos) {
             </div>
             <div class="card-footer">
                 ${r.buidl ? `<span class="buidl-pill">${r.buidl}</span>` : `<span></span>`}
-                <a href="${r.url}" target="_blank" class="action-link">Explore Repo →</a>
+                ${actionMarkup}
             </div>
         `;
         grid.appendChild(card);
@@ -612,6 +683,7 @@ function applyFilters() {
 document.getElementById('searchInput').addEventListener('input', applyFilters);
 
 // Initial Render
+updateDynamicCounts();
 renderRepos(REPOS);
 </script>
 </body>

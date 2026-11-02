@@ -36,24 +36,21 @@
                 radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 85% 85%, rgba(192, 132, 252, 0.08) 0%, transparent 40%);
         }
-        header.site-header {
+        header {
             padding: 32px 48px 24px;
             border-bottom: 1px solid var(--border);
-            background: var(--bg);
+            backdrop-filter: blur(12px);
+            background: rgba(7, 9, 14, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
         .header-wrap {
             max-width: 1400px;
             margin: 0 auto;
-        }
-        .controls-sticky-bar {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            padding: 16px 48px;
-            background: rgba(7, 9, 14, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         .top-row {
             display: flex;
@@ -211,6 +208,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            backdrop-filter: blur(8px);
             transition: all 0.25s ease;
             position: relative;
             overflow: hidden;
@@ -244,6 +242,7 @@
 
         .repo-status {
             font-size: 0.72rem;
+            color: var(--emerald);
             display: flex;
             align-items: center;
             gap: 5px;
@@ -253,49 +252,8 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-        }
-        /* Status Variants */
-        .status-live {
-            color: var(--emerald);
-        }
-        .status-live .repo-status-dot {
             background: var(--emerald);
             box-shadow: 0 0 8px var(--emerald);
-        }
-        .status-upstream,
-        .status-ready,
-        .status-submitted {
-            color: var(--cyan);
-        }
-        .status-upstream .repo-status-dot,
-        .status-ready .repo-status-dot,
-        .status-submitted .repo-status-dot {
-            background: var(--cyan);
-            box-shadow: none;
-        }
-        .status-completed {
-            color: var(--purple);
-        }
-        .status-completed .repo-status-dot {
-            background: var(--purple);
-            box-shadow: none;
-        }
-        .status-planned {
-            color: var(--text-dim);
-        }
-        .status-planned .repo-status-dot {
-            background: var(--text-dim);
-            box-shadow: none;
-        }
-        .pending-text {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-dim);
-            user-select: none;
-            cursor: default;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
         }
         .repo-name {
             font-size: 1.15rem;
@@ -324,7 +282,7 @@
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
-            color: var(--text-sub);
+            color: var(--text-dim);
             font-family: 'JetBrains Mono', monospace;
         }
         .card-footer {
@@ -366,48 +324,198 @@
             color: var(--text-dim);
             background: var(--bg);
         }
-
-        @media (max-width: 768px) {
-            header.site-header {
-                padding: 20px 16px 16px;
-            }
-            .controls-sticky-bar {
-                padding: 12px 16px;
-            }
-            main {
-                padding: 20px 16px 48px;
-            }
-            .top-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-            .links-group {
-                width: 100%;
-                display: flex;
-                gap: 8px;
-            }
-            .btn-link {
-                flex: 1;
-                justify-content: center;
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-            .controls-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
-            }
-            .search-box {
-                min-width: 100%;
-            }
-            .fleet-tabs {
-                width: 100%;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                padding: 4px;
-            }
-        }
+
+
+        @media (max-width: 768px) {
+
+            header.site-header {
+
+                padding: 20px 16px 16px;
+
+            }
+
+            .controls-sticky-bar {
+
+                padding: 12px 16px;
+
+            }
+
+            main {
+
+                padding: 20px 16px 48px;
+
+            }
+
+            .top-row {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 16px;
+
+            }
+
+            .links-group {
+
+                width: 100%;
+
+                display: flex;
+
+                gap: 8px;
+
+            }
+
+            .btn-link {
+
+                flex: 1;
+
+                justify-content: center;
+
+                padding: 8px 12px;
+
+                font-size: 0.8rem;
+
+            }
+
+            .controls-row {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 12px;
+
+            }
+
+            .search-box {
+
+                min-width: 100%;
+
+            }
+
+            .fleet-tabs {
+
+                width: 100%;
+
+                overflow-x: auto;
+
+                -webkit-overflow-scrolling: touch;
+
+                padding: 4px;
+
+            }
+
+        }
+
+        /* Empty State */
+
+        .empty-state {
+
+            grid-column: 1 / -1;
+
+            padding: 48px 24px;
+
+            text-align: center;
+
+            background: var(--bg-card);
+
+            border: 1px dashed var(--border);
+
+            border-radius: 14px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+        .empty-icon {
+
+            font-size: 2.2rem;
+
+            opacity: 0.8;
+
+        }
+
+        .empty-title {
+
+            font-size: 1.15rem;
+
+            font-weight: 700;
+
+            color: var(--text-main);
+
+        }
+
+        .empty-desc {
+
+            font-size: 0.88rem;
+
+            color: var(--text-sub);
+
+            max-width: 460px;
+
+            line-height: 1.5;
+
+        }
+
+        .clear-btn {
+
+            margin-top: 8px;
+
+            padding: 8px 18px;
+
+            border-radius: 8px;
+
+            border: 1px solid var(--border-hover);
+
+            background: rgba(56, 189, 248, 0.1);
+
+            color: var(--cyan);
+
+            font-size: 0.85rem;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.2s;
+
+        }
+
+        .clear-btn:hover {
+
+            background: var(--cyan);
+
+            color: #000;
+
+        }
+
+
+
+        /* Planned Card subtle lower weight */
+
+        .repo-card.card-planned {
+
+            opacity: 0.88;
+
+            border-style: dashed;
+
+        }
+
+        .repo-card.card-planned:hover {
+
+            opacity: 1;
+
+            border-style: solid;
+
+        }
+
     </style>
 </head>
 <body>
@@ -522,6 +630,15 @@ function getStatusClass(status) {
     return 'status-upstream';
 }
 
+function getSortPriority(repo) {
+    const s = (repo.status || '').toUpperCase();
+    if (s.startsWith('LIVE')) return 1;
+    if (s.startsWith('UPSTREAM') || s.startsWith('SUBMITTED')) return 2;
+    if (s.startsWith('READY') || s.startsWith('COMPLETED')) return 3;
+    if (s.startsWith('PLANNED')) return 4;
+    return 5;
+}
+
 function updateDynamicCounts() {
     document.title = `AI-TRIZ & DLOS Sovereign Galaxy | Open Source Matrix (${REPOS.length} Repos)`;
     const countAll = document.getElementById('count-all');
@@ -533,17 +650,56 @@ function updateDynamicCounts() {
     });
 }
 
+function syncUrlParams(fleet, query) {
+    try {
+        const url = new URL(window.location);
+        if (fleet && fleet !== 'all') {
+            url.searchParams.set('fleet', fleet);
+        } else {
+            url.searchParams.delete('fleet');
+        }
+        if (query && query.trim()) {
+            url.searchParams.set('q', query.trim());
+        } else {
+            url.searchParams.delete('q');
+        }
+        window.history.replaceState(null, '', url.pathname + url.search);
+    } catch (e) {
+        // Sandboxed or file:// environment fallback
+    }
+}
+
+function clearFilters() {
+    const input = document.getElementById('searchInput');
+    if (input) input.value = '';
+    filterFleet('all');
+}
+
 function renderRepos(repos) {
     const grid = document.getElementById('repoGrid');
     const count = document.getElementById('itemCount');
+    const rawQuery = document.getElementById('searchInput') ? document.getElementById('searchInput').value.trim() : '';
     grid.innerHTML = '';
     count.textContent = `Showing ${repos.length} Repositories`;
 
+    if (repos.length === 0) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'empty-state';
+        emptyDiv.innerHTML = `
+            <div class="empty-icon">🔍</div>
+            <div class="empty-title">無符合結果</div>
+            <div class="empty-desc">找不到符合「${rawQuery ? rawQuery.replace(/[&<>"']/g, '') : ''}」的專案。請嘗試其他關鍵字或重設篩選條件。</div>
+            <button class="clear-btn" onclick="clearFilters()">清除搜尋與篩選</button>
+        `;
+        grid.appendChild(emptyDiv);
+        return;
+    }
+
     repos.forEach(r => {
         const card = document.createElement('div');
-        card.className = 'repo-card';
         const isPersonal = r.url.replace(/\/+$/, '') === 'https://github.com/SDRmsung';
         const isPlanned = (r.status || '').toUpperCase().includes('PLANNED');
+        card.className = `repo-card${isPlanned ? ' card-planned' : ''}`;
 
         let actionMarkup = '';
         if (isPersonal) {
@@ -587,8 +743,9 @@ function filterFleet(fleet, ev) {
 }
 
 function applyFilters() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    let filtered = REPOS;
+    const rawQuery = document.getElementById('searchInput') ? document.getElementById('searchInput').value : '';
+    const query = rawQuery.toLowerCase().trim();
+    let filtered = REPOS.slice();
 
     if (currentFleet !== 'all') {
         filtered = filtered.filter(r => r.fleet === currentFleet);
@@ -602,14 +759,39 @@ function applyFilters() {
         );
     }
 
+    // Sort by priority: LIVE / UPSTREAM / READY first, PLANNED last
+    filtered.sort((a, b) => getSortPriority(a) - getSortPriority(b));
+
+    syncUrlParams(currentFleet, rawQuery);
     renderRepos(filtered);
+}
+
+function initFromUrl() {
+    try {
+        const params = new URLSearchParams(window.location.search);
+        const fleetParam = params.get('fleet');
+        const qParam = params.get('q');
+        if (fleetParam && ['fleet-a', 'fleet-b', 'fleet-c', 'fleet-d', 'fleet-e'].includes(fleetParam)) {
+            currentFleet = fleetParam;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const btn = document.querySelector(`.tab-btn[data-fleet="${fleetParam}"]`);
+            if (btn) btn.classList.add('active');
+        }
+        if (qParam) {
+            const input = document.getElementById('searchInput');
+            if (input) input.value = qParam;
+        }
+    } catch (e) {
+        // Fallback
+    }
 }
 
 document.getElementById('searchInput').addEventListener('input', applyFilters);
 
-// Initial Render
+// Initial Render & State Recovery
 updateDynamicCounts();
-renderRepos(REPOS);
+initFromUrl();
+applyFilters();
 </script>
 </body>
 </html>

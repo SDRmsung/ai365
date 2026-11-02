@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-TRIZ & DLOS Sovereign Galaxy | Open Source Matrix (100 Repos)</title>
+    <title>AI-TRIZ & DLOS Sovereign Galaxy | Open Source Matrix (50+ Repos)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,51 +11,61 @@
         :root {
             --bg: #07090e;
             --bg-surface: #0e131f;
-            --bg-card: rgba(18, 26, 43, 0.6);
-            --bg-card-hover: rgba(28, 40, 65, 0.8);
+            --bg-card: rgba(18, 26, 43, 0.65);
+            --bg-card-hover: rgba(28, 40, 65, 0.85);
             --border: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(56, 189, 248, 0.4);
             --cyan: #38bdf8;
+            --cyan-glow: rgba(56, 189, 248, 0.15);
             --purple: #c084fc;
             --emerald: #34d399;
             --amber: #fbbf24;
+            --rose: #f43f5e;
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
             --text-dim: #64748b;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            font-family: var(--font-sans);
             background-color: var(--bg);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(192, 132, 252, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(192, 132, 252, 0.07) 0%, transparent 40%);
         }
+
+        /* Header */
         header {
-            padding: 32px 48px 24px;
+            padding: 24px 40px 18px;
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            background: rgba(7, 9, 14, 0.7);
-            position: sticky;
-            top: 0;
-            z-index: 50;
+            backdrop-filter: blur(14px);
+            background: rgba(7, 9, 14, 0.75);
+            position: relative;
+            z-index: 40;
         }
         .header-wrap {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
         .top-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
         }
         .logo-group {
             display: flex;
@@ -63,26 +73,28 @@
             gap: 14px;
         }
         .logo-badge {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #000;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 24px rgba(56, 189, 248, 0.4);
+            flex-shrink: 0;
         }
         .title-block h1 {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--text-main);
         }
         .title-block p {
             font-size: 0.85rem;
@@ -92,6 +104,8 @@
         .links-group {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
         }
         .btn-link {
             padding: 8px 16px;
@@ -100,7 +114,7 @@
             background: var(--bg-surface);
             color: var(--text-main);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -112,379 +126,1559 @@
             background: rgba(56, 189, 248, 0.1);
             transform: translateY(-1px);
         }
+        .btn-link.accent {
+            border-color: rgba(251, 191, 36, 0.4);
+            color: var(--amber);
+        }
+        .btn-link.accent:hover {
+            background: rgba(251, 191, 36, 0.12);
+        }
 
-        /* Controls & Search */
-        .controls-row {
+        /* Persona Entry Section (F1 / S1) */
+        .persona-section {
+            margin-top: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .persona-label {
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-dim);
+            font-weight: 700;
+        }
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .persona-card {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+        .persona-card:hover {
+            border-color: var(--cyan);
+            background: rgba(14, 19, 31, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        }
+        .persona-card.active {
+            border-color: var(--cyan);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(14, 19, 31, 0.9) 100%);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+        }
+        .persona-card.active::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+        }
+        .persona-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+        }
+        .persona-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .persona-desc {
+            font-size: 0.74rem;
+            color: var(--text-sub);
+            line-height: 1.35;
+        }
+        .persona-badge {
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--cyan);
+            white-space: nowrap;
+        }
+
+        /* Navigation Bar & Controls */
+        .controls-sticky-bar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 12px 40px;
+            background: rgba(7, 9, 14, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .controls-inner {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
             flex-wrap: wrap;
         }
-        .search-box {
-            flex: 1;
-            min-width: 280px;
-            position: relative;
-        }
-        .search-input {
-            width: 100%;
-            padding: 10px 16px 10px 40px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--bg-surface);
-            color: var(--text-main);
-            font-size: 0.9rem;
-            outline: none;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-        .search-input:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
-        }
-        .search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-        .fleet-tabs {
+        .nav-tabs {
             display: flex;
             gap: 6px;
-            background: var(--bg-surface);
+            background: rgba(255, 255, 255, 0.03);
             padding: 4px;
             border-radius: 10px;
             border: 1px solid var(--border);
-            overflow-x: auto;
         }
         .tab-btn {
-            padding: 6px 14px;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
             border: none;
             background: transparent;
             color: var(--text-sub);
             font-size: 0.82rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.18s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
             white-space: nowrap;
         }
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--bg-card);
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .tab-btn.active {
+            background: var(--bg-surface);
             color: var(--cyan);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Content Grid */
-        main {
-            flex: 1;
-            padding: 32px 48px 64px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        .grid-header {
-            margin-bottom: 20px;
+        .search-and-view {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 12px;
+            flex: 1;
+            max-width: 600px;
+            justify-content: flex-end;
         }
-        .grid-count {
-            font-size: 0.9rem;
-            color: var(--text-sub);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .repo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 20px;
-        }
-        .repo-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 22px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            backdrop-filter: blur(8px);
-            transition: all 0.25s ease;
+        .search-box {
+            flex: 1;
+            min-width: 220px;
             position: relative;
-            overflow: hidden;
         }
-        .repo-card:hover {
-            border-color: var(--border-hover);
-            background: var(--bg-card-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        .search-input {
+            width: 100%;
+            padding: 8px 14px 8px 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            font-size: 0.85rem;
+            outline: none;
+            font-family: inherit;
+            transition: all 0.2s;
         }
-        .card-top {
+        .search-input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.18);
+        }
+        .search-icon {
+            position: absolute;
+            left: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+        .layout-toggle {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 3px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
         }
-        .repo-tag {
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 3px 8px;
+        .layout-btn {
+            padding: 6px 12px;
             border-radius: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .tag-core { background: rgba(56, 189, 248, 0.15); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
-        .tag-arsenal { background: rgba(192, 132, 252, 0.15); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.3); }
-        .tag-contest { background: rgba(52, 211, 153, 0.15); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
-        .tag-regtech { background: rgba(251, 191, 36, 0.15); color: var(--amber); border: 1px solid rgba(251, 191, 36, 0.3); }
-        .tag-agent { background: rgba(244, 114, 182, 0.15); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.3); }
-
-        .repo-status {
-            font-size: 0.72rem;
-            color: var(--emerald);
+            border: none;
+            background: transparent;
+            color: var(--text-sub);
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
             display: flex;
             align-items: center;
             gap: 5px;
-            font-weight: 600;
         }
-        .repo-status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--emerald);
-            box-shadow: 0 0 8px var(--emerald);
+        .layout-btn.active {
+            background: var(--bg-surface);
+            color: var(--cyan);
+            border: 1px solid rgba(56, 189, 248, 0.25);
         }
-        .repo-name {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 8px;
-            word-break: break-word;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .repo-desc {
-            font-size: 0.86rem;
-            color: var(--text-sub);
-            line-height: 1.5;
-            margin-bottom: 16px;
+
+        /* Main Container */
+        main {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 40px 60px;
             flex: 1;
         }
-        .card-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 18px;
+
+        /* Status Pills */
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
         }
-        .pill-badge {
-            font-size: 0.7rem;
-            padding: 2px 7px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: var(--text-dim);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .card-footer {
+        .status-dot.live { background-color: var(--emerald); box-shadow: 0 0 8px var(--emerald); }
+        .status-dot.wip { background-color: var(--amber); box-shadow: 0 0 8px var(--amber); }
+        .status-dot.archived { background-color: var(--text-dim); }
+
+        /* Section Headings */
+        .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
         }
-        .action-link {
-            font-size: 0.82rem;
+        .section-title {
+            font-size: 1.15rem;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-count {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: rgba(56, 189, 248, 0.1);
             color: var(--cyan);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .section-action {
+            font-size: 0.82rem;
+            color: var(--cyan);
+            cursor: pointer;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 4px;
-            transition: all 0.2s;
-        }
-        .action-link:hover {
-            color: var(--text-main);
-            gap: 7px;
-        }
-        .buidl-pill {
-            font-size: 0.72rem;
-            color: var(--emerald);
-            background: rgba(52, 211, 153, 0.1);
-            padding: 2px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(52, 211, 153, 0.2);
             font-weight: 600;
+            background: none;
+            border: none;
+        }
+        .section-action:hover {
+            text-decoration: underline;
         }
 
-        footer {
-            padding: 24px;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            font-size: 0.8rem;
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        /* Compact Repo Card (S2) */
+        .repo-card {
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.22s ease;
+            backdrop-filter: blur(8px);
+            position: relative;
+        }
+        .repo-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .card-name-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .card-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            line-height: 1.3;
+            transition: color 0.15s;
+        }
+        a.card-name:hover {
+            color: var(--cyan);
+        }
+        .card-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        .card-summary {
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            line-height: 1.45;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+        .card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .card-tags {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        .tag-pill {
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            padding: 2px 7px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-sub);
+        }
+        .tag-pill.more {
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--cyan);
+            cursor: help;
+            position: relative;
+        }
+        .tag-pill.more:hover .tag-tooltip {
+            display: block;
+        }
+        .tag-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 0;
+            background: #1e293b;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            z-index: 60;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+        }
+        .scenario-pill {
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            color: var(--purple);
+            background: rgba(192, 132, 252, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .scenario-pill:hover {
+            background: rgba(192, 132, 252, 0.2);
+        }
+        .card-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-link-btn {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            text-decoration: none;
+            padding: 3px 8px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            transition: all 0.15s;
+        }
+        .card-link-btn:hover {
+            color: var(--cyan);
+            border-color: var(--cyan);
+        }
+        .card-link-btn.demo {
+            color: var(--emerald);
+            border-color: rgba(52, 211, 153, 0.3);
+            background: rgba(52, 211, 153, 0.08);
+        }
+
+        /* Persona Expansion Button (F1) */
+        .persona-expand-bar {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+        }
+        .btn-expand-persona {
+            padding: 10px 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border-hover);
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--cyan);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-expand-persona:hover {
+            background: rgba(56, 189, 248, 0.18);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Domain Horizontal Scroll Row (S2) */
+        .domain-row-wrapper {
+            margin-bottom: 28px;
+        }
+        .scroll-container {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scroll-behavior: smooth;
+        }
+        .scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 3px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: var(--cyan);
+        }
+        .scroll-container > .repo-card {
+            min-width: 320px;
+            max-width: 320px;
+            flex-shrink: 0;
+        }
+        .scroll-container.expanded {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            overflow-x: visible;
+        }
+        .scroll-container.expanded > .repo-card {
+            min-width: auto;
+            max-width: none;
+        }
+
+        /* Table View (F5 & S2) */
+        .table-view-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+        }
+        .repo-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+        .repo-table th {
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-sub);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .repo-table th:hover {
+            color: var(--cyan);
+        }
+        .repo-table th.sorted-asc::after {
+            content: ' ▲';
+            color: var(--cyan);
+        }
+        .repo-table th.sorted-desc::after {
+            content: ' ▼';
+            color: var(--cyan);
+        }
+        .repo-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: middle;
+        }
+        .repo-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .table-name {
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+        a.table-name:hover {
+            color: var(--cyan);
+        }
+
+        /* Scenarios View (F2 / S3) */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+        }
+        .scenario-card {
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+        }
+        .scenario-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+        }
+        .scenario-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .scenario-id-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--purple);
+            background: rgba(192, 132, 252, 0.12);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .scenario-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.35;
+        }
+        .scenario-problem {
+            font-size: 0.83rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--purple);
+        }
+        .scenario-repos-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .scenario-repos-label {
+            font-size: 0.72rem;
             color: var(--text-dim);
-            background: var(--bg);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+        .scenario-repo-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .repo-chip {
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: var(--cyan);
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .repo-chip:hover {
+            border-color: var(--cyan);
+            background: rgba(56, 189, 248, 0.1);
+        }
+        .scenario-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .scenario-demo-btn {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(52, 211, 153, 0.12);
+            color: var(--emerald);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+        .scenario-demo-btn:hover {
+            background: rgba(52, 211, 153, 0.22);
+            transform: translateY(-1px);
+        }
+        .scenario-demo-btn.draft {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-dim);
+            border-color: var(--border);
+            cursor: default;
+            pointer-events: none;
+            user-select: none;
+            transform: none !important;
+        }
+
+        /* Empty state */
+        .empty-state {
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* Desktop vs Mobile visibility tokens */
+        .btn-text-short { display: none; }
+        .btn-text-full { display: inline; }
+        .tab-text-short { display: none; }
+        .tab-text-full { display: inline; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            header { padding: 20px 20px 16px; }
+            .controls-sticky-bar { padding: 12px 20px; }
+            main { padding: 20px 20px 40px; }
+            .persona-grid { grid-template-columns: repeat(2, 1fr); }
+            .search-and-view { max-width: none; width: 100%; }
+        }
+
+        /* F4 Mobile View (<= 480px) */
+        @media (max-width: 480px) {
+            header { padding: 12px 14px 10px; }
+            .header-wrap { gap: 10px; }
+            .top-row { flex-direction: column; align-items: stretch; gap: 8px; }
+            .logo-group { gap: 10px; }
+            .logo-badge { width: 34px; height: 34px; font-size: 0.95rem; border-radius: 9px; }
+            .title-block h1 { font-size: 1.05rem; }
+            .title-block p { display: none; }
+
+            .links-group {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 6px;
+                width: 100%;
+                overflow-x: auto;
+            }
+            .btn-link {
+                padding: 5px 8px;
+                font-size: 0.72rem;
+                gap: 4px;
+                white-space: nowrap;
+                flex: 1;
+                justify-content: center;
+            }
+            .btn-text-full { display: none; }
+            .btn-text-short { display: inline; }
+
+            /* 2x2 Compact Persona Grid */
+            .persona-section { margin-top: 4px; gap: 6px; }
+            .persona-label { font-size: 0.7rem; }
+            .persona-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .persona-card {
+                padding: 8px 10px;
+                gap: 0;
+            }
+            .persona-header {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 4px;
+            }
+            .persona-title {
+                font-size: 0.78rem;
+                gap: 4px;
+            }
+            .persona-badge {
+                font-size: 0.65rem;
+                padding: 1px 4px;
+                white-space: nowrap;
+            }
+            .persona-desc {
+                display: none;
+            }
+
+            /* Sticky Tab Bar single-line scroll */
+            .controls-sticky-bar { padding: 8px 14px; }
+            .controls-inner { gap: 8px; }
+            .nav-tabs {
+                width: 100%;
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 3px;
+                gap: 4px;
+            }
+            .tab-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+                padding: 6px 10px;
+                font-size: 0.78rem;
+            }
+            .tab-text-full { display: none; }
+            .tab-text-short { display: inline; }
+
+            .search-and-view {
+                width: 100%;
+                max-width: none;
+                gap: 8px;
+            }
+            .search-box { min-width: 0; flex: 1; }
+            .search-input { padding: 6px 10px 6px 30px; font-size: 0.78rem; }
+            .search-icon { left: 8px; font-size: 0.75rem; }
+
+            main { padding: 14px 14px 36px; }
+            .cards-grid { grid-template-columns: 1fr; gap: 12px; }
+            .scenarios-grid { grid-template-columns: 1fr; gap: 12px; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .section-action { align-self: flex-start; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="header-wrap">
-        <div class="top-row">
-            <div class="logo-group">
-                <div class="logo-badge">365</div>
-                <div class="title-block">
-                    <h1>AI-TRIZ & DLOS Sovereign Galaxy <span>🪐</span></h1>
-                    <p>Open Source Software Matrix, Mathematical Formal Verification & AI-TRIZ Weaponry</p>
+    <!-- Header & Hero -->
+    <header>
+        <div class="header-wrap">
+            <div class="top-row">
+                <div class="logo-group">
+                    <div class="logo-badge">365</div>
+                    <div class="title-block">
+                        <h1>AI-TRIZ & DLOS Sovereign Galaxy</h1>
+                        <p>Open Source Matrix & Spatiotemporal Data Atlas (54 Repositories)</p>
+                    </div>
+                </div>
+                <div class="links-group">
+                    <a href="https://github.com/SDRmsung" target="_blank" rel="noopener noreferrer" class="btn-link">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span class="btn-text-full">GitHub @SDRmsung</span>
+                        <span class="btn-text-short">GitHub</span>
+                    </a>
+                    <a href="https://dorahacks.io/buidl/48128" target="_blank" rel="noopener noreferrer" class="btn-link accent">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <span class="btn-text-full">DoraHacks #48128</span>
+                        <span class="btn-text-short">#48128</span>
+                    </a>
+                    <a href="https://sdrmsung.github.io/Sovereign-E-Data-Atlas/" target="_blank" rel="noopener noreferrer" class="btn-link">
+                        🗺️ <span class="btn-text-full">Data Atlas</span><span class="btn-text-short">Atlas</span>
+                    </a>
                 </div>
             </div>
-            <div class="links-group">
-                <a href="https://github.com/SDRmsung" target="_blank" class="btn-link">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    GitHub Profile
-                </a>
-                <a href="https://dorahacks.io/buidl/48128" target="_blank" class="btn-link">
-                    🏆 DoraHacks BUIDL
-                </a>
+
+            <!-- S1 Persona Entrance -->
+            <div class="persona-section">
+                <div class="persona-label">Select Your Persona to Begin</div>
+                <div class="persona-grid">
+                    <button class="persona-card" id="persona-visitor" onclick="setPersona('visitor')">
+                        <div class="persona-header">
+                            <span class="persona-title">🔭 Explore by Use Case</span>
+                            <span class="persona-badge" id="badge-visitor">0 of 0</span>
+                        </div>
+                        <span class="persona-desc">Interactive 3D spatiotemporal maps, urban flows & visual models.</span>
+                    </button>
+                    <button class="persona-card" id="persona-judge" onclick="setPersona('judge')">
+                        <div class="persona-header">
+                            <span class="persona-title">⚖️ Judges & Hackathons</span>
+                            <span class="persona-badge" id="badge-judge">0 of 0</span>
+                        </div>
+                        <span class="persona-desc">Competition-winning repos, formal BUIDLs & verification proofs.</span>
+                    </button>
+                    <button class="persona-card" id="persona-developer" onclick="setPersona('developer')">
+                        <div class="persona-header">
+                            <span class="persona-title">💻 For Developers</span>
+                            <span class="persona-badge" id="badge-developer">0 of 0</span>
+                        </div>
+                        <span class="persona-desc">Mathematical solvers, SDKs, algorithms & upstream forks.</span>
+                    </button>
+                    <button class="persona-card" id="persona-maintainer" onclick="setPersona('maintainer')">
+                        <div class="persona-header">
+                            <span class="persona-title">🛠️ Maintainer View</span>
+                            <span class="persona-badge" id="badge-maintainer">0 of 0</span>
+                        </div>
+                        <span class="persona-desc">Complete telemetry audit table, release status & work-in-progress.</span>
+                    </button>
+                </div>
             </div>
         </div>
+    </header>
 
-        <div class="controls-row">
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search by name, algorithm (DPLL, SAT, VRP), domain or keyword...">
+    <!-- Controls Bar -->
+    <div class="controls-sticky-bar">
+        <div class="controls-inner">
+            <div class="nav-tabs">
+                <button class="tab-btn active" id="tab-overview" onclick="switchTab('overview')">
+                    <span class="tab-text-full">✨ Featured & Personas</span>
+                    <span class="tab-text-short">✨ Featured</span>
+                </button>
+                <button class="tab-btn" id="tab-seeall" onclick="switchTab('seeall')">
+                    <span class="tab-text-full">📚 See All Repos (<span id="count-total">54</span>)</span>
+                    <span class="tab-text-short">All (<span id="count-total-short">54</span>)</span>
+                </button>
+                <button class="tab-btn" id="tab-scenarios" onclick="switchTab('scenarios')">
+                    <span class="tab-text-full">🗺️ Spatiotemporal Scenarios (14)</span>
+                    <span class="tab-text-short">Scenarios (14)</span>
+                </button>
             </div>
-            <div class="fleet-tabs">
-                <button class="tab-btn active" onclick="filterFleet('all')">All Fleets (100)</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-a')">🛸 Fleet A: Core Base</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-b')">🎯 Fleet B: Arsenals</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-c')">🏆 Fleet C: Contests</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-d')">⚖️ Fleet D: RegTech</button>
-                <button class="tab-btn" onclick="filterFleet('fleet-e')">🤖 Fleet E: Agents</button>
+
+            <div class="search-and-view">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search repos, tags, scenarios..." oninput="handleSearch()">
+                </div>
+                <div class="layout-toggle">
+                    <button class="layout-btn active" id="layout-cards" onclick="setLayout('cards')">Cards</button>
+                    <button class="layout-btn" id="layout-table" onclick="setLayout('table')">Table</button>
+                </div>
             </div>
         </div>
     </div>
-</header>
 
-<main>
-    <div class="grid-header">
-        <div class="grid-count" id="itemCount">Showing 100 Repositories</div>
-    </div>
-    <div class="repo-grid" id="repoGrid">
-        <!-- Injected via JavaScript -->
-    </div>
-</main>
+    <!-- Main Content -->
+    <main id="mainContainer">
+        <!-- Rendered dynamically by JavaScript -->
+    </main>
 
-<footer>
-    <p>AI-TRIZ & DLOS Sovereign Galaxy | Open Source Governance Protocol (Apache 2.0 / MIT) | Built for Startups & Innovators</p>
-</footer>
+    <!-- Data Injection for Offline/CORS Resilience -->
+    <script>
+        const FALLBACK_REPOS = [{"id": "sovereign-dlos-core", "name": "Sovereign-DLOS-Core", "url": "https://github.com/SDRmsung/DLOS", "demo_url": "https://sdrmsung.github.io/ai365/", "summary": "Dual-loop Decision OS with 1.08us CBF-QP deterministic safety barrier.", "status": "live", "status_label": "LIVE (DLOS)", "domain": "foundations", "tags": ["Rust", "CBF-QP", "Decision-OS", "Safety"], "personas": ["developer", "judge", "maintainer"], "scenarios": ["s01", "s06", "s07"], "featured": true, "updated": "2026-10-28", "legacy_fleet": "Fleet A", "persona_rank": {"judge": 1, "developer": 1}}, {"id": "sovereign-cognitive-metabolism", "name": "Sovereign-Cognitive-Metabolism", "url": "https://github.com/SDRmsung/Cognitive-Metabolism", "demo_url": "https://sdrmsung.github.io/ai365/", "summary": "4D epistemic health and synaptic memory pruning engine for knowledge graphs.", "status": "live", "status_label": "LIVE (Metabolism)", "domain": "foundations", "tags": ["Python", "PKM", "ISO30401", "Audit"], "personas": ["developer", "maintainer"], "scenarios": ["s05", "s13"], "featured": true, "updated": "2026-10-25", "legacy_fleet": "Fleet A", "persona_rank": {"developer": 2}}, {"id": "ai365", "name": "ai365", "url": "https://github.com/SDRmsung/ai365", "demo_url": "https://sdrmsung.github.io/ai365/", "summary": "Interactive web portal for sovereign galaxy with GNN topological diagnostics.", "status": "live", "status_label": "LIVE (Pages)", "domain": "foundations", "tags": ["Web3", "GNN", "Portal", "Galaxy"], "personas": ["visitor", "judge", "maintainer"], "scenarios": ["s03"], "featured": false, "updated": "2026-11-02", "legacy_fleet": "Fleet A", "persona_rank": {"visitor": 1, "judge": 2}}, {"id": "sovereign-upstream-tokio", "name": "Sovereign-Upstream-Tokio", "url": "https://github.com/SDRmsung/tokio", "demo_url": null, "summary": "High-throughput asynchronous runtime runtime fork with deadlock detection guard.", "status": "wip", "status_label": "UPSTREAM (PR #8380)", "domain": "foundations", "tags": ["Rust", "Async", "Deadlock", "Runtime"], "personas": ["developer", "maintainer"], "scenarios": ["s01"], "featured": false, "updated": "2026-10-15", "legacy_fleet": "Fleet A", "persona_rank": {"maintainer": 1}}, {"id": "sovereign-upstream-postgres", "name": "Sovereign-Upstream-Postgres", "url": "https://github.com/SDRmsung/postgres", "demo_url": null, "summary": "Vector HNSW indexing and transactional audit engine for PostGIS geometries.", "status": "wip", "status_label": "UPSTREAM", "domain": "foundations", "tags": ["C", "Database", "Vector", "PostGIS"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": "2026-10-12", "legacy_fleet": "Fleet A", "persona_rank": {"maintainer": 3}}, {"id": "ai-triz-core-engine", "name": "AI-TRIZ-Core-Engine", "url": null, "demo_url": null, "summary": "Algorithmic inventive problem solving SDK with automated contradiction resolution.", "status": "wip", "status_label": "PLANNED", "domain": "foundations", "tags": ["AI-TRIZ", "SDK", "Causal", "Engine"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Fleet A", "persona_rank": {"maintainer": 4}}, {"id": "ai-triz-sufield-toolkit", "name": "AI-TRIZ-SuField-Toolkit", "url": null, "demo_url": null, "summary": "Substance-field graph models and 76 inventive standards decomposition kit.", "status": "wip", "status_label": "PLANNED", "domain": "foundations", "tags": ["Su-Field", "TRIZ", "Graph", "Toolkit"], "personas": ["developer", "maintainer"], "scenarios": ["s13"], "featured": false, "updated": null, "legacy_fleet": "Fleet A", "persona_rank": {"maintainer": 5}}, {"id": "ai-triz-ariz-optimizer", "name": "AI-TRIZ-ARIZ-Optimizer", "url": null, "demo_url": null, "summary": "State machine workflow orchestrator based on ARIZ-85C inventive algorithms.", "status": "wip", "status_label": "PLANNED", "domain": "foundations", "tags": ["ARIZ-85C", "State-Machine", "TRIZ"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Fleet A", "persona_rank": {"maintainer": 6}}, {"id": "dlos-jepa-world-model", "name": "DLOS-JEPA-World-Model", "url": null, "demo_url": null, "summary": "Hierarchical joint embedding predictive architecture for spatial dynamics.", "status": "wip", "status_label": "PLANNED", "domain": "foundations", "tags": ["H-JEPA", "World-Model", "Latent"], "personas": ["developer", "judge", "maintainer"], "scenarios": ["s02", "s05", "s13"], "featured": false, "updated": null, "legacy_fleet": "Fleet A", "persona_rank": {"maintainer": 7}}, {"id": "dlos-safety-shield-cbf", "name": "DLOS-Safety-Shield-CBF", "url": null, "demo_url": null, "summary": "Control Barrier Function QP solver guaranteeing zero spatial collisions.", "status": "wip", "status_label": "PLANNED", "domain": "foundations", "tags": ["CBF-QP", "Safety", "Control"], "personas": ["developer", "maintainer"], "scenarios": ["s01", "s07"], "featured": false, "updated": null, "legacy_fleet": "Fleet A", "persona_rank": {"maintainer": 8}}, {"id": "sovereign-sat-dpll-solver", "name": "Sovereign-SAT-DPLL-Solver", "url": null, "demo_url": null, "summary": "Deterministic DPLL SAT solver with zero external dependencies.", "status": "live", "status_label": "READY (A50)", "domain": "arsenals", "tags": ["SAT", "DPLL", "Python", "Zero-Dep"], "personas": ["developer", "maintainer"], "scenarios": ["s08"], "featured": false, "updated": "2026-10-20", "legacy_fleet": "Fleet B", "persona_rank": {}}, {"id": "sovereign-milp-routing-vrp", "name": "Sovereign-MILP-Routing-VRP", "url": null, "demo_url": null, "summary": "Mixed integer linear programming and 2-opt vehicle routing optimization engine.", "status": "live", "status_label": "READY (A50)", "domain": "arsenals", "tags": ["MILP", "2-Opt", "VRP", "Routing"], "personas": ["developer", "judge", "maintainer"], "scenarios": ["s02", "s03", "s07", "s10"], "featured": false, "updated": "2026-10-22", "legacy_fleet": "Fleet B", "persona_rank": {}}, {"id": "sovereign-quantum-ising-annealer", "name": "Sovereign-Quantum-Ising-Annealer", "url": null, "demo_url": null, "summary": "QUBO Ising model simulator for high-dimensional combinatorial annealing.", "status": "live", "status_label": "READY (A50)", "domain": "arsenals", "tags": ["QUBO", "Ising", "Annealing", "Quantum"], "personas": ["developer", "maintainer"], "scenarios": ["s11"], "featured": false, "updated": "2026-10-18", "legacy_fleet": "Fleet B", "persona_rank": {}}, {"id": "sovereign-polygon-sat-armor", "name": "Sovereign-Polygon-SAT-Armor", "url": null, "demo_url": null, "summary": "Separating Axis Theorem 2D convex polygon collision inspection armor.", "status": "live", "status_label": "READY (A50)", "domain": "arsenals", "tags": ["Geometry", "SAT-Armor", "2D-Physics"], "personas": ["developer", "maintainer"], "scenarios": ["s08"], "featured": false, "updated": "2026-10-19", "legacy_fleet": "Fleet B", "persona_rank": {}}, {"id": "sovereign-milp-binpacking-fitter", "name": "Sovereign-MILP-BinPacking-Fitter", "url": null, "demo_url": null, "summary": "First-fit decreasing multi-container volume and packing optimization engine.", "status": "live", "status_label": "READY (A50)", "domain": "arsenals", "tags": ["Bin-Packing", "FFD", "Optimization"], "personas": ["developer", "maintainer"], "scenarios": ["s04", "s12"], "featured": false, "updated": "2026-10-21", "legacy_fleet": "Fleet B", "persona_rank": {}}, {"id": "sovereign-knapsack-partition-dp", "name": "Sovereign-Knapsack-Partition-DP", "url": null, "demo_url": null, "summary": "Dynamic programming knapsack solver for dynamic resource partitioning.", "status": "live", "status_label": "READY (A50)", "domain": "arsenals", "tags": ["DP", "Knapsack", "Partition"], "personas": ["developer", "maintainer"], "scenarios": ["s04"], "featured": false, "updated": "2026-10-20", "legacy_fleet": "Fleet B", "persona_rank": {}}, {"id": "sovereign-spatial-d4-group", "name": "Sovereign-Spatial-D4-Group", "url": null, "demo_url": null, "summary": "Dihedral group D4 symmetry transformations for grid data interpolation.", "status": "live", "status_label": "READY (A50)", "domain": "arsenals", "tags": ["D4-Group", "Symmetry", "Grid"], "personas": ["developer", "maintainer"], "scenarios": ["s06"], "featured": false, "updated": "2026-10-17", "legacy_fleet": "Fleet B", "persona_rank": {}}, {"id": "sovereign-c-aircombat5-agent", "name": "Sovereign-C-AirCombat5-Agent", "url": "https://github.com/SDRmsung/Sovereign-C-AirCombat5-Agent", "demo_url": null, "summary": "Multi-agent tactical air combat defense agent using CBF-QP and MCTS planning.", "status": "live", "status_label": "LIVE (SIGNATE 2026)", "domain": "contests", "tags": ["SIGNATE", "Defense-AI", "CBF-QP", "MCTS"], "personas": ["judge", "developer", "maintainer"], "scenarios": [], "featured": true, "updated": "2026-10-29", "legacy_fleet": "Fleet C", "persona_rank": {"developer": 8}}, {"id": "sovereign-c-numerai-agent", "name": "Sovereign-C-Numerai-Agent", "url": "https://github.com/SDRmsung/Sovereign-C-Numerai-Agent", "demo_url": null, "summary": "24/7 autonomous quantitative finance agent with feature neutralization.", "status": "live", "status_label": "LIVE (Numerai 24/7)", "domain": "contests", "tags": ["Numerai", "Quant", "Ridge", "Finance"], "personas": ["judge", "developer", "maintainer"], "scenarios": ["s12"], "featured": true, "updated": "2026-10-30", "legacy_fleet": "Fleet C", "persona_rank": {"judge": 7, "developer": 4}}, {"id": "sovereign-c-lexguard-bli", "name": "Sovereign-C-LexGuard-BLI", "url": "https://github.com/SDRmsung/Sovereign-C-LexGuard-BLI", "demo_url": "https://dorahacks.io/buidl/48128", "summary": "Formal legal-to-contract bidirectional mapping and causal audit engine.", "status": "live", "status_label": "LIVE (BUIDL #48128)", "domain": "contests", "tags": ["DoraHacks", "Solidity", "DPLL", "EIP-712"], "personas": ["judge", "developer", "maintainer"], "scenarios": ["s09"], "featured": true, "updated": "2026-10-27", "legacy_fleet": "Fleet C", "persona_rank": {"judge": 8, "developer": 5}}, {"id": "sovereign-attestagent-creditcoin", "name": "Sovereign-AttestAgent-Creditcoin", "url": "https://github.com/SDRmsung/Sovereign-AttestAgent-Creditcoin", "demo_url": null, "summary": "Autonomous credit evaluation agent with replay-resistant attestations.", "status": "live", "status_label": "SUBMITTED (CTC 2026)", "domain": "contests", "tags": ["Creditcoin", "Web3", "Lending", "Agent"], "personas": ["judge", "developer", "maintainer"], "scenarios": [], "featured": false, "updated": "2026-10-24", "legacy_fleet": "Fleet C", "persona_rank": {}}, {"id": "ai-triz-arc-agi-sovereign-solver", "name": "AI-TRIZ-ARC-AGI-Sovereign-Solver", "url": "https://github.com/SDRmsung/AI-TRIZ-ARC-AGI-Sovereign-Solver", "demo_url": null, "summary": "Grid topological color reasoning and cellular automata solver for ARC-AGI-2.", "status": "live", "status_label": "LIVE (Kaggle v9)", "domain": "contests", "tags": ["Kaggle", "ARC-AGI-2", "SATGridArmor"], "personas": ["judge", "developer", "maintainer"], "scenarios": [], "featured": false, "updated": "2026-10-28", "legacy_fleet": "Fleet C", "persona_rank": {"developer": 9}}, {"id": "ai-triz-pokemon-tcg-sovereign", "name": "AI-TRIZ-Pokemon-TCG-Sovereign", "url": "https://github.com/SDRmsung/AI-TRIZ-Pokemon-TCG-Sovereign", "demo_url": null, "summary": "Game-theoretic Nash equilibrium solver and strategy synthesizer.", "status": "live", "status_label": "LIVE (Kaggle)", "domain": "contests", "tags": ["Game-Theory", "Nash", "Strategy", "Kaggle"], "personas": ["judge", "developer", "maintainer"], "scenarios": ["s10"], "featured": false, "updated": "2026-10-26", "legacy_fleet": "Fleet C", "persona_rank": {"judge": 9, "developer": 6}}, {"id": "ai-triz-drivendata-tracetheace", "name": "AI-TRIZ-DrivenData-TraceTheAce", "url": null, "demo_url": null, "summary": "Psychometric model with Da Vinci cognitive mastery feature engineering.", "status": "archived", "status_label": "COMPLETED (0.6211)", "domain": "contests", "tags": ["DrivenData", "NLP", "Education-AI"], "personas": ["judge", "maintainer"], "scenarios": [], "featured": false, "updated": "2026-09-15", "legacy_fleet": "Fleet C", "persona_rank": {}}, {"id": "sovereign-smartcontract-formal-z3", "name": "Sovereign-SmartContract-Formal-Z3", "url": null, "demo_url": null, "summary": "First-order logic invariant theorem prover for Solidity smart contracts.", "status": "wip", "status_label": "PLANNED", "domain": "regtech", "tags": ["Z3-Prover", "Solidity", "Formal-Methods"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Fleet D", "persona_rank": {"maintainer": 9}}, {"id": "sovereign-eip712-signature-auditor", "name": "Sovereign-EIP712-Signature-Auditor", "url": null, "demo_url": null, "summary": "Cryptographic ECDSA EIP-712 structured data signature verification suite.", "status": "wip", "status_label": "PLANNED", "domain": "regtech", "tags": ["EIP-712", "ECDSA", "Security", "Crypto"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Fleet D", "persona_rank": {}}, {"id": "sovereign-contract-injunction-circuitbreaker", "name": "Sovereign-Contract-Injunction-CircuitBreaker", "url": null, "demo_url": null, "summary": "Automated legal injunction and emergency circuit breaker for smart contracts.", "status": "wip", "status_label": "PLANNED", "domain": "regtech", "tags": ["RegTech", "LegalTech", "CircuitBreaker"], "personas": ["developer", "maintainer"], "scenarios": ["s09"], "featured": false, "updated": null, "legacy_fleet": "Fleet D", "persona_rank": {}}, {"id": "sovereign-rwa-tokenization-mesh", "name": "Sovereign-RWA-Tokenization-Mesh", "url": null, "demo_url": null, "summary": "Real-world asset tokenization framework with legal compliance verification.", "status": "wip", "status_label": "PLANNED", "domain": "regtech", "tags": ["RWA", "DeFi", "Legal-Mesh", "Token"], "personas": ["developer", "judge", "maintainer"], "scenarios": ["s09", "s11"], "featured": false, "updated": null, "legacy_fleet": "Fleet D", "persona_rank": {}}, {"id": "swe-bench", "name": "SWE-bench", "url": "https://github.com/SDRmsung/SWE-bench", "demo_url": null, "summary": "Upstream evaluation pipeline for automated software engineering benchmarks.", "status": "wip", "status_label": "UPSTREAM (PR #644)", "domain": "agents", "tags": ["SWE-bench", "Agent", "Auto-Coding"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": "2026-10-14", "legacy_fleet": "Fleet E", "persona_rank": {"maintainer": 2}}, {"id": "sovereign-agent-evalguard", "name": "Sovereign-Agent-EvalGuard", "url": null, "demo_url": null, "summary": "Zero-trust autonomous agent auditing guardrail and telemetry verifier.", "status": "live", "status_label": "READY (050-Agents)", "domain": "agents", "tags": ["EvalGuard", "Auditor", "Zero-Trust"], "personas": ["developer", "maintainer"], "scenarios": ["z01"], "featured": false, "updated": "2026-10-19", "legacy_fleet": "Fleet E", "persona_rank": {}}, {"id": "sovereign-obsidian-chp-plugin", "name": "Sovereign-Obsidian-CHP-Plugin", "url": null, "demo_url": null, "summary": "Personal knowledge management plugin for epistemic health monitoring.", "status": "live", "status_label": "READY (Plugins)", "domain": "agents", "tags": ["Obsidian", "TypeScript", "PKM-Plugin"], "personas": ["developer", "maintainer"], "scenarios": ["z01"], "featured": false, "updated": "2026-10-18", "legacy_fleet": "Fleet E", "persona_rank": {}}, {"id": "sovereign-mcp-sqlite-server", "name": "Sovereign-MCP-SQLite-Server", "url": null, "demo_url": null, "summary": "Model Context Protocol read-only server for structured semantic queries.", "status": "live", "status_label": "READY (MCP)", "domain": "agents", "tags": ["MCP", "SQLite", "Model-Context"], "personas": ["developer", "maintainer"], "scenarios": ["z01"], "featured": false, "updated": "2026-10-21", "legacy_fleet": "Fleet E", "persona_rank": {}}, {"id": "sovereign-edge-udm-hardware-mesh", "name": "Sovereign-Edge-UDM-Hardware-Mesh", "url": null, "demo_url": null, "summary": "Unified device model and declarative abstraction mesh for edge IoT nodes.", "status": "wip", "status_label": "PLANNED", "domain": "agents", "tags": ["EdgeAI", "IoT", "Mesh", "Hardware"], "personas": ["developer", "maintainer"], "scenarios": ["s05"], "featured": false, "updated": null, "legacy_fleet": "Fleet E", "persona_rank": {}}, {"id": "sovereign-e-data-atlas", "name": "Sovereign-E-Data-Atlas", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/", "summary": "Spatiotemporal dynamic data atlas featuring 13 live scenarios and 3D maps.", "status": "live", "status_label": "LIVE (Data Atlas)", "domain": "data-atlas", "tags": ["MapLibre", "deck.gl", "Spatiotemporal", "Atlas"], "personas": ["visitor", "judge", "developer", "maintainer"], "scenarios": ["s01"], "featured": true, "updated": "2026-11-02", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 2, "judge": 3, "developer": 3}}, {"id": "atlas-s01-artery-flow", "name": "Atlas S01: Artery Flow", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s01_artery_flow/index.html", "summary": "National freeway & high-speed rail dynamic artery particle pulse visualization.", "status": "live", "status_label": "LIVE (Atlas)", "domain": "data-atlas", "tags": ["Freeway", "Rail", "TripsLayer", "Particles"], "personas": ["visitor", "judge"], "scenarios": ["s01"], "featured": false, "updated": "2026-11-02", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 3, "judge": 4}}, {"id": "atlas-s02-youbike-tide", "name": "Atlas S02: YouBike Tide", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s02_youbike_tide/index.html", "summary": "Urban bike-sharing tidal flow modeling and VRPTW rebalancing simulator.", "status": "live", "status_label": "LIVE (Atlas)", "domain": "data-atlas", "tags": ["YouBike", "Tidal-Flow", "VRPTW", "Mobility"], "personas": ["visitor", "judge"], "scenarios": ["s02"], "featured": false, "updated": "2026-11-02", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 4, "judge": 5}}, {"id": "atlas-s03-bus-delay", "name": "Atlas S03: Bus Delay Topology", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Real-time bus map matching, congestion light rails, and delay propagation GNN.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["Transit", "Bus-Delay", "GNN", "Topology"], "personas": ["visitor", "developer"], "scenarios": ["s03"], "featured": false, "updated": "2026-10-25", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 8}}, {"id": "atlas-s04-freeway-rest", "name": "Atlas S04: Freeway Rest Area", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s04_freeway_rest/index.html", "summary": "Freeway service area parking congestion dynamic bin-packing and retention model.", "status": "live", "status_label": "LIVE (Atlas)", "domain": "data-atlas", "tags": ["Parking", "Freeway", "BinPacking", "Simulation"], "personas": ["visitor", "judge"], "scenarios": ["s04"], "featured": false, "updated": "2026-11-02", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 5, "judge": 6}}, {"id": "atlas-s05-pm25-escape", "name": "Atlas S05: PM2.5 Escape Map", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Minute-level air quality plume diffusion linked with urban park crowd flows.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["AirQuality", "PM2.5", "Parks", "Diffusion"], "personas": ["visitor", "judge"], "scenarios": ["s05"], "featured": false, "updated": "2026-10-20", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 9}}, {"id": "atlas-s06-temp-outfit", "name": "Atlas S06: Weather Outfit Index", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Universal Thermal Climate Index (UTCI) spatial grid and outfit recommendation.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["Weather", "UTCI", "Outfit", "Climate"], "personas": ["visitor"], "scenarios": ["s06"], "featured": false, "updated": "2026-10-18", "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-s07-ev-charger", "name": "Atlas S07: EV Charger Hunger Map", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Real-time EV charging occupancy queueing simulator and grid barrier dispatch.", "status": "live", "status_label": "READY (Atlas)", "domain": "data-atlas", "tags": ["EV-Charging", "Erlang-C", "Queue", "Grid"], "personas": ["visitor", "judge", "developer"], "scenarios": ["s07"], "featured": false, "updated": "2026-10-28", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 6}}, {"id": "atlas-s08-speedcam-crash", "name": "Atlas S08: Tech Enforcement Heatmap", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Speed camera enforcement coverage overlapped with fatal traffic crash hotspots.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["SpeedCam", "Crash-Data", "Enforcement", "Safety"], "personas": ["visitor", "judge"], "scenarios": ["s08"], "featured": false, "updated": "2026-10-15", "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-s09-vacancy-rent", "name": "Atlas S09: Housing Vacancy & Rent", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Low-power electricity housing vacancy sea versus hot rental price spikes.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["Real-Estate", "Vacancy", "Rent-Index", "RWA"], "personas": ["visitor", "judge"], "scenarios": ["s09"], "featured": false, "updated": "2026-10-16", "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-s10-tour-shuttle", "name": "Atlas S10: Tourism Shuttle & Crowd", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Taiwan tourist shuttle lines aligned with scenic spot crowd tidal peaks.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["Tourism", "Shuttle", "Crowd-Tide", "VRP"], "personas": ["visitor"], "scenarios": ["s10"], "featured": false, "updated": "2026-10-14", "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-s11-flood-scar", "name": "Atlas S11: Flood Scar & Property", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Flood potential depth contours intersected with historical transaction prices.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["Flood-Risk", "Real-Estate", "DID", "Property"], "personas": ["visitor", "judge"], "scenarios": ["s11"], "featured": false, "updated": "2026-10-17", "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-s12-care-desert", "name": "Atlas S12: Child & Elderly Care Desert", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "15-minute isochrone accessibility analysis for childcare and elder care hubs.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["Care-Desert", "Accessibility", "2SFCA", "Isochrone"], "personas": ["visitor", "judge"], "scenarios": ["s12"], "featured": false, "updated": "2026-10-19", "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-s13-body-circulation", "name": "Atlas S13: Microcirculation & Meridians", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Blood circulation and traditional meridian particle conductance simulation.", "status": "wip", "status_label": "DRAFT (Atlas)", "domain": "data-atlas", "tags": ["Microcirculation", "Meridians", "Fluid", "Su-Field"], "personas": ["visitor", "developer"], "scenarios": ["s13"], "featured": false, "updated": "2026-10-12", "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-z01-news-pulse", "name": "Atlas Z01: Real-time News Pulse", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Real-time technology news crawler and zero-trust intelligence feed pipeline.", "status": "live", "status_label": "READY (Atlas)", "domain": "data-atlas", "tags": ["News-Pulse", "Crawler", "Zero-Trust", "Intelligence"], "personas": ["visitor", "developer", "maintainer"], "scenarios": ["z01"], "featured": false, "updated": "2026-10-28", "legacy_fleet": "Data Atlas", "persona_rank": {"visitor": 7}}, {"id": "atlas-shared-engine", "name": "Atlas Shared: Engine & Connectors", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/", "summary": "Data Atlas shared connectors, MapLibre renderers, and pipeline utilities.", "status": "live", "status_label": "LIVE (Shared)", "domain": "data-atlas", "tags": ["Connectors", "Shared-Core", "Pipeline", "DeckGL"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": "2026-11-01", "legacy_fleet": "Data Atlas", "persona_rank": {"developer": 7}}, {"id": "atlas-slot16-power-grid", "name": "Atlas Slot16: Power Grid Dynamics", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Regional power grid load balance, feeder contingency, and renewable mix.", "status": "wip", "status_label": "EXPANSION", "domain": "data-atlas", "tags": ["Power-Grid", "Energy", "Sensors"], "personas": ["developer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-slot17-reservoir-defense", "name": "Atlas Slot17: Reservoir Flood Defense", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Water reservoir storage telemetry, discharge curves, and flood disaster alerts.", "status": "wip", "status_label": "EXPANSION", "domain": "data-atlas", "tags": ["Hydrology", "Flood-Alert", "Reservoir"], "personas": ["developer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-slot18-maritime-ais", "name": "Atlas Slot18: Maritime AIS Trajectories", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Taiwan strait commercial vessel AIS trajectory streaming and anchorage queuing.", "status": "wip", "status_label": "EXPANSION", "domain": "data-atlas", "tags": ["AIS", "Maritime", "Trajectories", "Shipping"], "personas": ["developer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-slot19-flight-adsb", "name": "Atlas Slot19: Flight ADS-B Radar", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Live ADS-B transponder flight tracks, flight levels, and airway separation.", "status": "wip", "status_label": "EXPANSION", "domain": "data-atlas", "tags": ["Aviation", "ADS-B", "Flight-Tracks"], "personas": ["developer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Data Atlas", "persona_rank": {}}, {"id": "atlas-slot20-sandbox-lab", "name": "Atlas Slot20: Spatial Sandbox Lab", "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas", "demo_url": null, "summary": "Custom experimental spatial sandbox for testing novel Deck.gl layers.", "status": "wip", "status_label": "EXPANSION", "domain": "data-atlas", "tags": ["Sandbox", "Custom-Lab", "DeckGL"], "personas": ["developer", "maintainer"], "scenarios": [], "featured": false, "updated": null, "legacy_fleet": "Data Atlas", "persona_rank": {}}];
+        const FALLBACK_SCENARIOS = [{"id": "s01", "title": "National Freeway & Rail Arteries", "problem": "Predicting real-time arterial corridor bottlenecks across freeways and high-speed rail.", "repo_ids": ["sovereign-e-data-atlas", "sovereign-dlos-core", "dlos-safety-shield-cbf"], "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s01_artery_flow/index.html", "stage": "live"}, {"id": "s02", "title": "YouBike Tidal Rebalancing", "problem": "Resolving tidal bike starvation between commercial hubs and residential neighborhoods.", "repo_ids": ["sovereign-milp-routing-vrp", "dlos-jepa-world-model"], "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s02_youbike_tide/index.html", "stage": "live"}, {"id": "s03", "title": "Bus Delay Topology Diagnosis", "problem": "Tracking chronic transit delay propagation across high-density urban corridors.", "repo_ids": ["sovereign-milp-routing-vrp", "ai365"], "demo_url": null, "stage": "draft"}, {"id": "s04", "title": "Freeway Service Area Retention", "problem": "Optimizing holiday peak parking capacity and dynamic vehicle dwell time.", "repo_ids": ["sovereign-milp-binpacking-fitter", "sovereign-knapsack-partition-dp"], "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s04_freeway_rest/index.html", "stage": "live"}, {"id": "s05", "title": "Air Quality Plume & Park Evacuation", "problem": "Simulating minute-level PM2.5 plume dispersion and crowd flow steering.", "repo_ids": ["sovereign-cognitive-metabolism", "sovereign-edge-udm-hardware-mesh"], "demo_url": null, "stage": "draft"}, {"id": "s06", "title": "Apparent Temperature & Outfit Index", "problem": "Mapping high-resolution microclimate UTCI indices for adaptive outdoor clothing.", "repo_ids": ["sovereign-spatial-d4-group", "sovereign-dlos-core"], "demo_url": null, "stage": "draft"}, {"id": "s07", "title": "EV Charging Queue & Grid Shield", "problem": "Mitigating multi-vehicle charging wait times and regional substation overload.", "repo_ids": ["sovereign-dlos-core", "dlos-safety-shield-cbf", "sovereign-milp-routing-vrp"], "demo_url": null, "stage": "draft"}, {"id": "s08", "title": "Speed Enforcement & Crash Hotspots", "problem": "Auditing causal misalignment between automated speed cameras and fatal accident clusters.", "repo_ids": ["sovereign-polygon-sat-armor", "sovereign-sat-dpll-solver"], "demo_url": null, "stage": "draft"}, {"id": "s09", "title": "Housing Vacancy & Rent Drift", "problem": "Detecting dark residential vacancy zones against soaring rent growth trajectories.", "repo_ids": ["sovereign-rwa-tokenization-mesh", "sovereign-contract-injunction-circuitbreaker"], "demo_url": null, "stage": "draft"}, {"id": "s10", "title": "Tourist Shuttle & Scenic Crowd Tides", "problem": "Balancing scenic bus schedule dispatch against irregular visitor surge waves.", "repo_ids": ["sovereign-milp-routing-vrp", "ai-triz-pokemon-tcg-sovereign"], "demo_url": null, "stage": "draft"}, {"id": "s11", "title": "Flood Inundation & Property Valuation", "problem": "Quantifying property value depreciation scars caused by catastrophic flood risks.", "repo_ids": ["sovereign-quantum-ising-annealer", "sovereign-rwa-tokenization-mesh"], "demo_url": null, "stage": "draft"}, {"id": "s12", "title": "Child & Elderly Care Deserts", "problem": "Locating vulnerable neighborhoods outside 15-minute healthcare and childcare reach.", "repo_ids": ["sovereign-milp-binpacking-fitter", "sovereign-c-numerai-agent"], "demo_url": null, "stage": "draft"}, {"id": "s13", "title": "Microcirculation & Meridian Conduction", "problem": "Modeling physiological fluid resistance and traditional meridian conduction flows.", "repo_ids": ["sovereign-cognitive-metabolism", "ai-triz-sufield-toolkit", "dlos-jepa-world-model"], "demo_url": null, "stage": "draft"}, {"id": "z01", "title": "Real-Time Intelligence & News Pulse", "problem": "Continuous zero-trust scraping and semantic knowledge verification from live feeds.", "repo_ids": ["sovereign-agent-evalguard", "sovereign-mcp-sqlite-server", "sovereign-obsidian-chp-plugin"], "demo_url": null, "stage": "draft"}];
+    </script>
 
-<script>
-const REPOS = [
-    // Fleet A
-    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-DLOS-Core", desc: "Dual-Loop Decision Life Operating System with 1.08μs Control Barrier Function (CBF-QP) deterministic safety shield.", status: "LIVE (DLOS)", badges: ["Rust", "CBF-QP", "Apache-2.0", "Core Base"], url: "https://github.com/SDRmsung/DLOS" },
-    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-Cognitive-Metabolism", desc: "4D Epistemic Health & Synaptic Pruning Engine for Knowledge Graphs and Agentic AI memory architectures.", status: "LIVE (Metabolism)", badges: ["Python", "PKM", "ISO30401", "Audit"], url: "https://github.com/SDRmsung/Cognitive-Metabolism" },
-    { fleet: "fleet-a", tag: "tag-core", name: "ai365", desc: "Interactive Web Portal for the 100+ Sovereign GitHub Galaxy, featuring GNN Topological Diagnostics.", status: "LIVE (Pages)", badges: ["Web3", "GNN", "Portal"], url: "https://sdrmsung.github.io/ai365" },
-    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-Upstream-Tokio", desc: "Upstream Asynchronous Runtime Deadlock Defense & Critical Channel Fixes (PR #8380).", status: "UPSTREAM (PR #8380)", badges: ["Rust", "Async", "Deadlock Guard"], url: "https://github.com/SDRmsung/tokio" },
-    { fleet: "fleet-a", tag: "tag-core", name: "Sovereign-Upstream-Postgres", desc: "Upstream High-Reliability Storage Engine, Vector HNSW Indexing and Transactional Audit.", status: "UPSTREAM", badges: ["C", "Database", "Vector"], url: "https://github.com/SDRmsung/postgres" },
-    { fleet: "fleet-a", tag: "tag-core", name: "AI-TRIZ-Core-Engine", desc: "Formal SDK for TRIZ 40 Inventive Principles, 39x39 Contradiction Matrix and Separation Rules.", status: "PLANNED", badges: ["AI-TRIZ", "SDK", "Causal Engine"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-a", tag: "tag-core", name: "AI-TRIZ-SuField-Toolkit", desc: "Substance-Field Analysis & 76 Standard Solutions Modeling System for Complex Engineering.", status: "PLANNED", badges: ["Su-Field", "TRIZ 76", "Graph Model"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-a", tag: "tag-core", name: "AI-TRIZ-ARIZ-Optimizer", desc: "Algorithm for Inventive Problem Solving (ARIZ-85C) State Machine with Physical Contradiction Isolator.", status: "PLANNED", badges: ["ARIZ-85C", "State Machine"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-a", tag: "tag-core", name: "DLOS-JEPA-World-Model", desc: "Hierarchical Joint Embedding Predictive Architecture for Non-Autoregressive Latent Planning.", status: "PLANNED", badges: ["H-JEPA", "World Model", "Latent Space"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-a", tag: "tag-core", name: "DLOS-Safety-Shield-CBF", desc: "Microsecond-level Quadratic Programming (QP) Barrier Shield for Autonomous Vehicle & Agent Safety.", status: "PLANNED", badges: ["CBF-QP", "Zero-Collision", "Safety"], url: "https://github.com/SDRmsung" },
+    <script>
+        // State
+        let allRepos = [];
+        let allScenarios = [];
+        let currentTab = 'overview'; // 'overview' | 'seeall' | 'scenarios'
+        let currentPersona = null;   // null | 'visitor' | 'judge' | 'developer' | 'maintainer'
+        let currentLayout = 'cards';  // 'cards' | 'table'
+        let showAllPersona = false;  // F1: expand all for persona
+        let searchQuery = '';
+        let tableSortCol = 'updated';
+        let tableSortAsc = false;
+        let expandedDomains = {};
 
-    // Fleet B
-    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-SAT-DPLL-Solver", desc: "Pure Python Zero-Dependency DPLL/WalkSAT Constraint Satisfaction Engine. Sub-5ms verification.", status: "READY (A50)", badges: ["SAT", "DPLL", "Pure Python", "Zero-Dep"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-MILP-Routing-VRP", desc: "2-Opt / 3-Opt Local Search Combinatorial Vehicle Routing Engine with Time Windows (VRPTW).", status: "READY (A50)", badges: ["MILP", "2-Opt", "TSP", "VRP"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Quantum-Ising-Annealer", desc: "Transverse-Field Simulated Quantum Annealer & Quadratic Unconstrained Binary Optimization (QUBO).", status: "READY (A50)", badges: ["QUBO", "Ising", "Quantum Annealing"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Polygon-SAT-Armor", desc: "Separating Axis Theorem (SAT) Geometric Convex Polygon Collision Detector & SAT Armor.", status: "READY (A50)", badges: ["Geometry", "SAT Armor", "Game AI"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-MILP-BinPacking-Fitter", desc: "First-Fit Decreasing (FFD) & Best-Fit Decreasing 2D/3D Multi-Container Packing Optimizer.", status: "READY (A50)", badges: ["Bin Packing", "FFD", "Optimization"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Knapsack-Partition-DP", desc: "0-1 Knapsack Dynamic Programming & Karmarkar-Karp Number Partitioning Solver.", status: "READY (A50)", badges: ["DP", "Knapsack", "Algorithms"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-b", tag: "tag-arsenal", name: "Sovereign-Spatial-D4-Group", desc: "Dihedral D4 Symmetry Transformations & 4-Directional Gravity Inpainting for 2D Grids.", status: "READY (A50)", badges: ["D4 Group", "Symmetry", "ARC-AGI"], url: "https://github.com/SDRmsung" },
+        const DOMAIN_ORDER = ['foundations', 'arsenals', 'contests', 'regtech', 'agents', 'data-atlas'];
+        // F5: Remove Fleet A/B/C/D/E old codes
+        const DOMAIN_LABELS = {
+            'foundations': 'Foundations',
+            'arsenals': 'Toolkits',
+            'contests': 'Contests',
+            'regtech': 'RegTech',
+            'agents': 'Agents',
+            'data-atlas': 'Data Atlas'
+        };
 
-    // Fleet C
-    { fleet: "fleet-c", tag: "tag-contest", name: "Sovereign-LexGuard", desc: "Formal Legal-to-Contract Bidirectional Mapping & Causal Audit Engine for RWA & DeFi. Zero Hallucinations.", status: "SUBMITTED (BUIDL #48128)", badges: ["DoraHacks", "Solidity 0.8.20", "DPLL", "EIP-712"], url: "https://dorahacks.io/buidl/48128", buidl: "BUIDL #48128" },
-    { fleet: "fleet-c", tag: "tag-contest", name: "Sovereign-AttestAgent-Creditcoin", desc: "Autonomous On-Chain Credit Scoring and Attestcoin Lending Agent with Anti-Replay Nonce.", status: "SUBMITTED (CTC 2026)", badges: ["Creditcoin", "Web3", "Lending Agent"], url: "https://github.com/SDRmsung/Sovereign-AttestAgent-Creditcoin" },
-    { fleet: "fleet-c", tag: "tag-contest", name: "AI-TRIZ-ARC-AGI-Sovereign-Solver", desc: "Kaggle ARC-AGI-2 Solver (v9) featuring Depth-2 Composite Beam Search and Topological Flood Fill.", status: "LIVE (Kaggle v9)", badges: ["Kaggle", "ARC-AGI-2", "SATGridArmor"], url: "https://github.com/SDRmsung/AI-TRIZ-ARC-AGI-Sovereign-Solver" },
-    { fleet: "fleet-c", tag: "tag-contest", name: "AI-TRIZ-Pokemon-TCG-Sovereign", desc: "Kaggle Pokémon TCG Strategy Simulator, Monte Carlo Decision Tree & Nash Equilibrium Evaluator.", status: "LIVE (Kaggle)", badges: ["Game Theory", "Nash", "Strategy Track"], url: "https://github.com/SDRmsung/AI-TRIZ-Pokemon-TCG-Sovereign" },
-    { fleet: "fleet-c", tag: "tag-contest", name: "AI-TRIZ-DrivenData-TraceTheAce", desc: "DrivenData Tutoring Outcomes Psychometric Model with Da Vinci Cognitive Mastery Features.", status: "COMPLETED (0.6211)", badges: ["DrivenData", "NLP", "Education AI"], url: "https://github.com/SDRmsung" },
+        async function init() {
+            try {
+                const [rRes, sRes] = await Promise.all([
+                    fetch('data/repos.json'),
+                    fetch('data/scenarios.json')
+                ]);
+                if (rRes.ok && sRes.ok) {
+                    allRepos = await rRes.json();
+                    allScenarios = await sRes.json();
+                } else {
+                    throw new Error('Fetch failed, using embedded fallback');
+                }
+            } catch (e) {
+                console.warn('Loading fallback data:', e.message);
+                allRepos = FALLBACK_REPOS;
+                allScenarios = FALLBACK_SCENARIOS;
+            }
 
-    // Fleet D
-    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-SmartContract-Formal-Z3", desc: "Solidity Bytecode to Z3 First-Order Logic Theorem Prover for Formal Invariant Verification.", status: "PLANNED", badges: ["Z3 Prover", "Solidity", "Formal Methods"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-EIP712-Signature-Auditor", desc: "Cryptographic Domain Separator & Anti-Replay Nonce Validator for Multi-Chain DApps.", status: "PLANNED", badges: ["EIP-712", "ECDSA", "Security"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-Contract-Injunction-CircuitBreaker", desc: "Automated Court Injunction Asset Freezing Protocol for Real World Assets and DeFi.", status: "PLANNED", badges: ["RegTech", "LegalTech", "Circuit Breaker"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-d", tag: "tag-regtech", name: "Sovereign-RWA-Tokenization-Mesh", desc: "Real World Asset Legal Encapsulation Framework & On-Chain Title Deed Mesh.", status: "PLANNED", badges: ["RWA", "DeFi", "Legal-Mesh"], url: "https://github.com/SDRmsung" },
+            updatePersonaBadges();
+            const totalCount = allRepos.length;
+            document.getElementById('count-total').textContent = totalCount;
+            const countShortEl = document.getElementById('count-total-short');
+            if (countShortEl) countShortEl.textContent = totalCount;
 
-    // Fleet E
-    { fleet: "fleet-e", tag: "tag-agent", name: "SWE-bench", desc: "Upstream Benchmarking for Autonomous Software Engineers (PR #644 Verified Submissions).", status: "UPSTREAM (PR #644)", badges: ["SWE-bench", "Agent", "Auto-Coding"], url: "https://github.com/SDRmsung/SWE-bench" },
-    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-Agent-EvalGuard", desc: "Independent Third-Party Autonomous Auditor Agent for Zero-Trust Code & Telemetry Certification.", status: "READY (050-Agents)", badges: ["EvalGuard", "Auditor Agent", "Zero-Trust"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-Obsidian-CHP-Plugin", desc: "Obsidian 4D Cognitive Health Profile Dashboard Plugin for Vault Topology Health Monitoring.", status: "READY (Plugins)", badges: ["Obsidian", "TypeScript", "PKM Plugin"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-MCP-SQLite-Server", desc: "Model Context Protocol (MCP) Read-only SQLite Knowledge Server for Local LLM Reasoning.", status: "READY (MCP)", badges: ["MCP", "SQLite", "Model Context"], url: "https://github.com/SDRmsung" },
-    { fleet: "fleet-e", tag: "tag-agent", name: "Sovereign-Edge-UDM-Hardware-Mesh", desc: "Unified Device Model (UDM) Declarative Hardware Abstraction for Drones and Edge Sensors.", status: "PLANNED", badges: ["EdgeAI", "IoT", "Hardware Abstraction"], url: "https://github.com/SDRmsung" }
-];
+            // Parse URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const viewParam = params.get('view');
+            const tabParam = params.get('tab');
+            const layoutParam = params.get('layout');
+            const sortParam = params.get('sort');
+            const allParam = params.get('all');
 
-let currentFleet = 'all';
+            if (allParam === '1') {
+                showAllPersona = true;
+            }
 
-function renderRepos(repos) {
-    const grid = document.getElementById('repoGrid');
-    const count = document.getElementById('itemCount');
-    grid.innerHTML = '';
-    count.textContent = `Showing ${repos.length} Repositories`;
+            if (tabParam === 'scenarios') {
+                currentTab = 'scenarios';
+            } else if (viewParam === 'all') {
+                currentTab = 'seeall';
+            } else if (viewParam && ['visitor', 'judge', 'developer', 'maintainer'].includes(viewParam)) {
+                currentPersona = viewParam;
+                currentTab = 'overview';
+                if (viewParam === 'maintainer') {
+                    currentLayout = 'table';
+                }
+            }
 
-    repos.forEach(r => {
-        const card = document.createElement('div');
-        card.className = 'repo-card';
-        card.innerHTML = `
-            <div>
+            if (layoutParam && ['cards', 'table'].includes(layoutParam)) {
+                currentLayout = layoutParam;
+            }
+            if (sortParam) {
+                tableSortCol = sortParam;
+            }
+
+            updateURL(false);
+            render();
+        }
+
+        // F1: update badges to "9 of 42" format
+        function updatePersonaBadges() {
+            const personas = ['visitor', 'judge', 'developer', 'maintainer'];
+            personas.forEach(p => {
+                const totalCnt = allRepos.filter(r => r.personas && r.personas.includes(p)).length;
+                const rankedCnt = allRepos.filter(r => r.persona_rank && r.persona_rank[p] != null).length;
+                const el = document.getElementById(`badge-${p}`);
+                if (el) el.textContent = `${rankedCnt} of ${totalCnt}`;
+            });
+        }
+
+        function setPersona(persona) {
+            if (currentPersona === persona) {
+                currentPersona = null;
+                showAllPersona = false;
+            } else {
+                currentPersona = persona;
+                showAllPersona = false;
+                if (persona === 'maintainer') {
+                    currentLayout = 'table';
+                }
+            }
+            currentTab = 'overview';
+            updateURL(true);
+            render();
+        }
+
+        function expandPersonaAll() {
+            showAllPersona = true;
+            updateURL(true);
+            render();
+        }
+
+        function collapsePersona() {
+            showAllPersona = false;
+            updateURL(true);
+            render();
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            showAllPersona = false;
+            updateURL(true);
+            render();
+        }
+
+        function setLayout(layout) {
+            currentLayout = layout;
+            updateURL(true);
+            render();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+            render();
+        }
+
+        function updateURL(push) {
+            const url = new URL(window.location);
+            url.searchParams.delete('view');
+            url.searchParams.delete('tab');
+            url.searchParams.delete('layout');
+            url.searchParams.delete('sort');
+            url.searchParams.delete('all');
+
+            if (currentTab === 'scenarios') {
+                url.searchParams.set('tab', 'scenarios');
+            } else if (currentTab === 'seeall') {
+                url.searchParams.set('view', 'all');
+            } else if (currentPersona) {
+                url.searchParams.set('view', currentPersona);
+                if (showAllPersona) {
+                    url.searchParams.set('all', '1');
+                }
+            }
+
+            if (currentLayout === 'table') {
+                url.searchParams.set('layout', 'table');
+                url.searchParams.set('sort', tableSortCol);
+            }
+
+            if (push) {
+                history.pushState(null, '', url.toString());
+            } else {
+                history.replaceState(null, '', url.toString());
+            }
+
+            // Update UI buttons state
+            ['visitor', 'judge', 'developer', 'maintainer'].forEach(p => {
+                const el = document.getElementById(`persona-${p}`);
+                if (el) el.classList.toggle('active', currentPersona === p && currentTab === 'overview');
+            });
+
+            document.getElementById('tab-overview').classList.toggle('active', currentTab === 'overview');
+            document.getElementById('tab-seeall').classList.toggle('active', currentTab === 'seeall');
+            document.getElementById('tab-scenarios').classList.toggle('active', currentTab === 'scenarios');
+
+            document.getElementById('layout-cards').classList.toggle('active', currentLayout === 'cards');
+            document.getElementById('layout-table').classList.toggle('active', currentLayout === 'table');
+        }
+
+        function toggleDomainExpand(domain) {
+            expandedDomains[domain] = !expandedDomains[domain];
+            render();
+        }
+
+        function filterRepos(repos) {
+            if (!searchQuery) return repos;
+            return repos.filter(r => {
+                const matchName = r.name.toLowerCase().includes(searchQuery);
+                const matchSummary = (r.summary || '').toLowerCase().includes(searchQuery);
+                const matchTags = (r.tags || []).some(t => t.toLowerCase().includes(searchQuery));
+                const matchDomain = (DOMAIN_LABELS[r.domain] || '').toLowerCase().includes(searchQuery);
+                const matchScenarios = (r.scenarios || []).some(s => s.toLowerCase().includes(searchQuery));
+                return matchName || matchSummary || matchTags || matchDomain || matchScenarios;
+            });
+        }
+
+        function render() {
+            const container = document.getElementById('mainContainer');
+            container.innerHTML = '';
+
+            if (currentTab === 'scenarios') {
+                renderScenariosView(container);
+            } else if (currentTab === 'seeall') {
+                renderSeeAllView(container);
+            } else {
+                renderOverviewView(container);
+            }
+        }
+
+        // S1 Overview / Persona View (F1 Caps & Expansion)
+        function renderOverviewView(container) {
+            let targetRepos = [];
+            let headerTitle = '';
+            let headerDesc = '';
+            let totalPersonaCount = 0;
+
+            if (currentPersona) {
+                const allMatching = allRepos.filter(r => r.personas && r.personas.includes(currentPersona));
+                totalPersonaCount = allMatching.length;
+
+                if (showAllPersona) {
+                    // Show all matching for this persona, ranked ones first
+                    targetRepos = [...allMatching].sort((a, b) => {
+                        const rankA = a.persona_rank && a.persona_rank[currentPersona] ? a.persona_rank[currentPersona] : 999;
+                        const rankB = b.persona_rank && b.persona_rank[currentPersona] ? b.persona_rank[currentPersona] : 999;
+                        return rankA - rankB;
+                    });
+                } else {
+                    // F1: Cap to top 9 ranked cards
+                    targetRepos = allMatching
+                        .filter(r => r.persona_rank && r.persona_rank[currentPersona] != null)
+                        .sort((a, b) => a.persona_rank[currentPersona] - b.persona_rank[currentPersona]);
+                }
+
+                const personaNames = {
+                    'visitor': 'Explorer & Visual Showcase Repositories',
+                    'judge': 'Judges & Hackathon Verified Repositories',
+                    'developer': 'Developer SDKs, Solvers & Architecture Repos',
+                    'maintainer': 'Maintainer Systems & Work-in-Progress Repos'
+                };
+                headerTitle = personaNames[currentPersona] || 'Persona View';
+                headerDesc = showAllPersona ? 
+                    `Showing all ${targetRepos.length} repositories for the ${currentPersona} persona.` :
+                    `Showing top ${targetRepos.length} curated repositories for the ${currentPersona} persona (of ${totalPersonaCount} total).`;
+            } else {
+                // F5: Only repos with valid url and featured = true
+                targetRepos = allRepos.filter(r => r.featured && r.url);
+                headerTitle = 'Featured Sovereign Repositories';
+                headerDesc = 'Handpicked flagships with live demos, high scenario impact, or competition medals.';
+            }
+
+            const filtered = filterRepos(targetRepos);
+
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'section-header';
+            headerDiv.innerHTML = `
+                <div>
+                    <h2 class="section-title">${headerTitle} <span class="section-count">${filtered.length}${currentPersona && !showAllPersona ? ` of ${totalPersonaCount}` : ''}</span></h2>
+                    <p style="font-size:0.8rem;color:var(--text-sub);margin-top:4px;">${headerDesc}</p>
+                </div>
+                <button class="section-action" onclick="switchTab('seeall')">
+                    See all ${allRepos.length} repositories →
+                </button>
+            `;
+            container.appendChild(headerDiv);
+
+            if (filtered.length === 0) {
+                container.innerHTML += '<div class="empty-state">No matching repositories found. Try adjusting your search query.</div>';
+                return;
+            }
+
+            if (currentLayout === 'table') {
+                renderTable(filtered, container);
+            } else {
+                const grid = document.createElement('div');
+                grid.className = 'cards-grid';
+                filtered.forEach(r => grid.appendChild(createRepoCard(r)));
+                container.appendChild(grid);
+            }
+
+            // F1: "See all N for this persona →" bottom expansion bar
+            if (currentPersona) {
+                const expandDiv = document.createElement('div');
+                expandDiv.className = 'persona-expand-bar';
+                if (!showAllPersona && totalPersonaCount > targetRepos.length) {
+                    expandDiv.innerHTML = `
+                        <button class="btn-expand-persona" onclick="expandPersonaAll()">
+                            See all ${totalPersonaCount} for this persona →
+                        </button>
+                    `;
+                    container.appendChild(expandDiv);
+                } else if (showAllPersona && totalPersonaCount > 9) {
+                    expandDiv.innerHTML = `
+                        <button class="btn-expand-persona" onclick="collapsePersona()">
+                            Collapse to top 9 for this persona ↑
+                        </button>
+                    `;
+                    container.appendChild(expandDiv);
+                }
+            }
+        }
+
+        // S2 See All (Domain Rows / Grids / Table)
+        function renderSeeAllView(container) {
+            const filteredAll = filterRepos(allRepos);
+
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'section-header';
+            headerDiv.innerHTML = `
+                <div>
+                    <h2 class="section-title">All Sovereign Repositories & Data Atlas <span class="section-count">${filteredAll.length} / ${allRepos.length}</span></h2>
+                    <p style="font-size:0.8rem;color:var(--text-sub);margin-top:4px;">Layered ecosystem partitioned across 6 architectural domains.</p>
+                </div>
+                <div style="font-size:0.8rem;color:var(--text-dim);font-family:var(--font-mono);">
+                    LAYOUT: ${currentLayout.toUpperCase()}
+                </div>
+            `;
+            container.appendChild(headerDiv);
+
+            if (filteredAll.length === 0) {
+                container.innerHTML += '<div class="empty-state">No matching repositories found.</div>';
+                return;
+            }
+
+            if (currentLayout === 'table') {
+                renderTable(filteredAll, container);
+                return;
+            }
+
+            // Render 6 Domain horizontal scroll rows or grids
+            DOMAIN_ORDER.forEach(domain => {
+                const domainRepos = filteredAll.filter(r => r.domain === domain);
+                if (domainRepos.length === 0) return;
+
+                const isExpanded = expandedDomains[domain] || false;
+                const domainWrapper = document.createElement('div');
+                domainWrapper.className = 'domain-row-wrapper';
+
+                const domainHeader = document.createElement('div');
+                domainHeader.className = 'section-header';
+                domainHeader.innerHTML = `
+                    <h3 class="section-title" style="font-size:1.02rem;">
+                        ${DOMAIN_LABELS[domain] || domain}
+                        <span class="section-count">${domainRepos.length}</span>
+                    </h3>
+                    <button class="section-action" onclick="toggleDomainExpand('${domain}')">
+                        ${isExpanded ? '⬍ Collapse to Row' : '⊞ Expand to Grid'}
+                    </button>
+                `;
+                domainWrapper.appendChild(domainHeader);
+
+                const scrollBox = document.createElement('div');
+                scrollBox.className = `scroll-container ${isExpanded ? 'expanded' : ''}`;
+                domainRepos.forEach(r => scrollBox.appendChild(createRepoCard(r)));
+                domainWrapper.appendChild(scrollBox);
+
+                container.appendChild(domainWrapper);
+            });
+        }
+
+        // F2 & S3 Scenarios View
+        function renderScenariosView(container) {
+            // F2: Sort live first, then draft
+            const sortedScenarios = [...allScenarios].sort((a, b) => {
+                if (a.stage === 'live' && b.stage !== 'live') return -1;
+                if (a.stage !== 'live' && b.stage === 'live') return 1;
+                return a.id.localeCompare(b.id);
+            });
+
+            const liveCount = sortedScenarios.filter(s => s.stage === 'live').length;
+            const draftCount = sortedScenarios.filter(s => s.stage === 'draft').length;
+
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'section-header';
+            headerDiv.innerHTML = `
+                <div>
+                    <h2 class="section-title">Spatiotemporal Scenarios & News Intelligence <span class="section-count">${liveCount} live · ${draftCount} in progress</span></h2>
+                    <p style="font-size:0.8rem;color:var(--text-sub);margin-top:4px;">High-contrast real-world computational scenarios coupled to sovereign algorithm repositories.</p>
+                </div>
+                <a href="https://sdrmsung.github.io/Sovereign-E-Data-Atlas/" target="_blank" class="section-action">
+                    Open Full Data Atlas Portal ↗
+                </a>
+            `;
+            container.appendChild(headerDiv);
+
+            const grid = document.createElement('div');
+            grid.className = 'scenarios-grid';
+
+            sortedScenarios.forEach(sc => {
+                const card = document.createElement('div');
+                card.className = 'scenario-card';
+                card.id = `scenario-${sc.id}`;
+
+                // Find repo chips
+                const repoChipsHtml = (sc.repo_ids || []).map(rid => {
+                    const repoObj = allRepos.find(r => r.id === rid);
+                    const name = repoObj ? repoObj.name : rid;
+                    return `<a href="#repo-${rid}" class="repo-chip" onclick="navigateToRepo('${rid}')">${name}</a>`;
+                }).join('');
+
+                // F2: draft button is gray unclickable Coming soon badge, no links back to ai365
+                const isDraft = sc.stage === 'draft' || !sc.demo_url;
+                const demoBtnHtml = isDraft ? 
+                    `<span class="scenario-demo-btn draft">Coming soon</span>` :
+                    `<a href="${sc.demo_url}" target="_blank" rel="noopener noreferrer" class="scenario-demo-btn">
+                        <span>▶</span> Live Scenario Demo
+                    </a>`;
+
+                card.innerHTML = `
+                    <div class="scenario-header">
+                        <div>
+                            <span class="scenario-id-badge">${sc.id.toUpperCase()}</span>
+                            <div class="scenario-title">${sc.title}</div>
+                        </div>
+                    </div>
+                    <div class="scenario-problem">
+                        <strong>Problem Focus:</strong> ${sc.problem}
+                    </div>
+                    <div class="scenario-repos-section">
+                        <div class="scenario-repos-label">Coupled Sovereign Engines (${(sc.repo_ids||[]).length})</div>
+                        <div class="scenario-repo-chips">${repoChipsHtml}</div>
+                    </div>
+                    <div class="scenario-footer">
+                        ${demoBtnHtml}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            container.appendChild(grid);
+        }
+
+        // Helper: Create Repo Card (F3 Code button condition & F5 tooltip)
+        function createRepoCard(repo) {
+            const card = document.createElement('div');
+            card.className = 'repo-card';
+            card.id = `repo-${repo.id}`;
+
+            const statusClass = repo.status === 'live' ? 'live' : (repo.status === 'wip' ? 'wip' : 'archived');
+            const statusLabel = repo.status_label || repo.status.toUpperCase();
+
+            // First 2 tags
+            const visibleTags = (repo.tags || []).slice(0, 2);
+            const hiddenTags = (repo.tags || []).slice(2);
+            let tagsHtml = visibleTags.map(t => `<span class="tag-pill">${t}</span>`).join('');
+            if (hiddenTags.length > 0) {
+                tagsHtml += `
+                    <span class="tag-pill more" tabindex="0">+${hiddenTags.length}
+                        <span class="tag-tooltip">${hiddenTags.join(', ')}</span>
+                    </span>
+                `;
+            }
+
+            // Scenarios count badge
+            let scenarioHtml = '';
+            if (repo.scenarios && repo.scenarios.length > 0) {
+                scenarioHtml = `<a class="scenario-pill" onclick="jumpToScenarios('${repo.scenarios[0]}')">Used in ${repo.scenarios.length} scenario${repo.scenarios.length > 1 ? 's' : ''}</a>`;
+            }
+
+            const demoLinkHtml = repo.demo_url ? 
+                `<a href="${repo.demo_url}" target="_blank" rel="noopener noreferrer" class="card-link-btn demo">Demo</a>` : '';
+
+            // F3: Hide Code button if url is null
+            const codeLinkHtml = repo.url ?
+                `<a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="card-link-btn">Code ↗</a>` : '';
+
+            const nameHtml = repo.url ?
+                `<a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="card-name">${repo.name}</a>` :
+                `<span class="card-name" style="cursor:default;">${repo.name}</span>`;
+
+            card.innerHTML = `
                 <div class="card-top">
-                    <span class="repo-tag ${r.tag}">${r.fleet.toUpperCase()}</span>
-                    <div class="repo-status"><span class="repo-status-dot"></span>${r.status}</div>
+                    <div class="card-name-group">
+                        ${nameHtml}
+                    </div>
+                    <div class="card-status-badge">
+                        <span class="status-dot ${statusClass}"></span>
+                        ${statusLabel}
+                    </div>
                 </div>
-                <div class="repo-name">${r.name}</div>
-                <div class="repo-desc">${r.desc}</div>
-                <div class="card-badges">
-                    ${r.badges.map(b => `<span class="pill-badge">${b}</span>`).join('')}
+                <div class="card-summary">${repo.summary}</div>
+                <div class="card-bottom">
+                    <div class="card-tags">
+                        ${tagsHtml}
+                        ${scenarioHtml}
+                    </div>
+                    <div class="card-links">
+                        ${demoLinkHtml}
+                        ${codeLinkHtml}
+                    </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                ${r.buidl ? `<span class="buidl-pill">${r.buidl}</span>` : `<span></span>`}
-                <a href="${r.url}" target="_blank" class="action-link">Explore Repo →</a>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-}
+            `;
+            return card;
+        }
 
-function filterFleet(fleet) {
-    currentFleet = fleet;
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    applyFilters();
-}
+        // Helper: Table View (F5 Updated min-width & Tags tooltip & F3 null url)
+        function renderTable(repos, container) {
+            const tableWrap = document.createElement('div');
+            tableWrap.className = 'table-view-container';
 
-function applyFilters() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    let filtered = REPOS;
+            // Sort repos
+            const sorted = [...repos].sort((a, b) => {
+                let valA = a[tableSortCol];
+                let valB = b[tableSortCol];
+                if (tableSortCol === 'scenarios') {
+                    valA = (a.scenarios || []).length;
+                    valB = (b.scenarios || []).length;
+                } else if (tableSortCol === 'updated') {
+                    valA = a.updated || '1970-01-01';
+                    valB = b.updated || '1970-01-01';
+                } else if (typeof valA === 'string') {
+                    valA = valA.toLowerCase();
+                    valB = (valB || '').toLowerCase();
+                }
+                if (valA < valB) return tableSortAsc ? -1 : 1;
+                if (valA > valB) return tableSortAsc ? 1 : -1;
+                return 0;
+            });
 
-    if (currentFleet !== 'all') {
-        filtered = filtered.filter(r => r.fleet === currentFleet);
-    }
+            const table = document.createElement('table');
+            table.className = 'repo-table';
 
-    if (query) {
-        filtered = filtered.filter(r => 
-            r.name.toLowerCase().includes(query) ||
-            r.desc.toLowerCase().includes(query) ||
-            r.badges.some(b => b.toLowerCase().includes(query))
-        );
-    }
+            const cols = [
+                { key: 'name', label: 'Name' },
+                { key: 'status', label: 'Status' },
+                { key: 'domain', label: 'Domain' },
+                { key: 'tags', label: 'Tags' },
+                { key: 'scenarios', label: 'Scenarios' },
+                { key: 'updated', label: 'Updated' },
+                { key: 'actions', label: 'Links' }
+            ];
 
-    renderRepos(filtered);
-}
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            cols.forEach(col => {
+                const th = document.createElement('th');
+                th.textContent = col.label;
+                if (col.key === 'updated') {
+                    th.style.minWidth = '105px';
+                }
+                if (col.key !== 'actions' && col.key !== 'tags') {
+                    if (tableSortCol === col.key) {
+                        th.className = tableSortAsc ? 'sorted-asc' : 'sorted-desc';
+                    }
+                    th.onclick = () => {
+                        if (tableSortCol === col.key) {
+                            tableSortAsc = !tableSortAsc;
+                        } else {
+                            tableSortCol = col.key;
+                            tableSortAsc = true;
+                        }
+                        updateURL(true);
+                        render();
+                    };
+                }
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
 
-document.getElementById('searchInput').addEventListener('input', applyFilters);
+            const tbody = document.createElement('tbody');
+            sorted.forEach(r => {
+                const tr = document.createElement('tr');
+                const statusDot = `<span class="status-dot ${r.status === 'live' ? 'live' : (r.status === 'wip' ? 'wip' : 'archived')}"></span>`;
+                const tagsStr = (r.tags || []).slice(0, 3).join(', ');
+                const fullTagsStr = (r.tags || []).join(', ');
+                const scCount = (r.scenarios || []).length;
+                const scCell = scCount > 0 ? 
+                    `<a class="scenario-pill" onclick="jumpToScenarios('${r.scenarios[0]}')">${scCount} (${r.scenarios.join(', ')})</a>` : 
+                    '<span style="color:var(--text-dim);">-</span>';
 
-// Initial Render
-renderRepos(REPOS);
-</script>
+                const repoLinkHtml = r.url ?
+                    `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="card-link-btn" style="margin-right:4px;">Repo</a>` : '';
+                const demoLinkHtml = r.demo_url ?
+                    `<a href="${r.demo_url}" target="_blank" rel="noopener noreferrer" class="card-link-btn demo">Demo</a>` : '';
+                const linksHtml = `${repoLinkHtml}${demoLinkHtml}` || '<span style="color:var(--text-dim);">-</span>';
+
+                const nameCell = r.url ?
+                    `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="table-name">${r.name}</a>` :
+                    `<span class="table-name" style="cursor:default;">${r.name}</span>`;
+
+                tr.innerHTML = `
+                    <td>${nameCell}</td>
+                    <td>${statusDot} <span style="font-family:var(--font-mono);font-size:0.75rem;">${r.status_label || r.status}</span></td>
+                    <td style="font-size:0.78rem;color:var(--text-sub);">${DOMAIN_LABELS[r.domain] || r.domain}</td>
+                    <td style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-sub);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${fullTagsStr}">${tagsStr}</td>
+                    <td>${scCell}</td>
+                    <td style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim);min-width:105px;white-space:nowrap;">${r.updated || '-'}</td>
+                    <td>${linksHtml}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+            tableWrap.appendChild(table);
+            container.appendChild(tableWrap);
+        }
+
+        function jumpToScenarios(scenarioId) {
+            currentTab = 'scenarios';
+            updateURL(true);
+            render();
+            setTimeout(() => {
+                const el = document.getElementById(`scenario-${scenarioId}`);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.style.borderColor = 'var(--cyan)';
+                    setTimeout(() => { el.style.borderColor = ''; }, 2000);
+                }
+            }, 100);
+        }
+
+        function navigateToRepo(repoId) {
+            currentTab = 'seeall';
+            currentLayout = 'cards';
+            updateURL(true);
+            render();
+            setTimeout(() => {
+                const el = document.getElementById(`repo-${repoId}`);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.style.borderColor = 'var(--cyan)';
+                    el.style.boxShadow = '0 0 25px rgba(56, 189, 248, 0.5)';
+                    setTimeout(() => {
+                        el.style.borderColor = '';
+                        el.style.boxShadow = '';
+                    }, 2500);
+                }
+            }, 150);
+        }
+
+        window.addEventListener('popstate', () => {
+            const params = new URLSearchParams(window.location.search);
+            const viewParam = params.get('view');
+            const tabParam = params.get('tab');
+            const layoutParam = params.get('layout');
+            const sortParam = params.get('sort');
+            const allParam = params.get('all');
+
+            showAllPersona = allParam === '1';
+            currentTab = tabParam === 'scenarios' ? 'scenarios' : (viewParam === 'all' ? 'seeall' : 'overview');
+            currentPersona = ['visitor', 'judge', 'developer', 'maintainer'].includes(viewParam) ? viewParam : null;
+            if (layoutParam) currentLayout = layoutParam;
+            if (sortParam) tableSortCol = sortParam;
+            render();
+        });
+
+        // Boot
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>

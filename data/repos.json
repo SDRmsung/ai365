@@ -25,7 +25,12 @@
       "s07"
     ],
     "featured": true,
-    "updated": "2026-10-28"
+    "updated": "2026-10-28",
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "judge": 1,
+      "developer": 1
+    }
   },
   {
     "id": "sovereign-cognitive-metabolism",
@@ -51,7 +56,11 @@
       "s13"
     ],
     "featured": true,
-    "updated": "2026-10-25"
+    "updated": "2026-10-25",
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "developer": 2
+    }
   },
   {
     "id": "ai365",
@@ -77,7 +86,12 @@
       "s03"
     ],
     "featured": false,
-    "updated": "2026-11-02"
+    "updated": "2026-11-02",
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "visitor": 1,
+      "judge": 2
+    }
   },
   {
     "id": "sovereign-upstream-tokio",
@@ -102,7 +116,11 @@
       "s01"
     ],
     "featured": false,
-    "updated": "2026-10-15"
+    "updated": "2026-10-15",
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "maintainer": 1
+    }
   },
   {
     "id": "sovereign-upstream-postgres",
@@ -125,12 +143,16 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": "2026-10-12"
+    "updated": "2026-10-12",
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "maintainer": 3
+    }
   },
   {
     "id": "ai-triz-core-engine",
     "name": "AI-TRIZ-Core-Engine",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Algorithmic inventive problem solving SDK with automated contradiction resolution.",
     "status": "wip",
@@ -148,12 +170,16 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "maintainer": 4
+    }
   },
   {
     "id": "ai-triz-sufield-toolkit",
     "name": "AI-TRIZ-SuField-Toolkit",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Substance-field graph models and 76 inventive standards decomposition kit.",
     "status": "wip",
@@ -173,12 +199,16 @@
       "s13"
     ],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "maintainer": 5
+    }
   },
   {
     "id": "ai-triz-ariz-optimizer",
     "name": "AI-TRIZ-ARIZ-Optimizer",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "State machine workflow orchestrator based on ARIZ-85C inventive algorithms.",
     "status": "wip",
@@ -195,12 +225,16 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "maintainer": 6
+    }
   },
   {
     "id": "dlos-jepa-world-model",
     "name": "DLOS-JEPA-World-Model",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Hierarchical joint embedding predictive architecture for spatial dynamics.",
     "status": "wip",
@@ -222,12 +256,16 @@
       "s13"
     ],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "maintainer": 7
+    }
   },
   {
     "id": "dlos-safety-shield-cbf",
     "name": "DLOS-Safety-Shield-CBF",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Control Barrier Function QP solver guaranteeing zero spatial collisions.",
     "status": "wip",
@@ -247,12 +285,16 @@
       "s07"
     ],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet A",
+    "persona_rank": {
+      "maintainer": 8
+    }
   },
   {
     "id": "sovereign-sat-dpll-solver",
     "name": "Sovereign-SAT-DPLL-Solver",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Deterministic DPLL SAT solver with zero external dependencies.",
     "status": "live",
@@ -272,12 +314,14 @@
       "s08"
     ],
     "featured": false,
-    "updated": "2026-10-20"
+    "updated": "2026-10-20",
+    "legacy_fleet": "Fleet B",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-milp-routing-vrp",
     "name": "Sovereign-MILP-Routing-VRP",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Mixed integer linear programming and 2-opt vehicle routing optimization engine.",
     "status": "live",
@@ -300,13 +344,15 @@
       "s07",
       "s10"
     ],
-    "featured": true,
-    "updated": "2026-10-22"
+    "featured": false,
+    "updated": "2026-10-22",
+    "legacy_fleet": "Fleet B",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-quantum-ising-annealer",
     "name": "Sovereign-Quantum-Ising-Annealer",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "QUBO Ising model simulator for high-dimensional combinatorial annealing.",
     "status": "live",
@@ -326,12 +372,14 @@
       "s11"
     ],
     "featured": false,
-    "updated": "2026-10-18"
+    "updated": "2026-10-18",
+    "legacy_fleet": "Fleet B",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-polygon-sat-armor",
     "name": "Sovereign-Polygon-SAT-Armor",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Separating Axis Theorem 2D convex polygon collision inspection armor.",
     "status": "live",
@@ -350,12 +398,14 @@
       "s08"
     ],
     "featured": false,
-    "updated": "2026-10-19"
+    "updated": "2026-10-19",
+    "legacy_fleet": "Fleet B",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-milp-binpacking-fitter",
     "name": "Sovereign-MILP-BinPacking-Fitter",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "First-fit decreasing multi-container volume and packing optimization engine.",
     "status": "live",
@@ -375,12 +425,14 @@
       "s12"
     ],
     "featured": false,
-    "updated": "2026-10-21"
+    "updated": "2026-10-21",
+    "legacy_fleet": "Fleet B",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-knapsack-partition-dp",
     "name": "Sovereign-Knapsack-Partition-DP",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Dynamic programming knapsack solver for dynamic resource partitioning.",
     "status": "live",
@@ -399,12 +451,14 @@
       "s04"
     ],
     "featured": false,
-    "updated": "2026-10-20"
+    "updated": "2026-10-20",
+    "legacy_fleet": "Fleet B",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-spatial-d4-group",
     "name": "Sovereign-Spatial-D4-Group",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Dihedral group D4 symmetry transformations for grid data interpolation.",
     "status": "live",
@@ -423,7 +477,9 @@
       "s06"
     ],
     "featured": false,
-    "updated": "2026-10-17"
+    "updated": "2026-10-17",
+    "legacy_fleet": "Fleet B",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-c-aircombat5-agent",
@@ -447,7 +503,11 @@
     ],
     "scenarios": [],
     "featured": true,
-    "updated": "2026-10-29"
+    "updated": "2026-10-29",
+    "legacy_fleet": "Fleet C",
+    "persona_rank": {
+      "developer": 8
+    }
   },
   {
     "id": "sovereign-c-numerai-agent",
@@ -472,8 +532,13 @@
     "scenarios": [
       "s12"
     ],
-    "featured": false,
-    "updated": "2026-10-30"
+    "featured": true,
+    "updated": "2026-10-30",
+    "legacy_fleet": "Fleet C",
+    "persona_rank": {
+      "judge": 7,
+      "developer": 4
+    }
   },
   {
     "id": "sovereign-c-lexguard-bli",
@@ -499,7 +564,12 @@
       "s09"
     ],
     "featured": true,
-    "updated": "2026-10-27"
+    "updated": "2026-10-27",
+    "legacy_fleet": "Fleet C",
+    "persona_rank": {
+      "judge": 8,
+      "developer": 5
+    }
   },
   {
     "id": "sovereign-attestagent-creditcoin",
@@ -523,7 +593,9 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": "2026-10-24"
+    "updated": "2026-10-24",
+    "legacy_fleet": "Fleet C",
+    "persona_rank": {}
   },
   {
     "id": "ai-triz-arc-agi-sovereign-solver",
@@ -546,7 +618,11 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": "2026-10-28"
+    "updated": "2026-10-28",
+    "legacy_fleet": "Fleet C",
+    "persona_rank": {
+      "developer": 9
+    }
   },
   {
     "id": "ai-triz-pokemon-tcg-sovereign",
@@ -572,12 +648,17 @@
       "s10"
     ],
     "featured": false,
-    "updated": "2026-10-26"
+    "updated": "2026-10-26",
+    "legacy_fleet": "Fleet C",
+    "persona_rank": {
+      "judge": 9,
+      "developer": 6
+    }
   },
   {
     "id": "ai-triz-drivendata-tracetheace",
     "name": "AI-TRIZ-DrivenData-TraceTheAce",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Psychometric model with Da Vinci cognitive mastery feature engineering.",
     "status": "archived",
@@ -594,12 +675,14 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": "2026-09-15"
+    "updated": "2026-09-15",
+    "legacy_fleet": "Fleet C",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-smartcontract-formal-z3",
     "name": "Sovereign-SmartContract-Formal-Z3",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "First-order logic invariant theorem prover for Solidity smart contracts.",
     "status": "wip",
@@ -616,12 +699,16 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet D",
+    "persona_rank": {
+      "maintainer": 9
+    }
   },
   {
     "id": "sovereign-eip712-signature-auditor",
     "name": "Sovereign-EIP712-Signature-Auditor",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Cryptographic ECDSA EIP-712 structured data signature verification suite.",
     "status": "wip",
@@ -639,12 +726,14 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet D",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-contract-injunction-circuitbreaker",
     "name": "Sovereign-Contract-Injunction-CircuitBreaker",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Automated legal injunction and emergency circuit breaker for smart contracts.",
     "status": "wip",
@@ -663,12 +752,14 @@
       "s09"
     ],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet D",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-rwa-tokenization-mesh",
     "name": "Sovereign-RWA-Tokenization-Mesh",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Real-world asset tokenization framework with legal compliance verification.",
     "status": "wip",
@@ -690,7 +781,9 @@
       "s11"
     ],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet D",
+    "persona_rank": {}
   },
   {
     "id": "swe-bench",
@@ -712,12 +805,16 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": "2026-10-14"
+    "updated": "2026-10-14",
+    "legacy_fleet": "Fleet E",
+    "persona_rank": {
+      "maintainer": 2
+    }
   },
   {
     "id": "sovereign-agent-evalguard",
     "name": "Sovereign-Agent-EvalGuard",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Zero-trust autonomous agent auditing guardrail and telemetry verifier.",
     "status": "live",
@@ -736,12 +833,14 @@
       "z01"
     ],
     "featured": false,
-    "updated": "2026-10-19"
+    "updated": "2026-10-19",
+    "legacy_fleet": "Fleet E",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-obsidian-chp-plugin",
     "name": "Sovereign-Obsidian-CHP-Plugin",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Personal knowledge management plugin for epistemic health monitoring.",
     "status": "live",
@@ -760,12 +859,14 @@
       "z01"
     ],
     "featured": false,
-    "updated": "2026-10-18"
+    "updated": "2026-10-18",
+    "legacy_fleet": "Fleet E",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-mcp-sqlite-server",
     "name": "Sovereign-MCP-SQLite-Server",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Model Context Protocol read-only server for structured semantic queries.",
     "status": "live",
@@ -784,12 +885,14 @@
       "z01"
     ],
     "featured": false,
-    "updated": "2026-10-21"
+    "updated": "2026-10-21",
+    "legacy_fleet": "Fleet E",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-edge-udm-hardware-mesh",
     "name": "Sovereign-Edge-UDM-Hardware-Mesh",
-    "url": "https://github.com/SDRmsung",
+    "url": null,
     "demo_url": null,
     "summary": "Unified device model and declarative abstraction mesh for edge IoT nodes.",
     "status": "wip",
@@ -809,7 +912,9 @@
       "s05"
     ],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Fleet E",
+    "persona_rank": {}
   },
   {
     "id": "sovereign-e-data-atlas",
@@ -836,7 +941,13 @@
       "s01"
     ],
     "featured": true,
-    "updated": "2026-11-02"
+    "updated": "2026-11-02",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 2,
+      "judge": 3,
+      "developer": 3
+    }
   },
   {
     "id": "atlas-s01-artery-flow",
@@ -861,7 +972,12 @@
       "s01"
     ],
     "featured": false,
-    "updated": "2026-11-02"
+    "updated": "2026-11-02",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 3,
+      "judge": 4
+    }
   },
   {
     "id": "atlas-s02-youbike-tide",
@@ -886,13 +1002,18 @@
       "s02"
     ],
     "featured": false,
-    "updated": "2026-11-02"
+    "updated": "2026-11-02",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 4,
+      "judge": 5
+    }
   },
   {
     "id": "atlas-s03-bus-delay",
     "name": "Atlas S03: Bus Delay Topology",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Real-time bus map matching, congestion light rails, and delay propagation GNN.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -911,7 +1032,11 @@
       "s03"
     ],
     "featured": false,
-    "updated": "2026-10-25"
+    "updated": "2026-10-25",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 8
+    }
   },
   {
     "id": "atlas-s04-freeway-rest",
@@ -936,13 +1061,18 @@
       "s04"
     ],
     "featured": false,
-    "updated": "2026-11-02"
+    "updated": "2026-11-02",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 5,
+      "judge": 6
+    }
   },
   {
     "id": "atlas-s05-pm25-escape",
     "name": "Atlas S05: PM2.5 Escape Map",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Minute-level air quality plume diffusion linked with urban park crowd flows.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -961,13 +1091,17 @@
       "s05"
     ],
     "featured": false,
-    "updated": "2026-10-20"
+    "updated": "2026-10-20",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 9
+    }
   },
   {
     "id": "atlas-s06-temp-outfit",
     "name": "Atlas S06: Weather Outfit Index",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Universal Thermal Climate Index (UTCI) spatial grid and outfit recommendation.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -985,13 +1119,15 @@
       "s06"
     ],
     "featured": false,
-    "updated": "2026-10-18"
+    "updated": "2026-10-18",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-s07-ev-charger",
     "name": "Atlas S07: EV Charger Hunger Map",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Real-time EV charging occupancy queueing simulator and grid barrier dispatch.",
     "status": "live",
     "status_label": "READY (Atlas)",
@@ -1011,13 +1147,17 @@
       "s07"
     ],
     "featured": false,
-    "updated": "2026-10-28"
+    "updated": "2026-10-28",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 6
+    }
   },
   {
     "id": "atlas-s08-speedcam-crash",
     "name": "Atlas S08: Tech Enforcement Heatmap",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Speed camera enforcement coverage overlapped with fatal traffic crash hotspots.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -1036,13 +1176,15 @@
       "s08"
     ],
     "featured": false,
-    "updated": "2026-10-15"
+    "updated": "2026-10-15",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-s09-vacancy-rent",
     "name": "Atlas S09: Housing Vacancy & Rent",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Low-power electricity housing vacancy sea versus hot rental price spikes.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -1061,13 +1203,15 @@
       "s09"
     ],
     "featured": false,
-    "updated": "2026-10-16"
+    "updated": "2026-10-16",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-s10-tour-shuttle",
     "name": "Atlas S10: Tourism Shuttle & Crowd",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Taiwan tourist shuttle lines aligned with scenic spot crowd tidal peaks.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -1085,13 +1229,15 @@
       "s10"
     ],
     "featured": false,
-    "updated": "2026-10-14"
+    "updated": "2026-10-14",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-s11-flood-scar",
     "name": "Atlas S11: Flood Scar & Property",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Flood potential depth contours intersected with historical transaction prices.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -1110,13 +1256,15 @@
       "s11"
     ],
     "featured": false,
-    "updated": "2026-10-17"
+    "updated": "2026-10-17",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-s12-care-desert",
     "name": "Atlas S12: Child & Elderly Care Desert",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "15-minute isochrone accessibility analysis for childcare and elder care hubs.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -1135,13 +1283,15 @@
       "s12"
     ],
     "featured": false,
-    "updated": "2026-10-19"
+    "updated": "2026-10-19",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-s13-body-circulation",
     "name": "Atlas S13: Microcirculation & Meridians",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Blood circulation and traditional meridian particle conductance simulation.",
     "status": "wip",
     "status_label": "DRAFT (Atlas)",
@@ -1160,13 +1310,15 @@
       "s13"
     ],
     "featured": false,
-    "updated": "2026-10-12"
+    "updated": "2026-10-12",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-z01-news-pulse",
     "name": "Atlas Z01: Real-time News Pulse",
     "url": "https://github.com/SDRmsung/Sovereign-E-Data-Atlas",
-    "demo_url": "https://sdrmsung.github.io/ai365/",
+    "demo_url": null,
     "summary": "Real-time technology news crawler and zero-trust intelligence feed pipeline.",
     "status": "live",
     "status_label": "READY (Atlas)",
@@ -1186,7 +1338,11 @@
       "z01"
     ],
     "featured": false,
-    "updated": "2026-10-28"
+    "updated": "2026-10-28",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "visitor": 7
+    }
   },
   {
     "id": "atlas-shared-engine",
@@ -1209,7 +1365,11 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": "2026-11-01"
+    "updated": "2026-11-01",
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {
+      "developer": 7
+    }
   },
   {
     "id": "atlas-slot16-power-grid",
@@ -1230,7 +1390,9 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-slot17-reservoir-defense",
@@ -1251,7 +1413,9 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-slot18-maritime-ais",
@@ -1273,7 +1437,9 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-slot19-flight-adsb",
@@ -1294,7 +1460,9 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   },
   {
     "id": "atlas-slot20-sandbox-lab",
@@ -1316,6 +1484,8 @@
     ],
     "scenarios": [],
     "featured": false,
-    "updated": null
+    "updated": null,
+    "legacy_fleet": "Data Atlas",
+    "persona_rank": {}
   }
 ]

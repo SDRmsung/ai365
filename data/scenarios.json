@@ -8,7 +8,8 @@
       "sovereign-dlos-core",
       "dlos-safety-shield-cbf"
     ],
-    "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s01_artery_flow/index.html"
+    "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s01_artery_flow/index.html",
+    "stage": "live"
   },
   {
     "id": "s02",
@@ -18,7 +19,8 @@
       "sovereign-milp-routing-vrp",
       "dlos-jepa-world-model"
     ],
-    "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s02_youbike_tide/index.html"
+    "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s02_youbike_tide/index.html",
+    "stage": "live"
   },
   {
     "id": "s03",
@@ -28,7 +30,8 @@
       "sovereign-milp-routing-vrp",
       "ai365"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s04",
@@ -38,7 +41,8 @@
       "sovereign-milp-binpacking-fitter",
       "sovereign-knapsack-partition-dp"
     ],
-    "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s04_freeway_rest/index.html"
+    "demo_url": "https://sdrmsung.github.io/Sovereign-E-Data-Atlas/s04_freeway_rest/index.html",
+    "stage": "live"
   },
   {
     "id": "s05",
@@ -48,7 +52,8 @@
       "sovereign-cognitive-metabolism",
       "sovereign-edge-udm-hardware-mesh"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s06",
@@ -58,7 +63,8 @@
       "sovereign-spatial-d4-group",
       "sovereign-dlos-core"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s07",
@@ -69,7 +75,8 @@
       "dlos-safety-shield-cbf",
       "sovereign-milp-routing-vrp"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s08",
@@ -79,7 +86,8 @@
       "sovereign-polygon-sat-armor",
       "sovereign-sat-dpll-solver"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s09",
@@ -89,7 +97,8 @@
       "sovereign-rwa-tokenization-mesh",
       "sovereign-contract-injunction-circuitbreaker"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s10",
@@ -99,7 +108,8 @@
       "sovereign-milp-routing-vrp",
       "ai-triz-pokemon-tcg-sovereign"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s11",
@@ -109,7 +119,8 @@
       "sovereign-quantum-ising-annealer",
       "sovereign-rwa-tokenization-mesh"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s12",
@@ -119,7 +130,8 @@
       "sovereign-milp-binpacking-fitter",
       "sovereign-c-numerai-agent"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "s13",
@@ -130,7 +142,8 @@
       "ai-triz-sufield-toolkit",
       "dlos-jepa-world-model"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   },
   {
     "id": "z01",
@@ -141,6 +154,7 @@
       "sovereign-mcp-sqlite-server",
       "sovereign-obsidian-chp-plugin"
     ],
-    "demo_url": "https://sdrmsung.github.io/ai365/"
+    "demo_url": null,
+    "stage": "draft"
   }
 ]
